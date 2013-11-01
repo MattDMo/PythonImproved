@@ -30,6 +30,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 - `support.type.exception.python` now matches any identifier that ends with `Exception` or `Error`, not just the built-in ones like `IndentationError` or `RuntimeException`, allowing for the highlighting of custom exceptions such as those included in third-party modules
 - Miscellaneous changes to `support.function.builtin.python` and `support.type.python` &mdash; a lot of personal judgement went in to deciding which word went where (for example, `list` is a built-in function, but it's also a type, so I put it in `type`), so if you have a good reason for disagreeing please tell me.
 - You can now have comments in multi-line function definitions:
+
 ```python
 def myfunc(self,            # gotta have self
            param1="value",  # values are cool
