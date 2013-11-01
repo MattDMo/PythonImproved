@@ -64,7 +64,7 @@
         </dict>
         <dict>
             <key>match</key>
-            <string>django(\.[a-zA-Z0-9_]+){1,} </string>
+            <string>django(\.[a-zA-Z0-9_]+){0,} </string>
             <key>name</key>
             <string>support.other.django.module</string>
         </dict>
@@ -1607,7 +1607,7 @@
             <string>these methods have magic interpretation by python and are generally called indirectly through syntactic constructs</string>
             <key>match</key>
             <string>(?x)(\.)?\b(__(?:
-                        abs|add|and|call|cmp|coerce|complex|contains|del|delattr|
+                        abs|add|and|bool|call|cmp|coerce|complex|contains|del|delattr|
                         delete|delitem|delslice|div|divmod|enter|eq|exit|float|
                         floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|
                         hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|
