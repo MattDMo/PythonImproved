@@ -16,7 +16,7 @@
             To make this your main Python language definition (in Sublime Text 2):
                 1) Rename Packages/Python/Python.tmLanguage to something else with a different extension (like Python.tmLanguage.backup)
                 2) Move this file and its README.md to Packages/Python/
-                3) Search for "<string>PythonImproved</string>" and change it to just say Python (if you want) - this is what is displayed in ST2's various menus
+                3) Search for "&lt;string&gt;PythonImproved&lt;/string&gt;" and change it to just say Python (if you want) - this is what is displayed in ST2's various menus
                 4) Rename this file to Python.tmLanguage (if you want)
 
     </string>
