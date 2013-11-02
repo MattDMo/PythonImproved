@@ -29,7 +29,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 - `keyword.other.python` now only contains `assert` &mdash; `as`, `del`, `exec`, and `print` have been relocated
 - `support.type.exception.python` now matches any identifier that ends with `Exception` or `Error`, not just the built-in ones like `IndentationError` or `RuntimeException`, allowing for the highlighting of custom exceptions such as those included in third-party modules
 - Miscellaneous changes to `support.function.builtin.python` and `support.type.python` &mdash; a lot of personal judgement went in to deciding which word went where (for example, `list` is a built-in function, but it's also a type, so I put it in `type`), so if you have a good reason for disagreeing please tell me.
-- function annotation support for python3.  New scopes added: `punctuation.separator.annotation.python`, `punctuation.separator.annotation.result.python`, `punctuation.definition.parameters-group.begin.python`., and `punctuation.definition.parameters-group.end.python`.
+- [Function annotation](http://www.python.org/dev/peps/pep-3107/) support for Python 3, thanks to @facelessuser.  New scopes added: `punctuation.separator.annotation.python`, `punctuation.separator.annotation.result.python`, `punctuation.definition.parameters-group.begin.python`, and `punctuation.definition.parameters-group.end.python`.
 - You can now have comments in multi-line function definitions:
 
 ```python
@@ -40,17 +40,6 @@ def myfunc(self,            # gotta have self
 ```
 
 ## Issues
-
-I'd love to be able to add support for Python 3's [function annotations](http://www.python.org/dev/peps/pep-3107/):
-
-```python
-def greet(name: str, age: int) -> str:
-    print('Hello {0}, you are {1} years old'.format(name, age))
-# instead of the standard
-def greet(name, age):
-    print(...)
-```
-This is a bit complex, and I've been having all sorts of trouble trying to match the various parts. If you'd like to help, let me know!
 
 If you have questions, concerns, or suggested improvements, I'd love to hear from you! Feel free to [open an issue](https://github.com/MattDMo/PythonImproved/issues/new) or send a [pull request](https://github.com/MattDMo/PythonImproved/compare/) and I'll get back to you as soon as I can. You can also email me at <mattdmo@pigimal.com>.
 
