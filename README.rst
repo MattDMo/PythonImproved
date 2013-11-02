@@ -11,7 +11,7 @@ as well as a number of my own changes to make things more consistent and underst
 
 ## Installation and Use
 
-If you haven't already, [install Package Control](https://sublime.wbond.net/installation), then select **`Python Improved`** from the `Package Control: Install Package` option in the Command Palette. To use as your default Python syntax, open a `.py` file, then select `View -> Syntax -> Open all with current extension as... -> PythonImproved`.
+If you haven't already, [install Package Control](https://sublime.wbond.net/installation), then select `Python Improved` from the `Package Control: Install Package` option in the Command Palette. To use as your default Python syntax, open a `.py` file, then select `View -> Syntax -> Open all with current extension as... -> PythonImproved`.
 
 ## New/Changed Scopes
 
