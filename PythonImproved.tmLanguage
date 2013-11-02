@@ -6,19 +6,23 @@
     <string>11B0273F-0284-4483-B17B-4B8D0A9294CC</string>
     <key>comment</key>
     <string>
-
+<!--
             Compiled by @MattDMo - mattdmo@pigimal.com
             Inspired by:
                 - the orginal TextMate and Sublime Text 2 .tmLanguage definitions
                 - facelessuser's Better Python (https://github.com/facelessuser/sublime-languages)
                 - Djaniero's Django syntax (https://github.com/squ1b3r/Djaneiro)
 
-            To make this your main Python language definition (in Sublime Text 2):
+            To make this your main Python language definition (in Sublime Text):
                 1) Rename Packages/Python/Python.tmLanguage to something else with a different extension (like Python.tmLanguage.backup)
                 2) Move this file and its README.md to Packages/Python/
                 3) Search for "<string>PythonImproved</string>" and change it to just say Python (if you want) - this is what is displayed in ST2's various menus
                 4) Rename this file to Python.tmLanguage (if you want)
-
+            Or (probably a better way):
+                1) Open a .py file.
+                2) Select View -> Syntax -> PythonImproved
+                3) Select View -> Syntax -> Open all with current extension as... -> PythonImproved
+ -->
     </string>
     <key>fileTypes</key>
     <array>
