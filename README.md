@@ -7,7 +7,7 @@ A better `Python.tmLanguage` language definition for Sublime Text and TextMate. 
 - facelessuser's [Better Python](https://github.com/facelessuser/sublime-languages)
 - Djaniero's [Django syntax](https://github.com/squ1b3r/Djaneiro)
 
-as well as a number of my own changes to make things more consistent and understandable. For customized syntax highlighting taking advantage of all the new scopes, use PythonImproved with the [Neon Color Scheme](https://sublime.wbond.net/packages/Neon%20Color%20Scheme).
+as well as a number of my own changes to make things more consistent and understandable. For customized syntax highlighting taking advantage of all the new scopes, use PythonImproved with the [Neon Color Scheme](https://sublime.wbond.net/packages/Neon%20Color%20Scheme), or modify your own favorite theme with the scopes below.
 
 ## Installation and Use
 
