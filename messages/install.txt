@@ -1,0 +1,1 @@
+Thank you for installing Python Improved, the better Python language definition for Sublime Text!
