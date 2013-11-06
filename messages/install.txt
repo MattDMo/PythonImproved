@@ -1,1 +1,19 @@
-Thank you for installing Python Improved, the better Python language definition for Sublime Text!
+Python Improved
+===============
+
+Thank you for installing Python Improved, the better Python language definition
+for Sublime Text! To make this your default Python, open a `.py` Python file.
+Select `View -> Syntax -> Open all with current extension as... -> PythonImproved`
+and you should be all set.
+
+To take full advantage of the extra scopes included in Python Improved, check
+out the Neon Color Scheme at https://sublime.wbond.net/packages/Neon%20Color%20Scheme
+If you'd rather modify your own color scheme, a list of scopes is included in
+the README.md in the `Packages/Python Improved` directory. You can also find
+them on GitHub at https://github.com/MattDMo/PythonImproved
+
+If you have any questions, comments, concerns, bugs, or patches, please open an
+issue or pull request on GitHub and I'll do what I can to help out. You can also
+email me directly at <mattdmo@pigimal.com> or find me on Twitter @MattDMo. This
+is definitely a work in progress, so if you'd like to contribute I'd love to
+hear from you!
