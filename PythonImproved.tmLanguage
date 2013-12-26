@@ -1340,43 +1340,21 @@
         <key>builtin_exceptions</key>
         <dict>
             <key>match</key>
-            <string>(?x)\b(
-                (
-                    Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|
-                    Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|
-                    Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|
-                    Unicode(Encode|Decode|Translate)?|
-                    Value|VMS|Windows|ZeroDivision|([.a-zA-Z0-9_]+)
-                )Error|
-                ((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|
-                (Base)?Exception|
-                SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|Exception
-            )\b</string>
+            <string>(?x)\b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([.a-zA-Z0-9_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|(Base)?Exception|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|Exception)\b</string>
             <key>name</key>
             <string>support.type.exception.python</string>
         </dict>
         <key>builtin_functions</key>
         <dict>
             <key>match</key>
-            <string>(?x)(?&lt;!\.)\b(
-                __import__|abs|all|any|apply|callable|chr|cmp|
-                coerce|compile|copyright|credits|del|delattr|dir|divmod|enumerate|eval|
-                exec|execfile|exit|filter|format|getattr|globals|hasattr|hash|help|id|
-                input|intern|isinstance|issubclass|iter|len|license|locals|map|max|memoryview|
-                min|next|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|
-                repr|reversed|round|setattr|sorted|sum|unichr|vars|zip
-            )\b</string>
+            <string>(?x)(?&lt;!\.)\b(__import__|abs|all|any|apply|callable|chr|cmp|coerce|compile|copyright|credits|del|delattr|dir|divmod|enumerate|eval|exec|execfile|exit|filter|format|getattr|globals|hasattr|hash|help|id|input|intern|isinstance|issubclass|iter|len|license|locals|map|max|memoryview|min|next|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|setattr|sorted|sum|unichr|vars|zip)\b</string>
             <key>name</key>
             <string>support.function.builtin.python</string>
         </dict>
         <key>builtin_types</key>
         <dict>
             <key>match</key>
-            <string>(?x)(?&lt;!\.)\b(
-                ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|
-                float|frozenset|hex|int|list|long|object|oct|property|reversed|set|
-                slice|staticmethod|str|super|tuple|type|unicode|xrange
-            )\b</string>
+            <string>(?x)(?&lt;!\.)\b(ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|hex|int|list|long|object|oct|property|reversed|set|slice|staticmethod|str|super|tuple|type|unicode|xrange)\b</string>
             <key>name</key>
             <string>support.type.python</string>
         </dict>
@@ -1754,17 +1732,7 @@
             <key>comment</key>
             <string>these methods have magic interpretation by python and are generally called indirectly through syntactic constructs</string>
             <key>match</key>
-            <string>(?x)(\.)?\b(__(?:
-                        abs|add|and|bool|call|cmp|coerce|complex|contains|del|delattr|
-                        delete|delitem|delslice|div|divmod|enter|eq|exit|float|
-                        floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|
-                        hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|
-                        int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|
-                        long|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|
-                        radd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|
-                        rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|
-                        setslice|str|sub|truediv|unicode|xor
-                    )__)\b</string>
+            <string>(?x)(\.)?\b(__(?:abs|add|and|bool|call|cmp|coerce|complex|contains|del|delattr|delete|delitem|delslice|div|divmod|enter|eq|exit|float|floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|str|sub|truediv|unicode|xor)__)\b</string>
         </dict>
         <key>magic_variable_names</key>
         <dict>

@@ -869,15 +869,15 @@
             ]
         },
         "builtin_exceptions": {
-            "match": "(?x)\\b(\n                (\n                    Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|\n                    Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|\n                    Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|\n                    Unicode(Encode|Decode|Translate)?|\n                    Value|VMS|Windows|ZeroDivision|([.a-zA-Z0-9_]+)\n                )Error|\n                ((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|\n                (Base)?Exception|\n                SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|Exception\n            )\\b",
+            "match": "(?x)\\b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([.a-zA-Z0-9_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|(Base)?Exception|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|Exception)\\b",
             "name": "support.type.exception.python"
         },
         "builtin_functions": {
-            "match": "(?x)(?<!\\.)\\b(\n                __import__|abs|all|any|apply|callable|chr|cmp|\n                coerce|compile|copyright|credits|del|delattr|dir|divmod|enumerate|eval|\n                exec|execfile|exit|filter|format|getattr|globals|hasattr|hash|help|id|\n                input|intern|isinstance|issubclass|iter|len|license|locals|map|max|memoryview|\n                min|next|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|\n                repr|reversed|round|setattr|sorted|sum|unichr|vars|zip\n            )\\b",
+            "match": "(?x)(?<!\\.)\\b(__import__|abs|all|any|apply|callable|chr|cmp|coerce|compile|copyright|credits|del|delattr|dir|divmod|enumerate|eval|exec|execfile|exit|filter|format|getattr|globals|hasattr|hash|help|id|input|intern|isinstance|issubclass|iter|len|license|locals|map|max|memoryview|min|next|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|setattr|sorted|sum|unichr|vars|zip)\\b",
             "name": "support.function.builtin.python"
         },
         "builtin_types": {
-            "match": "(?x)(?<!\\.)\\b(\n                ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|\n                float|frozenset|hex|int|list|long|object|oct|property|reversed|set|\n                slice|staticmethod|str|super|tuple|type|unicode|xrange\n            )\\b",
+            "match": "(?x)(?<!\\.)\\b(ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|hex|int|list|long|object|oct|property|reversed|set|slice|staticmethod|str|super|tuple|type|unicode|xrange)\\b",
             "name": "support.type.python"
         },
         "comments": {
@@ -1123,7 +1123,7 @@
                 }
             },
             "comment": "these methods have magic interpretation by python and are generally called indirectly through syntactic constructs",
-            "match": "(?x)(\\.)?\\b(__(?:\n                        abs|add|and|bool|call|cmp|coerce|complex|contains|del|delattr|\n                        delete|delitem|delslice|div|divmod|enter|eq|exit|float|\n                        floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|\n                        hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|\n                        int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|\n                        long|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|\n                        radd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|\n                        rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|\n                        setslice|str|sub|truediv|unicode|xor\n                    )__)\\b"
+            "match": "(?x)(\\.)?\\b(__(?:abs|add|and|bool|call|cmp|coerce|complex|contains|del|delattr|delete|delitem|delslice|div|divmod|enter|eq|exit|float|floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|str|sub|truediv|unicode|xor)__)\\b"
         },
         "magic_variable_names": {
             "comment": "magic variables which a class/module may have.",
