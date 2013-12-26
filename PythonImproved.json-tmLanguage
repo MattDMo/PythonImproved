@@ -1212,6 +1212,69 @@
                     ]
                 },
                 {
+                    "begin": "([bB]r)(\"\"\")",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "single quoted bytes-raw string",
+                    "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.double.python"
+                        }
+                    },
+                    "name": "string.quoted.double.block.bytes-raw-regex.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        },
+                        {
+                            "include": "#regular_expressions"
+                        }
+                    ]
+                },
+                {
+                    "begin": "([bB]R)(\"\"\")",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "single quoted bytes-raw string without regular expression highlighting",
+                    "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.double.python"
+                        }
+                    },
+                    "name": "string.quoted.double.block.bytes-raw.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        }
+                    ]
+                },
+                {
                     "begin": "(r)(\"\"\")",
                     "beginCaptures": {
                         "1": {
@@ -1307,6 +1370,36 @@
                         }
                     ]
                 },
+                {
+                    "begin": "([bB])(\"\"\")",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "double quoted bytes string",
+                    "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.double.python"
+                        }
+                    },
+                    "name": "string.quoted.double.block.bytes.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        }
+                    ]
+                },
                 //single quotes special
                 {
                     "begin": "([uU]r)(\")",
@@ -1377,6 +1470,75 @@
                         },
                         {
                             "include": "#escaped_unicode_char"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        }
+                    ]
+                },
+                {
+                    "begin": "([bB]r)(\")",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "double-quoted raw string",
+                    "end": "((?<=\")(\")|\")|(\\n)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.double.python"
+                        },
+                        "3": {
+                            "name": "invalid.illegal.unclosed-string.python"
+                        }
+                    },
+                    "name": "string.quoted.double.single-line.bytes-raw-regex.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        },
+                        {
+                            "include": "#regular_expressions"
+                        }
+                    ]
+                },
+                {
+                    "begin": "([bB]R)(\")",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "double-quoted raw string",
+                    "end": "((?<=\")(\")|\")|(\\n)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.double.python"
+                        },
+                        "3": {
+                            "name": "invalid.illegal.unclosed-string.python"
+                        }
+                    },
+                    "name": "string.quoted.double.single-line.bytes-raw.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
                         },
                         {
                             "include": "#escaped_char"
@@ -1488,6 +1650,39 @@
                         }
                     ]
                 },
+                {
+                    "begin": "([bB])(\")",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "double quoted bytes string",
+                    "end": "((?<=\")(\")|\")|(\\n)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.double.python"
+                        },
+                        "3": {
+                            "name": "invalid.illegal.unclosed-string.python"
+                        }
+                    },
+                    "name": "string.quoted.double.single-line.bytes.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        }
+                    ]
+                },
                 //sql
                 {
                     "begin": "(\"\"\")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))",
@@ -1510,6 +1705,9 @@
                     "patterns": [
                         {
                             "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_unicode_char"
                         },
                         {
                             "include": "#escaped_char"
@@ -1545,6 +1743,9 @@
                             "include": "#constant_placeholder"
                         },
                         {
+                            "include": "#escaped_unicode_char"
+                        },
+                        {
                             "include": "#escaped_char"
                         },
                         {
@@ -1576,6 +1777,9 @@
                             "include": "#constant_placeholder"
                         },
                         {
+                            "include": "#escaped_unicode_char"
+                        },
+                        {
                             "include": "#escaped_char"
                         }
                     ]
@@ -1604,6 +1808,9 @@
                     "patterns": [
                         {
                             "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_unicode_char"
                         },
                         {
                             "include": "#escaped_char"
@@ -1693,6 +1900,69 @@
                         },
                         {
                             "include": "#escaped_unicode_char"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        }
+                    ]
+                },
+                {
+                    "begin": "([bB]r)(''')",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "single quoted bytes-raw string",
+                    "end": "((?<=''')(')''|''')",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.single.python"
+                        }
+                    },
+                    "name": "string.quoted.single.block.bytes-raw-regex.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        },
+                        {
+                            "include": "#regular_expressions"
+                        }
+                    ]
+                },
+                {
+                    "begin": "([bB]R)(''')",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "single quoted bytes-raw string",
+                    "end": "((?<=''')(')''|''')",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.single.python"
+                        }
+                    },
+                    "name": "string.quoted.single.block.bytes-raw.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
                         },
                         {
                             "include": "#escaped_char"
@@ -1795,6 +2065,36 @@
                         }
                     ]
                 },
+                {
+                    "begin": "([bB])(''')",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "single quoted bytes string",
+                    "end": "((?<=''')(')''|''')",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "meta.empty-string.single.python"
+                        }
+                    },
+                    "name": "string.quoted.single.block.bytes.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        }
+                    ]
+                },
                 //single quotes special
                 {
                     "begin": "([uU]r)(')",
@@ -1806,7 +2106,7 @@
                             "name": "punctuation.definition.string.begin.python"
                         }
                     },
-                    "comment": "single quoted raw string",
+                    "comment": "single quoted unicode-raw string",
                     "end": "(')|(\\n)",
                     "endCaptures": {
                         "1": {
@@ -1842,7 +2142,7 @@
                             "name": "punctuation.definition.string.begin.python"
                         }
                     },
-                    "comment": "single quoted raw string",
+                    "comment": "single quoted unicode-raw string",
                     "end": "(')|(\\n)",
                     "endCaptures": {
                         "1": {
@@ -1859,6 +2159,69 @@
                         },
                         {
                             "include": "#escaped_unicode_char"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        }
+                    ]
+                },
+                {
+                    "begin": "([bB]r)(')",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "single quoted bytes-raw string",
+                    "end": "(')|(\\n)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.unclosed-string.python"
+                        }
+                    },
+                    "name": "string.quoted.single.single-line.bytes-raw-regex.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        },
+                        {
+                            "include": "#regular_expressions"
+                        }
+                    ]
+                },
+                {
+                    "begin": "([bB]R)(')",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "single quoted bytes-raw string",
+                    "end": "(')|(\\n)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.unclosed-string.python"
+                        }
+                    },
+                    "name": "string.quoted.single.single-line.bytes-raw.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
                         },
                         {
                             "include": "#escaped_char"
@@ -1961,6 +2324,36 @@
                         }
                     ]
                 },
+                {
+                    "begin": "([bB])(')",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.string.python"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "comment": "single quoted bytes string",
+                    "end": "(')|(\\n)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.python"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.unclosed-string.python"
+                        }
+                    },
+                    "name": "string.quoted.single.single-line.bytes.python",
+                    "patterns": [
+                        {
+                            "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_char"
+                        }
+                    ]
+                },
                 //sql
                 {
                     "begin": "(''')(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))",
@@ -1983,6 +2376,9 @@
                     "patterns": [
                         {
                             "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_unicode_char"
                         },
                         {
                             "include": "#escaped_char"
@@ -2013,6 +2409,9 @@
                     "patterns": [
                         {
                             "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_unicode_char"
                         },
                         {
                             "include": "#escaped_char"
@@ -2046,6 +2445,9 @@
                             "include": "#constant_placeholder"
                         },
                         {
+                            "include": "#escaped_unicode_char"
+                        },
+                        {
                             "include": "#escaped_char"
                         }
                     ]
@@ -2071,6 +2473,9 @@
                     "patterns": [
                         {
                             "include": "#constant_placeholder"
+                        },
+                        {
+                            "include": "#escaped_unicode_char"
                         },
                         {
                             "include": "#escaped_char"
