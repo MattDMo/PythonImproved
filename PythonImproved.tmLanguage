@@ -5,20 +5,7 @@
     <key>bundleUUID</key>
     <string>11B0273F-0284-4483-B17B-4B8D0A9294CC</string>
     <key>comment</key>
-    <string>
-<!--
-            Compiled by @MattDMo - mattdmo@pigimal.com
-            Inspired by:
-                - the orginal TextMate and Sublime Text 2 .tmLanguage definitions
-                - facelessuser's Better Python (https://github.com/facelessuser/sublime-languages)
-                - Djaniero's Django syntax (https://github.com/squ1b3r/Djaneiro)
-
-            To make this your default Python language definition (in Sublime Text):
-                1) Open a .py file.
-                2) Select View -> Syntax -> PythonImproved
-                3) Select View -> Syntax -> Open all with current extension as... -> PythonImproved
- -->
-    </string>
+    <string></string>
     <key>fileTypes</key>
     <array>
         <string>py</string>
