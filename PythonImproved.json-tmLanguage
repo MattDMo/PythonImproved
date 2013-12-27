@@ -506,6 +506,9 @@
             "include": "#builtin_types"
         },
         {
+            "include": "#builtin_exceptions"
+        },
+        {
             "include": "#magic_function_names"
         },
         {
