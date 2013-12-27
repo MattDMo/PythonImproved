@@ -509,6 +509,9 @@
             "include": "#magic_function_names"
         },
         {
+            "include": "#magic_variable_names"
+        },
+        {
             "include": "#language_variables"
         },
         {
@@ -1126,9 +1129,13 @@
             "match": "(?x)(\\.)?\\b(__(?:abs|add|and|bool|call|cmp|coerce|complex|contains|del|delattr|delete|delitem|delslice|div|divmod|enter|eq|exit|float|floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|str|sub|truediv|unicode|xor)__)\\b"
         },
         "magic_variable_names": {
+            "captures": {
+                "2": {
+                    "name": "support.variable.magic.python"
+                }
+            },
             "comment": "magic variables which a class/module may have.",
-            "match": "\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b",
-            "name": "support.variable.magic.python"
+            "match": "(?x)(\\.)?\\b(__(?:all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__)\\b",
         },
         "regular_expressions": {
             "comment": "Changed disabled to 1 to turn off syntax highlighting in “r” strings.",
