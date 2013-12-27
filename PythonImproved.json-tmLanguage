@@ -304,13 +304,16 @@
                         {
                             "captures": {
                                 "1": {
-                                    "name": "variable.parameter.function.python"
+                                    "name": "variable.parameter.function.language.python"
                                 },
                                 "2": {
+                                    "name": "variable.parameter.function.python"
+                                },
+                                "3": {
                                     "name": "punctuation.separator.parameters.python"
                                 }
                             },
-                            "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)]))"
+                            "match": "\\b(?:(self|cls)|([a-zA-Z_][a-zA-Z_0-9]*))\\s*(?:(,)|(?=[\\n\\)]))"
                         }
                     ]
                 },
