@@ -1,6 +1,6 @@
 # PythonImproved
 
-A better Python language definition for Sublime Text and TextMate. Inspired by:
+A better Python `.tmLanguage` syntax highlighting definition for [Sublime Text](http://www.sublimetext.com) and [TextMate](http://www.macromates.com). Inspired by:
 
 - the original TextMate and Sublime Text `Python.tmLanguage` files
 - facelessuser's [Better Python](https://github.com/facelessuser/sublime-languages)
@@ -10,7 +10,9 @@ as well as a number of my own changes to make things more consistent and underst
 
 ## Installation and Use
 
-If you haven't already, [install Package Control](https://sublime.wbond.net/installation), then select `Python Improved` from the `Package Control: Install Package` option in the Command Palette. To use as your default Python syntax, open a `.py` file, then select `View -> Syntax -> Open all with current extension as... -> PythonImproved`.
+If you haven't already, [install Package Control](https://sublime.wbond.net/installation), then select `Python Improved` from the `Package Control: Install Package` option in the Command Palette. To use PythonImproved as your default Python syntax, open a `.py` file, then select `View -> Syntax -> Open all with current extension as... -> PythonImproved`.
+
+While I haven't yet tried to install PythonImproved with TextMate, I can't think of a good reason as to why it wouldn't work. You could try putting it in the same directory as the standard `Python.tmbundle` package, in the `Syntaxes` subdirectory. Then, just pick `PythonImproved` from the syntax menu.
 
 ## New/Changed Scopes
 
@@ -40,6 +42,9 @@ def myfunc(self,            # gotta have self
 
 ![Multi-line comments and function annotations](http://pigimal.com/img/github/python_annotations.png)
 
+- New scopes for bytes, unicode, and raw/regex strings, thanks to @simonzack: `string.quoted.(single|double).(block|single-line).(bytes|bytes-raw|bytes-raw-regex).python`
+- Also from @simonzack, highlighting of `self|cls` in parameter strings: `variable.parameter.function.(keyword|language)`
+
 ## Issues
 
 If you have questions, concerns, or suggested improvements, I'd love to hear from you! Feel free to [open an issue](https://github.com/MattDMo/PythonImproved/issues/new) or send a [pull request](https://github.com/MattDMo/PythonImproved/compare/) and I'll get back to you as soon as I can. You can also email me at <mattdmo@pigimal.com>.
@@ -47,7 +52,7 @@ If you have questions, concerns, or suggested improvements, I'd love to hear fro
 
 ## License
 
-&copy; 2013 Matt Morrison <mattdmo@pigimal.com>.
+&copy; 2013-2014 Matt Morrison <mattdmo@pigimal.com>.
 
 This is free software. It is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. Feel free to use this in your own work. However, if you modify and/or redistribute it, please attribute me in some way, and distribute your work under this or a similar license. A shout-out or a beer would be appreciated.
 
