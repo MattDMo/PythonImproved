@@ -44,6 +44,9 @@ def myfunc(self,            # gotta have self
 
 - New scopes for bytes, unicode, and raw/regex strings, thanks to @simonzack: `string.quoted.(single|double).(block|single-line).(bytes|bytes-raw|bytes-raw-regex).python`
 - Also from @simonzack, highlighting of `self|cls` in parameter strings: `variable.parameter.function.(keyword|language)`
+- `comment.line.note` to highlight lines containing notes: BUG/FIXME/TODO/XXX
+- `comment.line.note.notation` to highlight the actual word BUG/FIXME/TODO/XXX
+- Added `nonlocal` from Python 3 to `storage.modifier.global`
 
 ## Issues
 
