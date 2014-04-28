@@ -1,1 +1,2 @@
-PythonImproved.tmLanguage.cache
+*.tmLanguage.cache
+*.json-tmLanguage
