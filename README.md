@@ -30,7 +30,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 - `keyword.other.python` now only contains `assert` &mdash; `as`, `del`, `exec`, and `print` have been relocated
 - `support.type.exception.python` now matches any identifier that ends with `Exception` or `Error`, not just the built-in ones like `IndentationError` or `RuntimeException`, allowing for the highlighting of custom exceptions such as those included in third-party modules
 - Miscellaneous changes to `support.function.builtin.python` and `support.type.python` &mdash; a lot of personal judgement went in to deciding which word went where (for example, `list` is a built-in function, but it's also a type, so I put it in `type`), so if you have a good reason for disagreeing please tell me.
-- [Function annotation](http://www.python.org/dev/peps/pep-3107/) support for Python 3, thanks to @facelessuser.  New scopes added: `punctuation.separator.annotation.python`, `punctuation.separator.annotation.result.python`, `punctuation.definition.parameters-group.begin.python`, and `punctuation.definition.parameters-group.end.python`.
+- [Function annotation](http://www.python.org/dev/peps/pep-3107/) support for Python 3, thanks to [@facelessuser](https://github.com/facelessuser).  New scopes added: `punctuation.separator.annotation.python`, `punctuation.separator.annotation.result.python`, `punctuation.definition.parameters-group.begin.python`, and `punctuation.definition.parameters-group.end.python`.
 - You can now have comments in multi-line function definitions:
 
 ```python
@@ -42,11 +42,8 @@ def myfunc(self,            # gotta have self
 
 ![Multi-line comments and function annotations](http://pigimal.com/img/github/python_annotations.png)
 
-- New scopes for bytes, unicode, and raw/regex strings, thanks to @simonzack: `string.quoted.(single|double).(block|single-line).(bytes|bytes-raw|bytes-raw-regex).python`
+- New scopes for bytes, unicode, and raw/regex strings, thanks to [@simonzack](https://github.com/simonzack): `string.quoted.(single|double).(block|single-line).(bytes|bytes-raw|bytes-raw-regex).python`
 - Also from @simonzack, highlighting of `self|cls` in parameter strings: `variable.parameter.function.(keyword|language)`
-- `comment.line.note` to highlight lines containing notes: BUG/FIXME/TODO/XXX
-- `comment.line.note.notation` to highlight the actual word BUG/FIXME/TODO/XXX
-- Added `nonlocal` from Python 3 to `storage.modifier.global`
 
 ## Issues
 
@@ -57,9 +54,9 @@ If you have questions, concerns, or suggested improvements, I'd love to hear fro
 
 &copy; 2013-2014 Matt Morrison <mattdmo@pigimal.com>.
 
-This is free software. It is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. Feel free to use this in your own work. However, if you modify and/or redistribute it, please attribute me in some way, and distribute your work under this or a similar license. A shout-out or a beer would be appreciated.
+This is free software. It is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International Public License](http://creativecommons.org/licenses/by-sa/4.0/). Feel free to use this in your own work. However, if you modify and/or redistribute it, please attribute me in some way, and distribute your work under this or a similar license. A shout-out or a beer would be appreciated.
 
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0;align:center" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;align:center" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
 
 <p>
 You can also [give on Gittip](https://www.gittip.com/on/github/MattDMo/).
