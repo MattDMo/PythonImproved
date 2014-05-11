@@ -44,6 +44,7 @@ def myfunc(self,            # gotta have self
 
 - New scopes for bytes, unicode, and raw/regex strings, thanks to [@simonzack](https://github.com/simonzack): `string.quoted.(single|double).(block|single-line).(bytes|bytes-raw|bytes-raw-regex).python`
 - Also from @simonzack, highlighting of `self|cls` in parameter strings: `variable.parameter.function.(keyword|language)`
+- `comment.line.note.python` is a comment line that contains `(BUG|FIXME|TODO|XXX)` at the beginning. `comment.line.note.notation.python` matches the actual word itself, so you can differentially highlight the word and the whole line.
 
 ## Issues
 
