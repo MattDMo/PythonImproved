@@ -1,23 +1,25 @@
 Python Improved v1.2.1
 ======================
 
-A couple changes for this new release: first, while AAAPackageDev's facility for 
-translating XML-based `.tmLanguage` files to and from YAML is great for 
-developing language definitions, it has a small bug where spaces can be inserted 
-into extra-long single-line regexes. After this was kindly pointed out by 
-@inancsevinc, I have instituted an extra step after each build to remove these 
-spaces, which had been interfering with matching some scopes. Second, after 
-experimenting with bringing the contents of the base Python package's `Regular 
-Expressions (Python).tmLanguage` file into Python Improved, I have decided to 
-remove it. It was causing some significant problems highlighting regexes in 
-Python code, and rather than wade through it line-by-line I found it works just 
-as well as if I just use a single `include` statement. Finally, I updated the
-license to CC-BY-SA 4.0, an upgrade from 3.0. I think it's a little more
-clearly written, but still says essentially the same thing: feel free to use my
-work as the basis of your own, but please acknowledge me in your work, and 
-license it with the same or a similar license.
+A couple changes for this new release: first, while AAAPackageDev's facility for
+translating XML-based `.tmLanguage` files to and from YAML is great for
+developing language definitions, it has a small bug where spaces can be inserted
+into extra-long single-line regexes. After this was kindly pointed out by
+@inancsevinc, I have instituted an extra step after each build to remove these
+spaces, which had been interfering with matching some scopes. Second, after
+experimenting with bringing the contents of the base Python package's `Regular
+Expressions (Python).tmLanguage` file into Python Improved, I have decided to
+remove it. It was causing some significant problems highlighting regexes in
+Python code, and rather than wade through it line-by-line I found it works just
+as well as if I just use a single `include` statement. Third, I added the
+ability to highlight `XXX`, `BUG`, `FIXME`, and `TODO` in comments, as well as
+highlight the entire line containing that word. You can find the latest scopes
+in the README. Finally, I updated the license to CC-BY-SA 4.0, an upgrade from 
+3.0. I think it's a little more clearly written, but still says essentially the 
+same thing: feel free to use my work as the basis of your own, but please 
+acknowledge me in your work, and license it with the same or a similar license.
 
-To take full advantage of the extra scopes included in Python Improved, check out 
+To take full advantage of the extra scopes included in Python Improved, check out
 the Neon Color Scheme at https://sublime.wbond.net/packages/Neon%20Color%20Scheme
 If you'd rather modify your own color scheme, a list of scopes is included in
 the README.md in the `Packages/Python Improved` directory. You can also find
@@ -25,6 +27,6 @@ them on GitHub at https://github.com/MattDMo/PythonImproved#readme
 
 If you have any questions, comments, concerns, bugs, or patches, please open an
 issue or pull request on GitHub and I'll do what I can to help out. You can also
-email me directly at <mattdmo@pigimal.com> or find me on Twitter at @MattDMo. 
-This is definitely a work in progress, so if you'd like to contribute I'd love 
+email me directly at <mattdmo@pigimal.com> or find me on Twitter at @MattDMo.
+This is definitely a work in progress, so if you'd like to contribute I'd love
 to hear from you!
