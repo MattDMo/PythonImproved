@@ -11,7 +11,11 @@ experimenting with bringing the contents of the base Python package's `Regular
 Expressions (Python).tmLanguage` file into Python Improved, I have decided to 
 remove it. It was causing some significant problems highlighting regexes in 
 Python code, and rather than wade through it line-by-line I found it works just 
-as well as if I just use a single `include` statement.
+as well as if I just use a single `include` statement. Finally, I updated the
+license to CC-BY-SA 4.0, an upgrade from 3.0. I think it's a little more
+clearly written, but still says essentially the same thing: feel free to use my
+work as the basis of your own, but please acknowledge me in your work, and 
+license it with the same or a similar license.
 
 To take full advantage of the extra scopes included in Python Improved, check out 
 the Neon Color Scheme at https://sublime.wbond.net/packages/Neon%20Color%20Scheme
