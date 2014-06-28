@@ -48,6 +48,11 @@ def myfunc(self,            # gotta have self
  
 ![BUG FIXME TODO XXX line highlighting](http://pigimal.com/img/comment.line.note.png)
 
+- `constant.other.allcaps.python` captures variable names that are in all caps (`OPENING_PORT`, for example), assuming the convention that these are generally treated as constants in the code. This scope does not match `variable.other.django.settings`, so each can be colored independently.
+- Fixed the octal integers so the Python 3-style `0o123` is matched as well as the old-style `0123`
+- Built-in functions like `any()`, `dict()`, `len()`, `raw_input()`, etc. now have their arguments highlighted just like any other function. Many thanks to [@facelessuser](https://github.com/facelessuser) for the regex, and [@FichteFoll](https://github.com/FichteFoll) for valuable discussion. For those working with Python 2, `print` is still a standalone keyword, as is `del`. If you can think of any others that should be as well, please [let me know](https://github.com/MattDMo/PythonImproved/issues/8).
+- To facilitate hacking, I've now added a `.no-sublime-package` file to keep Python Improved from being zipped up, and I'm also including my `.YAML-tmLanguage` file in the repo, which I use for my day-to-day work (I really hate debugging regexes embedded in XML). Install [`AAAPackageDev`](https://sublime.wbond.net/packages/AAAPackageDev) for syntax highlighting, and tools for converting between YAML, JSON, and XML/Plist formats. [Neon](https://sublime.wbond.net/packages/Neon%20Color%20Scheme) of course has great coloring :)
+
 ## Issues
 
 If you have questions, concerns, or suggested improvements, I'd love to hear from you! Feel free to [open an issue](https://github.com/MattDMo/PythonImproved/issues/new) or send a [pull request](https://github.com/MattDMo/PythonImproved/compare/) and I'll get back to you as soon as I can. You can also email me at <mattdmo@pigimal.com>.
