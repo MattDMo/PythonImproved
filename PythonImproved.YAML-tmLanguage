@@ -1,0 +1,1248 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+comment: To make PythonImproved your default Python syntax, open a .py file and select
+  View|Syntax|Open all with current extension as...|PythonImproved.
+name: PythonImproved
+scopeName: source.python
+fileTypes: [py, py3, rpy, pyw, cpy, SConstruct, Sconstruct, sconstruct, SConscript]
+uuid: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
+
+patterns:
+- name: support.ipython.in
+  match: ^In\b
+
+- name: support.ipython.out
+  match: ^Out\b
+
+- name: support.type.django.model
+  match: (meta|models)\.(Admin|AutoField|BooleanField|CharField|CommaSeparatedIntegerField|DateField|DateTimeField|DecimalField|EmailField|FileField|FilePathField|FloatField|ForeignKey|ImageField|IntegerField|IPAddressField|ManyToManyField|NullBooleanField|OneToOneField|PhoneNumberField|PositiveIntegerField|PositiveSmallIntegerField|SlugField|SmallIntegerField|TextField|TimeField|URLField|USStateField|XMLField)\b
+
+- name: support.other.django.module
+  match: 'django(\.[a-zA-Z0-9_]+){0,} '
+
+- name: variable.other.django.settings
+  match: (ABSOLUTE_URL_OVERRIDES|ADMIN_FOR|ADMIN_MEDIA_PREFIX|ADMINS|ALLOWED_HOSTS|ALLOWED_INCLUDE_ROOTS|APPEND_SLASH|ATOMIC_REQUESTS|AUTH_PROFILE_MODULE|AUTH_USER_MODEL|AUTHENTICATION_BACKENDS|AUTOCOMMIT|BACKEND|CACHE_BACKEND|CACHE_MIDDLEWARE_ALIAS|CACHE_MIDDLEWARE_ANONYMOUS_ONLY|CACHE_MIDDLEWARE_KEY_PREFIX|CACHE_MIDDLEWARE_SECONDS|CACHES|COMMENT_MAX_LENGTH|COMMENTS_APP|COMMENTS_HIDE_REMOVED|CONN_MAX_AGE|CSRF_COOKIE_DOMAIN|CSRF_COOKIE_HTTPONLY|CSRF_COOKIE_NAME|CSRF_COOKIE_PATH|CSRF_COOKIE_SECURE|CSRF_FAILURE_VIEW|DATABASE_ENGINE|DATABASE_HOST|DATABASE_NAME|DATABASE_OPTIONS|DATABASE_PASSWORD|DATABASE_PORT|DATABASE_ROUTERS|DATABASE_USER|DATABASES|DATE_FORMAT|DATE_INPUT_FORMATS|DATETIME_FORMAT|DATETIME_INPUT_FORMATS|DEBUG|DEBUG_PROPAGATE_EXCEPTIONS|DECIMAL_SEPARATOR|DEFAULT_CHARSET|DEFAULT_CONTENT_TYPE|DEFAULT_EXCEPTION_REPORTER_FILTER|DEFAULT_FILE_STORAGE|DEFAULT_FROM_EMAIL|DEFAULT_INDEX_TABLESPACE|DEFAULT_TABLESPACE|DISALLOWED_USER_AGENTS|EMAIL_BACKEND|EMAIL_FILE_PATH|EMAIL_HOST|EMAIL_HOST_PASSWORD|EMAIL_HOST_USER|EMAIL_PORT|EMAIL_SUBJECT_PREFIX|EMAIL_USE_TLS|ENGINE|FILE_CHARSET|FILE_UPLOAD_HANDLERS|FILE_UPLOAD_MAX_MEMORY_SIZE|FILE_UPLOAD_PERMISSIONS|FILE_UPLOAD_TEMP_DIR|FIRST_DAY_OF_WEEK|FIXTURE_DIRS|FORCE_SCRIPT_NAME|FORMAT_MODULE_PATH|HOST|IGNORABLE_404_ENDS|IGNORABLE_404_STARTS|IGNORABLE_404_URLS|INSTALLED_APPS|INTERNAL_IPS|JING_PATH|KEY_FUNCTION|KEY_PREFIX|LANGUAGE_CODE|LANGUAGE_COOKIE_NAME|LANGUAGES|LOCALE_PATHS|LOCATION|LOGGING|LOGGING_CONFIG|LOGIN_REDIRECT_URL|LOGIN_URL|LOGOUT_URL|MANAGERS|MEDIA_ROOT|MEDIA_URL|MESSAGE_LEVEL|MESSAGE_STORAGE|MESSAGE_TAGS|MIDDLEWARE_CLASSES|MONTH_DAY_FORMAT|NAME|NUMBER_GROUPING|OPTIONS|OPTIONS|PASSWORD|PASSWORD_HASHERS|PASSWORD_RESET_TIMEOUT_DAYS|PORT|PREPEND_WWW|PROFANITIES_LIST|RESTRUCTUREDTEXT_FILTER_SETTINGS|ROOT_URLCONF|SECRET_KEY|SECURE_PROXY_SSL_HEADER|SEND_BROKEN_LINK_EMAILS|SERIALIZATION_MODULES|SERVER_EMAIL|SESSION_CACHE_ALIAS|SESSION_COOKIE_AGE|SESSION_COOKIE_DOMAIN|SESSION_COOKIE_HTTPONLY|SESSION_COOKIE_NAME|SESSION_COOKIE_PATH|SESSION_COOKIE_SECURE|SESSION_ENGINE|SESSION_ENGINE|SESSION_EXPIRE_AT_BROWSER_CLOSE|SESSION_FILE_PATH|SESSION_SAVE_EVERY_REQUEST|SESSION_SERIALIZER|SHORT_DATE_FORMAT|SHORT_DATETIME_FORMAT|SIGNING_BACKEND|SITE_ID|STATIC_ROOT|STATIC_URL|STATICFILES_DIRS|STATICFILES_FINDERS|STATICFILES_STORAGE|TEMPLATE_CONTEXT_PROCESSORS|TEMPLATE_DEBUG|TEMPLATE_DIRS|TEMPLATE_LOADERS|TEMPLATE_STRING_IF_INVALID|TEST_CHARSET|TEST_COLLATION|TEST_CREATE|TEST_DATABASE_CHARSET|TEST_DATABASE_COLLATION|TEST_DATABASE_NAME|TEST_DEPENDENCIES|TEST_MIRROR|TEST_NAME|TEST_PASSWD|TEST_RUNNER|TEST_TBLSPACE|TEST_TBLSPACE_TMP|TEST_USER|TEST_USER_CREATE|THOUSAND_SEPARATOR|TIME_FORMAT|TIME_INPUT_FORMATS|TIME_ZONE|TIMEOUT|TRANSACTIONS_MANAGED|URL_VALIDATOR_USER_AGENT|USE_ETAGS|USE_I18N|USE_L10N|USE_THOUSAND_SEPARATOR|USE_TZ|USE_X_FORWARDED_HOST|USER|VERSION|WSGI_APPLICATION|X_FRAME_OPTIONS|YEAR_MONTH_FORMAT)\b
+
+- name: support.function.django.view
+  match: (get_list_or_404|get_object_or_404|load_and_render|loader|render_to_response|render)\b
+
+- name: support.function.django.model
+  match: '[A-Za-z0-9_]+\.get_(object|list|iterator|count|values|values_iterator|in_bulk)\b'
+
+- name: comment.line.note.python
+  match: (#)\s*(BUG|FIXME|TODO|XXX).*$\n?
+  captures:
+    '1': {name: punctuation.definition.comment.python}
+    '2': {name: comment.line.note.notation.python}
+
+- name: comment.line.number-sign.python
+  match: (#).*$\n?
+  captures:
+    '1': {name: punctuation.definition.comment.python}
+
+- name: constant.other.allcaps.python
+  match: \b([A-Z_][A-Z0-9_]*)\b(?!\()
+
+- name: constant.numeric.integer.long.hexadecimal.python
+  match: \b(?i:(0x\h*)L)
+
+- name: constant.numeric.integer.hexadecimal.python
+  match: \b(?i:(0x\h*))
+
+- name: constant.numeric.integer.long.binary.python
+  match: \b(?i:(0b[01]*)L)
+
+- name: constant.numeric.integer.binary.python
+  match: \b(?i:(0b[01]*))
+
+- name: constant.numeric.integer.long.octal.python
+  match: \b(?i:(0[o]?[0-7]+)L)
+
+- name: constant.numeric.integer.octal.python
+  match: \b(0[o]?[0-7]+)
+
+- name: constant.numeric.complex.python
+  match: \b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?<=[^0-9a-zA-Z_])\.\d+)(e[\-\+]?\d+)?))J)
+
+- name: constant.numeric.float.python
+  match: \b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^a-zA-Z_])
+
+- name: constant.numeric.float.python
+  match: (?<=[^0-9a-zA-Z_])(?i:(\.\d+(e[\-\+]?\d+)?))
+
+- name: constant.numeric.float.python
+  match: \b(?i:(\d+e[\-\+]?\d+))
+
+- name: constant.numeric.integer.long.decimal.python
+  match: \b(?i:([1-9]+[0-9]*|0)L)
+
+- name: constant.numeric.integer.decimal.python
+  match: \b([1-9]+[0-9]*|0)
+
+- name: storage.modifier.declaration.python
+  match: \b(global|nonlocal)\b
+
+- name: keyword.control.import.python
+  match: \b(?:(import|from|as))\b
+
+- comment: keywords that delimit flow blocks or alter flow from within a block
+  name: keyword.control.flow.python
+  match: \b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield)\b
+
+- comment: keyword operators that evaluate to True or False
+  name: keyword.operator.logical.python
+  match: \b(and|in|is|not|or)\b
+
+- comment: keywords that haven't fit into other groups (yet).
+  name: keyword.other.python
+  match: \b(assert)\b
+
+- name: invalid.deprecated.operator.python
+  match: <>
+
+- name: keyword.operator.comparison.python
+  match: <\=|>\=|\=\=|<|>|\!\=
+
+- name: keyword.operator.assignment.augmented.python
+  match: \+\=|-\=|\*\=|/\=|//\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=|\*\*\=
+
+- name: keyword.operator.arithmetic.python
+  match: \+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~
+
+- name: keyword.operator.assignment.python
+  match: \=
+
+- name: meta.class.old-style.python
+  contentName: entity.name.type.class.python
+  begin: \s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\:)
+  beginCaptures:
+    '1': {name: storage.type.class.python}
+  end: \s*(:)
+  endCaptures:
+    '1': {name: punctuation.section.class.begin.python}
+  patterns:
+  - include: '#entity_name_class'
+
+- name: meta.class.python
+  begin: \s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\()
+  beginCaptures:
+    '1': {name: storage.type.class.python}
+  end: (\))\s*(?:(\:)|(.*$\n?))
+  endCaptures:
+    '1': {name: punctuation.definition.inheritance.end.python}
+    '2': {name: punctuation.section.class.begin.python}
+    '3': {name: invalid.illegal.missing-section-begin.python}
+  patterns:
+  - contentName: entity.name.type.class.python
+    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
+    end: (?![A-Za-z0-9_])
+    patterns:
+    - include: '#entity_name_class'
+  - contentName: meta.class.inheritance.python
+    begin: (\()
+    beginCaptures:
+      '1': {name: punctuation.definition.inheritance.begin.python}
+    end: (?=\)|:)
+    patterns:
+    - contentName: entity.other.inherited-class.python
+      begin: (?<=\(|,)\s*
+      end: \s*(?:(,)|(?=\)))
+      endCaptures:
+        '1': {name: punctuation.separator.inheritance.python}
+      patterns:
+      - include: $self
+
+- name: meta.class.python
+  begin: \s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9])
+  beginCaptures:
+    '1': {name: storage.type.class.python}
+  end: (\()|\s*($\n?|#.*$\n?)
+  endCaptures:
+    '1': {name: punctuation.definition.inheritance.begin.python}
+    '2': {name: invalid.illegal.missing-inheritance.python}
+  patterns:
+  - contentName: entity.name.type.class.python
+    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
+    end: (?![A-Za-z0-9_])
+    patterns:
+    - include: '#entity_name_function'
+
+- name: meta.function.python
+  begin: \s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*\s*\()
+  beginCaptures:
+    '1': {name: storage.type.function.python}
+  end: (\:)
+  endCaptures:
+    '1': {name: punctuation.section.function.begin.python}
+  patterns:
+  - contentName: entity.name.function.python
+    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
+    end: (?![A-Za-z0-9_])
+    patterns:
+    - include: '#entity_name_function'
+  - contentName: meta.function.parameters.python
+    begin: (\()
+    beginCaptures:
+      '1': {name: punctuation.definition.parameters.begin.python}
+    end: (?=\)\s*(?:\:|-\>))
+    patterns:
+    - include: '#annotated_arguments'
+    - include: '#keyword_arguments'
+    - include: '#comments'
+    - match: \b(?:(self|cls)|([a-zA-Z_][a-zA-Z_0-9]*))\s*(?:(,)|(?=[\n\)]))
+      captures:
+        '1': {name: variable.parameter.function.language.python}
+        '2': {name: variable.parameter.function.python}
+        '3': {name: punctuation.separator.parameters.python}
+  - begin: (\))\s*(\->)
+    beginCaptures:
+      '1': {name: punctuation.definition.parameters.end.python}
+      '2': {name: punctuation.separator.annotation.result.python}
+    end: (?=\:)
+    patterns:
+    - include: $self
+
+- name: meta.function.python
+  begin: \s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*)
+  beginCaptures:
+    '1': {name: storage.type.function.python}
+  end: (\()|\s*($\n?|#.*$\n?)
+  endCaptures:
+    '1': {name: punctuation.definition.parameters.begin.python}
+    '2': {name: invalid.illegal.missing-parameters.python}
+  patterns:
+  - contentName: entity.name.function.python
+    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
+    end: (?![A-Za-z0-9_])
+    patterns:
+    - include: '#entity_name_function'
+
+- name: meta.function.inline.python
+  begin: (lambda)(?=\s+|:)
+  beginCaptures:
+    '1': {name: storage.type.function.inline.python}
+  end: (\:)
+  endCaptures:
+    '1': {name: punctuation.definition.parameters.end.python}
+    '2': {name: punctuation.section.function.begin.python}
+    '3': {name: invalid.illegal.missing-section-begin.python}
+  patterns:
+  - contentName: meta.function.inline.parameters.python
+    begin: \s+
+    end: (?=\:)
+    patterns:
+    - include: '#keyword_arguments'
+    - match: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(?:(,)|(?=[\n\)\:]))
+      captures:
+        '1': {name: variable.parameter.function.python}
+        '2': {name: punctuation.separator.parameters.python}
+
+- comment: a decorator may be a function call which returns a decorator.
+  name: meta.function.decorator.python
+  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()
+  end: (\))
+  endCaptures:
+    '1': {name: punctuation.definition.arguments.end.python}
+  patterns:
+  - contentName: entity.name.function.decorator.python
+    begin: (?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
+    beginCaptures:
+      '1': {name: punctuation.definition.decorator.python}
+    end: (?=\s*\()
+    patterns:
+    - include: '#dotted_name'
+  - contentName: meta.function.decorator.arguments.python
+    begin: (\()
+    beginCaptures:
+      '1': {name: punctuation.definition.arguments.begin.python}
+    end: (?=\))
+    patterns:
+    - include: '#keyword_arguments'
+    - include: $self
+
+- name: meta.function.decorator.python
+  contentName: entity.name.function.decorator.python
+  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)
+  end: (?=\s|$\n?|#)
+  patterns:
+  - begin: (?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*)
+    beginCaptures:
+      '1': {name: punctuation.definition.decorator.python}
+    end: (?=\s|$\n?|#)
+    patterns:
+    - include: '#dotted_name'
+
+- name: meta.function-call.python
+  contentName: meta.function-call.arguments.python
+  begin: (?<=\)|\])\s*(\()
+  beginCaptures:
+    '1': {name: punctuation.definition.arguments.begin.python}
+  end: (\))
+  endCaptures:
+    '1': {name: punctuation.definition.arguments.end.python}
+  patterns:
+  - include: '#keyword_arguments'
+  - include: $self
+
+- include: '#builtin_functions'
+
+- include: '#builtin_types'
+
+- include: '#builtin_exceptions'
+
+- include: '#docstrings'
+
+- include: '#magic_function_names'
+
+- include: '#magic_variable_names'
+
+- include: '#language_variables'
+
+- include: '#generic_object_names'
+
+- name: meta.function-call.python
+  begin: (?:\.)?([a-zA-Z_][a-zA-Z_0-9]*)\s*(?=\()
+  beginCaptures:
+    '1': {name: meta.function-call.generic.python}
+  end: (\))
+  endCaptures:
+    '1': {name: punctuation.definition.arguments.end.python}
+  patterns:
+  - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
+    end: (?=\s*\()
+    patterns:
+    - include: '#dotted_name'
+  - contentName: meta.function-call.arguments.python
+    begin: (\()
+    beginCaptures:
+      '1': {name: punctuation.definition.arguments.begin.python}
+    end: (?=\))
+    patterns:
+    - include: '#keyword_arguments'
+    - include: $self
+
+- name: meta.item-access.python
+  begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
+  end: (\])
+  endCaptures:
+    '1': {name: punctuation.definition.arguments.end.python}
+  patterns:
+  - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\[)
+    end: (?=\s*\[)
+    patterns:
+    - include: '#dotted_name'
+  - contentName: meta.item-access.arguments.python
+    begin: (\[)
+    beginCaptures:
+      '1': {name: punctuation.definition.arguments.begin.python}
+    end: (?=\])
+    patterns:
+    - include: $self
+
+- name: meta.item-access.python
+  contentName: meta.item-access.arguments.python
+  begin: (?<=\)|\])\s*(\[)
+  beginCaptures:
+    '1': {name: punctuation.definition.arguments.begin.python}
+  end: (\])
+  endCaptures:
+    '1': {name: punctuation.definition.arguments.end.python}
+  patterns:
+  - include: $self
+
+- match: \b(def|lambda)\b
+  captures:
+    '1': {name: storage.type.function.python}
+
+- match: \b(class)\b
+  captures:
+    '1': {name: storage.type.class.python}
+
+- include: '#line_continuation'
+
+- include: '#language_variables'
+
+- name: constant.language.python
+  match: \b(None|True|False|Ellipsis|NotImplemented)\b
+
+- include: '#string_quoted_single'
+
+- include: '#string_quoted_double'
+
+- include: '#dotted_name'
+
+- begin: (\()
+  end: (\))
+  patterns:
+  - include: $self
+
+- match: (\[)(\s*(\]))\b
+  captures:
+    '1': {name: punctuation.definition.list.begin.python}
+    '2': {name: meta.empty-list.python}
+    '3': {name: punctuation.definition.list.end.python}
+
+- name: meta.structure.list.python
+  begin: (\[)
+  beginCaptures:
+    '1': {name: punctuation.definition.list.begin.python}
+  end: (\])
+  endCaptures:
+    '1': {name: punctuation.definition.list.end.python}
+  patterns:
+  - contentName: meta.structure.list.item.python
+    begin: (?<=\[|\,)\s*(?![\],])
+    end: \s*(?:(,)|(?=\]))
+    endCaptures:
+      '1': {name: punctuation.separator.list.python}
+    patterns:
+    - include: $self
+
+- name: meta.structure.tuple.python
+  match: (\()(\s*(\)))
+  captures:
+    '1': {name: punctuation.definition.tuple.begin.python}
+    '2': {name: meta.empty-tuple.python}
+    '3': {name: punctuation.definition.tuple.end.python}
+
+- name: meta.structure.dictionary.python
+  match: (\{)(\s*(\}))
+  captures:
+    '1': {name: punctuation.definition.dictionary.begin.python}
+    '2': {name: meta.empty-dictionary.python}
+    '3': {name: punctuation.definition.dictionary.end.python}
+
+- name: meta.structure.dictionary.python
+  begin: (\{)
+  beginCaptures:
+    '1': {name: punctuation.definition.dictionary.begin.python}
+  end: (\})
+  endCaptures:
+    '1': {name: punctuation.definition.dictionary.end.python}
+  patterns:
+  - contentName: meta.structure.dictionary.key.python
+    begin: (?<=\{|\,|^)\s*(?![\},])
+    end: \s*(?:(?=\})|(\:))
+    endCaptures:
+      '1': {name: punctuation.separator.valuepair.dictionary.python}
+    patterns:
+    - include: $self
+  - contentName: meta.structure.dictionary.value.python
+    begin: (?<=\:|^)\s*
+    end: \s*(?:(?=\})|(,))
+    endCaptures:
+      '1': {name: punctuation.separator.dictionary.python}
+    patterns:
+    - include: $self
+
+repository:
+  annotated_arguments:
+    begin: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)|(?=\()
+    beginCaptures:
+      '1': {name: variable.parameter.function.python}
+      '2': {name: punctuation.separator.annotation.python}
+    end: \s*(?:(,)|(?=$\n?|[\)\:]))
+    endCaptures:
+      '1': {name: punctuation.separator.parameters.python}
+    patterns:
+    - include: '#annotated_group'
+    - name: keyword.operator.assignment.python
+      match: '='
+    - include: $self
+
+  annotated_group:
+    begin: (\()
+    beginCaptures:
+      '1': {name: punctuation.definition.parameters-group.begin.python}
+    end: (\))
+    endCaptures:
+      '1': {name: punctuation.definition.parameters-group.end.python}
+    patterns:
+    - begin: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)
+      beginCaptures:
+        '1': {name: variable.parameter.function.python}
+        '2': {name: punctuation.separator.annotation.python}
+      end: \s*(?:(,)|(?=$\n?|\)))
+      endCaptures:
+        '1': {name: punctuation.separator.parameters.python}
+      patterns:
+      - include: $self
+    - begin: \b([a-zA-Z_][a-zA-Z_0-9]*)
+      beginCaptures:
+        '1': {name: variable.parameter.function.python}
+      end: \s*(?:(,)|(?=$\n?|\)))
+      endCaptures:
+        '1': {name: punctuation.separator.parameters.python}
+    - include: '#comments'
+
+  builtin_exceptions:
+    name: support.type.exception.python
+    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([.a-zA-Z0-9_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([.a-zA-Z0-9_]+)?Exception)\b
+
+  builtin_functions:
+    patterns:
+    - name: meta.function-call.python
+      begin: (?<!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|del|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()
+      beginCaptures:
+        '1': {name: support.function.builtin.python}
+      end: (\))
+      endCaptures:
+        '1': {name: punctuation.definition.arguments.end.python}
+      patterns:
+      - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
+        end: (?=\s*\()
+        patterns:
+        - include: '#dotted_name'
+      - begin: (\()
+        beginCaptures:
+          '1': {name: punctuation.definition.arguments.begin.python}
+        contentName: meta.function-call.arguments.python
+        end: (?=\))
+        patterns:
+        - include: '#keyword_arguments'
+        - include: $self
+    - comment: "These are statements in Py2, but don't really fit into keyword.control.flow\
+        \ with the rest"
+      name: support.function.builtin.python
+      match: (?<!\.)\b(print|del)\b
+
+  builtin_types:
+    name: support.type.python
+    match: (?<!\.)\b(ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|hex|int|list|long|object|oct|property|reversed|set|slice|staticmethod|str|super|tuple|type|unicode|xrange)\b
+
+  character-class:
+    patterns:
+    - name: constant.character.character-class.regex.python
+      match: \\[wWsSdDhH]|\.
+    - name: constant.character.escape.backslash.regex.python
+      match: \\.
+    - name: constant.other.character-class.set.regex.python
+      begin: (\[)(\^)?
+      beginCaptures:
+        '1': {name: punctuation.definition.character-class.regex.python}
+        '2': {name: keyword.operator.negation.regex.python}
+      end: (\])
+      endCaptures:
+        '1': {name: punctuation.definition.character-class.regex.python}
+      patterns:
+      - include: '#character-class'
+      - name: constant.other.character-class.range.regex.python
+        match: ((\\.)|.)\-((\\.)|[^\]])
+        captures:
+          '2': {name: constant.character.escape.backslash.regex.python}
+          '4': {name: constant.character.escape.backslash.regex.python}
+
+  comments:
+    name: comment.line.number-sign.python
+    match: (#).*$\n?
+
+  constant_placeholder:
+    name: constant.other.placeholder.python
+    match: (?i:%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])
+
+  docstrings:
+    patterns:
+    - name: comment.block.python
+      begin: ^\s*(?=[uU]?[rR]?""")
+      end: (?<=""")
+      patterns:
+      - include: '#string_quoted_double'
+    - name: comment.block.python
+      begin: ^\s*(?=[uU]?[rR]?''')
+      end: (?<=''')
+      patterns:
+      - include: '#string_quoted_single'
+
+  dotted_name:
+    begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)
+    end: (?![A-Za-z0-9_\.])
+    patterns:
+    - begin: (\.)(?=[A-Za-z_][A-Za-z0-9_]*)
+      end: (?![A-Za-z0-9_])
+      patterns:
+      - include: '#magic_function_names'
+      - include: '#magic_variable_names'
+      - include: '#illegal_names'
+      - include: '#generic_names'
+    - begin: (?<!\.)(?=[A-Za-z_][A-Za-z0-9_]*)
+      end: (?![A-Za-z0-9_])
+      patterns:
+      - include: '#builtin_functions'
+      - include: '#builtin_types'
+      - include: '#builtin_exceptions'
+      - include: '#illegal_names'
+      - include: '#magic_function_names'
+      - include: '#magic_variable_names'
+      - include: '#language_variables'
+      - include: '#generic_names'
+
+  entity_name_class:
+    patterns:
+    - include: '#illegal_names'
+    - include: '#generic_names'
+
+  entity_name_function:
+    patterns:
+    - include: '#magic_function_names'
+    - include: '#illegal_names'
+    - include: '#generic_names'
+
+  escaped_char:
+    match: (\\x[0-9A-F]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)
+    captures:
+      '1': {name: constant.character.escape.hex.python}
+      '2': {name: constant.character.escape.octal.python}
+      '3': {name: constant.character.escape.newline.python}
+      '4': {name: constant.character.escape.backlash.python}
+      '5': {name: constant.character.escape.double-quote.python}
+      '6': {name: constant.character.escape.single-quote.python}
+      '7': {name: constant.character.escape.bell.python}
+      '8': {name: constant.character.escape.backspace.python}
+      '9': {name: constant.character.escape.formfeed.python}
+      '10': {name: constant.character.escape.linefeed.python}
+      '11': {name: constant.character.escape.return.python}
+      '12': {name: constant.character.escape.tab.python}
+      '13': {name: constant.character.escape.vertical-tab.python}
+
+  escaped_unicode_char:
+    match: (\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z0-9 ]+\})
+    captures:
+      '1': {name: constant.character.escape.unicode.16-bit-hex.python}
+      '2': {name: constant.character.escape.unicode.32-bit-hex.python}
+      '3': {name: constant.character.escape.unicode.name.python}
+
+  function_name:
+    patterns:
+    - include: '#magic_function_names'
+    - include: '#magic_variable_names'
+    - include: '#builtin_exceptions'
+    - include: '#builtin_functions'
+    - include: '#builtin_types'
+    - include: '#generic_names'
+
+  generic_names:
+    match: '[A-Za-z_][A-Za-z0-9_]*'
+
+  generic_object_names:
+    match: (\.\b([A-Za-z_][A-Za-z0-9_]*)\b(?!\(|\[)|\b([A-Za-z_][A-Za-z0-9_]*)\b\.)
+
+  illegal_names:
+    name: invalid.illegal.name.python
+    match: \b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|with|yield)\b
+
+  keyword_arguments:
+    begin: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(=)(?!=)
+    beginCaptures:
+      '1': {name: variable.parameter.function.keyword.python}
+      '2': {name: keyword.operator.assignment.python}
+    end: \s*(?:(,)|(?=$\n?|[\)\:]))
+    endCaptures:
+      '1': {name: punctuation.separator.parameters.python}
+    patterns:
+    - include: $self
+
+  language_variables:
+    name: variable.language.python
+    match: (?<!\.)\b(self|cls)\b
+
+  line_continuation:
+    match: (\\)(.*)$\n?
+    captures:
+      '1': {name: punctuation.separator.continuation.line.python}
+
+  magic_function_names:
+    comment: these methods have magic interpretation by python and are generally called
+      indirectly through syntactic constructs
+    match: (\.)?\b(__(?:abs|add|and|bool|call|ceil|cmp|coerce|complex|contains|copy|deepcopy|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floor|floordiv|format|ge|get|getattr|getattribute|getinitargs|getitem|getnewargs|getslice|getstate|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|missing|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|reduce|reduce_ex|repr|reversed|rfloordiv|rlshift|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|setstate|sizeof|str|sub|subclasscheck|truediv|trunc|unicode|xor)__)\b
+    captures:
+      '2': {name: support.function.magic.python}
+
+  magic_variable_names:
+    comment: magic variables which a class/module may have.
+    match: (\.)?\b(__(?:all|bases|class|debug|dict|doc|file|members|metaclass|methods|module|mro|name|slots|subclasses|version|weakref)__)\b
+    captures:
+      '2': {name: support.variable.magic.python}
+
+  regular_expressions:
+    patterns:
+    - include: source.regexp.python
+
+  string_quoted_double:
+    patterns:
+    - comment: single quoted unicode-raw string
+      name: string.quoted.double.block.unicode-raw-regex.python
+      begin: ([uU]r)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: single quoted unicode-raw string without regular expression highlighting
+      name: string.quoted.double.block.unicode-raw.python
+      begin: ([uU]R)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: single quoted bytes-raw string
+      name: string.quoted.double.block.bytes-raw-regex.python
+      begin: ([bB]r)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: single quoted bytes-raw string without regular expression highlighting
+      name: string.quoted.double.block.bytes-raw.python
+      begin: ([bB]R)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: double quoted raw string
+      name: string.quoted.double.block.raw-regex.python
+      begin: (r)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: double quoted raw string
+      name: string.quoted.double.block.raw.python
+      begin: (R)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: double quoted unicode string
+      name: string.quoted.double.block.unicode.python
+      begin: ([uU])(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: double quoted bytes string
+      name: string.quoted.double.block.bytes.python
+      begin: ([bB])(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: double-quoted raw string
+      name: string.quoted.double.single-line.unicode-raw-regex.python
+      begin: ([uU]r)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: double-quoted raw string
+      name: string.quoted.double.single-line.unicode-raw.python
+      begin: ([uU]R)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: double-quoted raw string
+      name: string.quoted.double.single-line.bytes-raw-regex.python
+      begin: ([bB]r)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: double-quoted raw string
+      name: string.quoted.double.single-line.bytes-raw.python
+      begin: ([bB]R)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: double-quoted raw string
+      name: string.quoted.double.single-line.raw-regex.python
+      begin: (r)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: double-quoted raw string
+      name: string.quoted.double.single-line.raw.python
+      begin: (R)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: double quoted unicode string
+      name: string.quoted.double.single-line.unicode.python
+      begin: ([uU])(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: double quoted bytes string
+      name: string.quoted.double.single-line.bytes.python
+      begin: ([bB])(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: double quoted string
+      name: string.quoted.double.block.sql.python
+      begin: (""")(?=\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))
+      beginCaptures:
+        '1': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+      - include: source.sql
+    - comment: double quoted string
+      name: string.quoted.double.single-line.sql.python
+      begin: (")(?=\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))
+      beginCaptures:
+        '1': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+      - include: source.sql
+    - comment: double quoted string
+      name: string.quoted.double.block.python
+      begin: (""")
+      beginCaptures:
+        '1': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: double quoted string
+      name: string.quoted.double.single-line.python
+      begin: (")
+      beginCaptures:
+        '1': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+
+  string_quoted_single:
+    patterns:
+    - name: string.quoted.single.single-line.python
+      match: (?<!')(')(('))(?!')
+      captures:
+        '1': {name: punctuation.definition.string.begin.python}
+        '2': {name: punctuation.definition.string.end.python}
+        '3': {name: meta.empty-string.single.python}
+    - comment: single quoted unicode-raw string
+      name: string.quoted.single.block.unicode-raw-regex.python
+      begin: ([uU]r)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: single quoted unicode-raw string
+      name: string.quoted.single.block.unicode-raw.python
+      begin: ([uU]R)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: single quoted bytes-raw string
+      name: string.quoted.single.block.bytes-raw-regex.python
+      begin: ([bB]r)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: single quoted bytes-raw string
+      name: string.quoted.single.block.bytes-raw.python
+      begin: ([bB]R)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: single quoted raw string
+      name: string.quoted.single.block.raw-regex.python
+      begin: (r)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: single quoted raw string
+      name: string.quoted.single.block.raw.python
+      begin: (R)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: single quoted unicode string
+      name: string.quoted.single.block.unicode.python
+      begin: ([uU])(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: single quoted bytes string
+      name: string.quoted.single.block.bytes.python
+      begin: ([bB])(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: single quoted unicode-raw string
+      name: string.quoted.single.single-line.unicode-raw-regex.python
+      begin: ([uU]r)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: single quoted unicode-raw string
+      name: string.quoted.single.single-line.unicode-raw.python
+      begin: ([uU]R)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: single quoted bytes-raw string
+      name: string.quoted.single.single-line.bytes-raw-regex.python
+      begin: ([bB]r)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: single quoted bytes-raw string
+      name: string.quoted.single.single-line.bytes-raw.python
+      begin: ([bB]R)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: single quoted raw string
+      name: string.quoted.single.single-line.raw-regex.python
+      begin: (r)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+      - include: '#regular_expressions'
+    - comment: single quoted raw string
+      name: string.quoted.single.single-line.raw.python
+      begin: (R)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: single quoted unicode string
+      name: string.quoted.single.single-line.unicode.python
+      begin: ([uU])(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: single quoted bytes string
+      name: string.quoted.single.single-line.bytes.python
+      begin: ([bB])(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_char'
+    - comment: single quoted string
+      name: string.quoted.single.block.python
+      begin: (''')(?=\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))
+      beginCaptures:
+        '1': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+      - include: source.sql
+    - comment: single quoted string
+      name: string.quoted.single.single-line.python
+      begin: (')(?=\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))
+      beginCaptures:
+        '1': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+      - include: source.sql
+    - comment: single quoted string
+      name: string.quoted.single.block.python
+      begin: (''')
+      beginCaptures:
+        '1': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+    - comment: single quoted string
+      name: string.quoted.single.single-line.python
+      begin: (')
+      beginCaptures:
+        '1': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
+
+  strings:
+    patterns:
+    - include: '#string_quoted_double'
+    - include: '#string_quoted_single'
+author: Matt Morrison @MattDMo mattdmo@pigimal.com
+bundleUUID: 11B0273F-0284-4483-B17B-4B8D0A9294CC
+firstLineMatch: ^#!/.*\bpython[0-9.-]*\b
+foldingStartMarker: ^\s*(def|class)\s+([.a-zA-Z0-9_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
+foldingStopMarker: ^\s*$|^\s*\}|^\s*\]|^\s*\)|^\s*"""\s*$
+keyEquivalent: ^~P
