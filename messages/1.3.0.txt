@@ -1,0 +1,24 @@
+Python Improved v1.3.0
+======================
+
+The major change in this release is that built-in functions like `any()`,
+`dict()`, `len()`, `raw_input()`, etc. now have their arguments highlighted just
+like any other function. Many thanks to @facelessuser and @FichteFoll for their
+help and input. Additionally, I've also added `constant.other.allcaps.python`,
+which captures variable names that are in all caps (`OPENING_PORT`, for example),
+assuming the convention that these are generally treated as constants in the
+code. This scope does not match `variable.other.django.settings`, so each can be
+colored independently. Finally, I tweaked the octal scope so that both old-style
+values like `0123` and Python 3-style `0o123` numbers are recognized.
+
+To take full advantage of the extra scopes included in Python Improved, check out
+the Neon Color Scheme at https://sublime.wbond.net/packages/Neon%20Color%20Scheme
+If you'd rather modify your own color scheme, a list of scopes is included in
+the README.md in the `Packages/Python Improved` directory. You can also find
+them on GitHub at https://github.com/MattDMo/PythonImproved#readme
+
+If you have any questions, comments, concerns, bugs, or patches, please open an
+issue or pull request on GitHub and I'll do what I can to help out. You can also
+email me directly at <mattdmo@pigimal.com> or find me on Twitter at @MattDMo.
+This is definitely a work in progress, so if you'd like to contribute I'd love
+to hear from you!
