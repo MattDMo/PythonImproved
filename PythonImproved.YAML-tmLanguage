@@ -8,10 +8,10 @@ uuid: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
 
 patterns:
 - name: support.ipython.in
-  match: (^In \[\d\]\:)
+  match: (^In \[\d+\]\:)
 
 - name: support.ipython.out
-  match: (^Out\[\d\]\:)
+  match: (^Out\[\d+\]\:)
 
 - name: support.type.django.model
   comment: updated for 1.7, backwards-compatible with 1.6
