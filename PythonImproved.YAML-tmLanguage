@@ -41,8 +41,8 @@ patterns:
     '1': {name: punctuation.definition.comment.python}
 
 - name: constant.other.allcaps.python
-  match: \b(?!\bPIL\b)([A-Z_][A-Z0-9_]*)\b(?!\()
-  comment: Match identifiers in ALL_CAPS as constants. Built-in exception for PIL module.
+  match: \b([A-Z_][A-Z0-9_]*)\b(?!\()
+  comment: Match identifiers in ALL_CAPS as constants.
 
 - name: constant.numeric.integer.long.hexadecimal.python
   match: \b(?i:(0x\h*)L)
