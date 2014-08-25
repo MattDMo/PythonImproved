@@ -8,17 +8,17 @@ uuid: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
 
 patterns:
 - name: support.ipython.in
-  match: ^In\b
+  match: (^In \[\d\]\:)
 
 - name: support.ipython.out
-  match: ^Out\b
+  match: (^Out\[\d\]\:)
 
 - name: support.type.django.model
   comment: updated for 1.7, backwards-compatible with 1.6
   match: (meta|models)\.(Admin|AutoField|BigIntegerField|BinaryField|BooleanField|CharField|CommaSeparatedIntegerField|DateField|DateTimeField|DecimalField|EmailField|FileField|FilePathField|FloatField|ForeignKey|ImageField|IntegerField|IPAddressField|GenericIPAddressField|ManyToManyField|NullBooleanField|OneToOneField|PhoneNumberField|PositiveIntegerField|PositiveSmallIntegerField|SlugField|SmallIntegerField|TextField|TimeField|URLField|USStateField|XMLField)\b
 
 - name: support.other.django.module
-  match: 'django(\.[a-zA-Z0-9_]+){0,} '
+  match: 'django(\.[A-Za-z_][A-Za-z0-9_]+){0,} '
 
 - name: variable.other.django.settings
   comment: updated for 1.7, backwards-compatible with 1.6
@@ -28,7 +28,7 @@ patterns:
   match: (get_list_or_404|get_object_or_404|load_and_render|loader|render_to_response|render)\b
 
 - name: support.function.django.model
-  match: '[A-Za-z0-9_]+\.get_(object|list|iterator|count|values|values_iterator|in_bulk)\b'
+  match: '[A-Za-z_][A-Za-z0-9_]+\.get_(object|list|iterator|count|values|values_iterator|in_bulk)\b'
 
 - name: comment.line.note.python
   match: (#)\s*(BUG|FIXME|TODO|XXX).*$\n?
