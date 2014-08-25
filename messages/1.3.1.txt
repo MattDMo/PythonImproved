@@ -1,0 +1,24 @@
+Python Improved v1.3.1
+======================
+
+This is primarily a maintenance release, mainly with bugfixes. Several Django-
+specific regexes were tweaked to either better match their intended targets, or
+in some cases to add items to be included in the upcoming 1.7 release. The new
+`constant.other.allcaps.python` from last release was tweaked to match `CONSTANT`,
+`class.CONSTANT` and the `CONSTANT` part of `CLASS.CONSTANT`, but not
+`CLASS.function()`, `class.FUNCTION()`, or `FUNCTION()`. Finally, the IPython
+In and Out statement regexes were modified to make the entire entity (for example,
+`In [12]: `) a single color, instead of just having the words `In` and `Out`
+colored green and red, respectively. This is more in line with the style in the
+IPython Notebook and terminal applications.
+
+To take full advantage of the extra scopes included in Python Improved, check out
+the Neon Color Scheme at https://sublime.wbond.net/packages/Neon%20Color%20Scheme
+If you'd rather modify your own color scheme, a list of scopes is included in
+the README.md on GitHub at https://github.com/MattDMo/PythonImproved#readme
+
+If you have any questions, comments, concerns, bugs, or patches, please open an
+issue or pull request on GitHub and I'll do what I can to help out. You can also
+email me directly at <mattdmo@pigimal.com> or find me on Twitter at @MattDMo.
+This is definitely a work in progress, so if you'd like to contribute I'd love
+to hear from you!
