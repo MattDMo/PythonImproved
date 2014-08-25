@@ -10,7 +10,7 @@ as well as a number of my own changes to make things more consistent and underst
 
 ## Installation and Use
 
-If you haven't already, [install Package Control](https://sublime.wbond.net/installation), then select `Python Improved` from the `Package Control: Install Package` option in the Command Palette. To use PythonImproved as your default Python syntax, open a `.py` file, then select `View -> Syntax -> Open all with current extension as... -> PythonImproved`.
+If you haven't already, [install Package Control](https://sublime.wbond.net/installation), then select `Python Improved` from the `Package Control: Install Package` option in the Command Palette. To use PythonImproved as your default Python syntax, open a `.py` file, then select **`View -> Syntax -> Open all with current extension as... -> PythonImproved`**.
 
 While I haven't yet tried to install PythonImproved with TextMate, I can't think of a good reason as to why it wouldn't work. You could try putting it in the same directory as the standard `Python.tmbundle` package, in the `Syntaxes` subdirectory. Then, just pick `PythonImproved` from the syntax menu.
 
@@ -22,7 +22,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 - [Django](http://www.djangoproject.com)-specific:
     - `support.type.django.model`: `(meta|models).` `DecimalField`, `EmailField`, `ForeignKey`, `ManyToManyField`, etc.
     - `support.other.django.module`: `django`, `django.contrib`, etc.
-    - `variable.other.django.settings`: [`settings.py`](https://docs.djangoproject.com/en/1.6/ref/settings/) options like `ADMINS`, `DATABASES`, `INSTALLED_APPS`, `MIDDLEWARE_CLASSES`, etc. Should be complete as of Django 1.6.
+    - `variable.other.django.settings`: [`settings.py`](https://docs.djangoproject.com/en/1.6/ref/settings/) options like `ADMINS`, `DATABASES`, `INSTALLED_APPS`, `MIDDLEWARE_CLASSES`, etc. Should be complete as of Django 1.7.
     - `support.function.django.view`: view functions `get_list_or_404`, `get_object_or_404`, `load_and_render`, `loader`, `render_to_response`, `render`
     - `support.function.django.model`: model functions `get_object`, `get_list`, `get_count`, etc.
 - `constant.numeric.integer.(long).binary.python`: binary literals `0b00101010`, `0b00101010L`
@@ -48,14 +48,14 @@ def myfunc(self,            # gotta have self
  
 ![BUG FIXME TODO XXX line highlighting](http://pigimal.com/img/comment.line.note.png)
 
-- `constant.other.allcaps.python` captures variable names that are in all caps (`OPENING_PORT`, for example), assuming the convention that these are generally treated as constants in the code. This scope does not match `variable.other.django.settings`, so each can be colored independently.
+- `constant.other.allcaps.python` captures variable names that are in all caps (`OPENING_PORT`, for example), assuming the convention that these are generally treated as constants in the code. This scope does not match `variable.other.django.settings`, so each can be colored independently. Matches `CONSTANT`, `class.CONSTANT` and the `CONSTANT` part of `CLASS.CONSTANT`, but not `CLASS.function()`, `class.FUNCTION()`, or `FUNCTION()`.
 - Fixed the octal integers so the Python 3-style `0o123` is matched as well as the old-style `0123`
 - Built-in functions like `any()`, `dict()`, `len()`, `raw_input()`, etc. now have their arguments highlighted just like any other function. Many thanks to [@facelessuser](https://github.com/facelessuser) for the regex, and [@FichteFoll](https://github.com/FichteFoll) for valuable discussion. For those working with Python 2, `print` is still a standalone keyword, as is `del`. If you can think of any others that should be as well, please [let me know](https://github.com/MattDMo/PythonImproved/issues/8).
-- To facilitate hacking, I'm also including my `.YAML-tmLanguage` file in the repo, which I use for my day-to-day work (I really hate debugging regexes embedded in XML). Install [`AAAPackageDev`](https://sublime.wbond.net/packages/AAAPackageDev) for syntax highlighting, and tools for converting between YAML, JSON, and XML/Plist formats. [Neon](https://sublime.wbond.net/packages/Neon%20Color%20Scheme) of course has great coloring :)
+- To facilitate hacking, I'm also including my `.YAML-tmLanguage` file in the repo, which I use for my day-to-day work (I really hate debugging regexes embedded in XML). Install [`AAAPackageDev`](https://sublime.wbond.net/packages/AAAPackageDev) for syntax highlighting, and tools for converting between YAML, JSON, and XML/Plist formats. [Neon](https://sublime.wbond.net/packages/Neon%20Color%20Scheme) of course has great coloring for the `.YAML-tmLanguage` format, and especially the regexes :)
 
 ## Issues
 
-If you have questions, concerns, or suggested improvements, I'd love to hear from you! Feel free to [open an issue](https://github.com/MattDMo/PythonImproved/issues/new) or send a [pull request](https://github.com/MattDMo/PythonImproved/compare/) and I'll get back to you as soon as I can. You can also email me at <mattdmo@pigimal.com>.
+If you have questions, concerns, or suggested improvements, I'd love to hear from you! Feel free to [open an issue](https://github.com/MattDMo/PythonImproved/issues/new) or send a [pull request](https://github.com/MattDMo/PythonImproved/compare/) and I'll get back to you as soon as I can. You can also email me at <mattdmo@pigimal.com> or find me on Twitter [@MattDMo](https://twitter.com/MattDMo).
 
 
 ## License
