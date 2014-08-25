@@ -42,7 +42,7 @@ patterns:
     '1': {name: punctuation.definition.comment.python}
 
 - name: constant.other.allcaps.python
-  match: \b([A-Z_][A-Z0-9_]*)\b(?!\()
+  match: \b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])
   comment: Match identifiers in ALL_CAPS as constants.
 
 - name: constant.numeric.integer.long.hexadecimal.python
