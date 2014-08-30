@@ -33,14 +33,30 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.ipython.cell-number</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>(^In \[\d+\]\:)</string>
+			<string>(^In \[(\d+)\]\:)</string>
 			<key>name</key>
 			<string>support.ipython.in</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.ipython.cell-number</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>(^Out\[\d+\]\:)</string>
+			<string>(^Out\[(\d+)\]\:)</string>
 			<key>name</key>
 			<string>support.ipython.out</string>
 		</dict>
