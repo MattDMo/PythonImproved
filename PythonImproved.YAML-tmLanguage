@@ -295,7 +295,7 @@ patterns:
 # - include: '#generic_object_names'
 
 - name: meta.function-call.python
-  begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_])*\s*\()
+  begin: (?=\b[A-Za-z_][A-Za-z0-9_]*\s*(\.\s*[A-Za-z_][A-Za-z0-9_])*\s*\()
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
@@ -315,7 +315,7 @@ patterns:
 
 - comment: Py2 print statement that should only be matched after function calls
   name: keyword.other.print.python
-  match: \b(print)(?!\s*(?!\.))
+  match: \b(print)(?=\s)(?!\s*\.) # Otherwise this would qualify as a dotted name, which is matched later
 
 - name: meta.item-access.python
   begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
@@ -526,11 +526,13 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*(?![A-Za-z0-9_\.]))
-    end: (?![A-Za-z0-9_\.])
+    begin: (?=\b[A-Za-z_][A-Za-z0-9_]*\s*(?:\.\s*[A-Za-z_][A-Za-z0-9_]*)*)
+    end: (?![A-Za-z0-9_\.\s])|(?=(?<!\.)\s+[^.])
     contentName: meta.dotted-name.python
     patterns:
-    - begin: (\.)
+    - begin: \.
+      beginCaptures:
+        '0': {name: meta.dot.python}
       end: (?![A-Za-z0-9_])
       patterns:
       - include: '#magic_function_names'

@@ -832,7 +832,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_])*\s*\()</string>
+			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*\s*(\.\s*[A-Za-z_][A-Za-z0-9_])*\s*\()</string>
 			<key>end</key>
 			<string>(\))</string>
 			<key>endCaptures</key>
@@ -893,7 +893,7 @@
 			<key>comment</key>
 			<string>Py2 print statement that should only be matched after function calls</string>
 			<key>match</key>
-			<string>\b(print)(?!\s*(?!\.))</string>
+			<string>\b(print)(?=\s)(?!\s*\.)</string>
 			<key>name</key>
 			<string>keyword.other.print.python</string>
 		</dict>
@@ -1520,16 +1520,24 @@
 		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*(?![A-Za-z0-9_\.]))</string>
+			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*\s*(?:\.\s*[A-Za-z_][A-Za-z0-9_]*)*)</string>
 			<key>contentName</key>
 			<string>meta.dotted-name.python</string>
 			<key>end</key>
-			<string>(?![A-Za-z0-9_\.])</string>
+			<string>(?![A-Za-z0-9_\.\s])|(?=(?&lt;!\.)\s+[^.])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(\.)</string>
+					<string>\.</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>meta.dot.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>
