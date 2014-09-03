@@ -828,10 +828,6 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#builtin_functions</string>
-		</dict>
-		<dict>
-			<key>include</key>
 			<string>#builtin_types</string>
 		</dict>
 		<dict>
@@ -1412,89 +1408,15 @@
 		</dict>
 		<key>builtin_functions</key>
 		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?&lt;!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|del|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.builtin.python</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(\))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.arguments.end.python</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>meta.function-call.python</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
-							<key>end</key>
-							<string>(?=\s*\()</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#dotted_name</string>
-								</dict>
-							</array>
-						</dict>
-						<dict>
-							<key>begin</key>
-							<string>(\()</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>1</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.arguments.begin.python</string>
-								</dict>
-							</dict>
-							<key>contentName</key>
-							<string>meta.function-call.arguments.python</string>
-							<key>end</key>
-							<string>(?=\))</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#keyword_arguments</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>$self</string>
-								</dict>
-							</array>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>comment</key>
-					<string>These are statements in Py2, but don't really fit into keyword.control.flow with the rest</string>
-					<key>match</key>
-					<string>(?&lt;!\.)\b(print|del)\b</string>
-					<key>name</key>
-					<string>support.function.builtin.python</string>
-				</dict>
-			</array>
+			<key>match</key>
+			<string>(?&lt;!\.)\b(__import__|abs|all|any|apply|ascii|bin|buffer|callable|chr|cmp|coerce|compile|copyright|credits|delattr|dir|divmod|enumerate|eval|exec|execfile|exit|filter|format|getattr|globals|hasattr|hash|help|hex|id|input|intern|isinstance|issubclass|iter|len|license|locals|long|map|max|memoryview|min|next|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|setattr|sorted|sum|unichr|vars|xrange|zip)\b</string>
+			<key>name</key>
+			<string>support.function.builtin.python</string>
 		</dict>
 		<key>builtin_types</key>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!\.)\b(ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|hex|int|list|long|object|oct|property|reversed|set|slice|staticmethod|str|super|tuple|type|unicode|xrange)\b</string>
+			<string>(?&lt;!\.)\b(basestring|bool|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|int|list|object|property|set|slice|staticmethod|str|super|tuple|type|unicode)\b</string>
 			<key>name</key>
 			<string>support.type.python</string>
 		</dict>

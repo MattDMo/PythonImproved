@@ -290,8 +290,6 @@ patterns:
   - include: '#keyword_arguments'
   - include: $self
 
-- include: '#builtin_functions'
-
 - include: '#builtin_types'
 
 - include: '#builtin_exceptions'
@@ -486,35 +484,12 @@ repository:
     match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([.a-zA-Z0-9_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([.a-zA-Z0-9_]+)?Exception)\b
 
   builtin_functions:
-    patterns:
-    - name: meta.function-call.python
-      begin: (?<!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|del|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()
-      beginCaptures:
-        '1': {name: support.function.builtin.python}
-      end: (\))
-      endCaptures:
-        '1': {name: punctuation.definition.arguments.end.python}
-      patterns:
-      - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
-        end: (?=\s*\()
-        patterns:
-        - include: '#dotted_name'
-      - begin: (\()
-        beginCaptures:
-          '1': {name: punctuation.definition.arguments.begin.python}
-        contentName: meta.function-call.arguments.python
-        end: (?=\))
-        patterns:
-        - include: '#keyword_arguments'
-        - include: $self
-    - comment: "These are statements in Py2, but don't really fit into keyword.control.flow\
-        \ with the rest"
-      name: support.function.builtin.python
-      match: (?<!\.)\b(print|del)\b
+    name: support.function.builtin.python
+    match: (?<!\.)\b(__import__|abs|all|any|apply|ascii|bin|buffer|callable|chr|cmp|coerce|compile|copyright|credits|delattr|dir|divmod|enumerate|eval|exec|execfile|exit|filter|format|getattr|globals|hasattr|hash|help|hex|id|input|intern|isinstance|issubclass|iter|len|license|locals|long|map|max|memoryview|min|next|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|setattr|sorted|sum|unichr|vars|xrange|zip)\b
 
   builtin_types:
     name: support.type.python
-    match: (?<!\.)\b(ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|hex|int|list|long|object|oct|property|reversed|set|slice|staticmethod|str|super|tuple|type|unicode|xrange)\b
+    match: (?<!\.)\b(basestring|bool|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|int|list|object|property|set|slice|staticmethod|str|super|tuple|type|unicode)\b
 
   character-class:
     patterns:
