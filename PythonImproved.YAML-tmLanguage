@@ -290,32 +290,16 @@ patterns:
   - include: '#keyword_arguments'
   - include: $self
 
-- include: '#builtin_types'
-
-- include: '#builtin_exceptions'
-
 - include: '#docstrings'
 
-- include: '#magic_function_names'
-
-- include: '#magic_variable_names'
-
-- include: '#language_variables'
-
-- include: '#generic_object_names'
+# - include: '#generic_object_names'
 
 - name: meta.function-call.python
-  begin: (?:\.)?([a-zA-Z_][a-zA-Z_0-9]*)\s*(?=\()
-  beginCaptures:
-    '1': {name: meta.function-call.generic.python}
+  begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_])*\s*\()
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
-    end: (?=\s*\()
-    patterns:
-    - include: '#dotted_name'
   - contentName: meta.function-call.arguments.python
     begin: (\()
     beginCaptures:
@@ -324,6 +308,10 @@ patterns:
     patterns:
     - include: '#keyword_arguments'
     - include: $self
+  - begin: \G
+    end: (?=\()
+    patterns:
+    - include: '#dotted_name'
 
 - name: meta.item-access.python
   begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
@@ -535,17 +523,18 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)
+    begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*(?![A-Za-z0-9_\.]))
     end: (?![A-Za-z0-9_\.])
+    contentName: meta.dotted-name.python
     patterns:
-    - begin: (\.)(?=[A-Za-z_][A-Za-z0-9_]*)
+    - begin: (\.)
       end: (?![A-Za-z0-9_])
       patterns:
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#illegal_names'
       - include: '#generic_names'
-    - begin: (?<!\.)(?=[A-Za-z_][A-Za-z0-9_]*)
+    - begin: (?=[A-Za-z_])
       end: (?![A-Za-z0-9_])
       patterns:
       - include: '#builtin_functions'
@@ -592,16 +581,17 @@ repository:
       '2': {name: constant.character.escape.unicode.32-bit-hex.python}
       '3': {name: constant.character.escape.unicode.name.python}
 
-  function_name:
-    patterns:
-    - include: '#magic_function_names'
-    - include: '#magic_variable_names'
-    - include: '#builtin_exceptions'
-    - include: '#builtin_functions'
-    - include: '#builtin_types'
-    - include: '#generic_names'
+  # function_name:
+  #   patterns:
+  #   - include: '#magic_function_names'
+  #   - include: '#magic_variable_names'
+  #   - include: '#builtin_exceptions'
+  #   - include: '#builtin_functions'
+  #   - include: '#builtin_types'
+  #   - include: '#generic_names'
 
   generic_names:
+    name: meta.generic-name.python
     match: '[A-Za-z_][A-Za-z0-9_]*'
 
   generic_object_names:
