@@ -244,17 +244,16 @@ patterns:
         '2': {name: punctuation.separator.parameters.python}
 
 - comment: a decorator may be a function call which returns a decorator.
-  name: meta.function.decorator.python
-  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()
+  name: meta.function.decorator-call.python entity.name.function.decorator.python
+  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z_0-9]*)*\s*\()
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - contentName: entity.name.function.decorator.python
-    begin: (?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
+  - begin: '@'
     beginCaptures:
-      '1': {name: punctuation.definition.decorator.python}
-    end: (?=\s*\()
+      '0': {name: punctuation.definition.decorator.python}
+    end: (?=\()
     patterns:
     - include: '#dotted_name'
   - contentName: meta.function.decorator.arguments.python
@@ -268,13 +267,13 @@ patterns:
 
 - name: meta.function.decorator.python
   contentName: entity.name.function.decorator.python
-  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)
-  end: (?=\s|$\n?|#)
+  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*)
+  end: (?=\s*(#|$))
   patterns:
-  - begin: (?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*)
+  - begin: '@'
     beginCaptures:
-      '1': {name: punctuation.definition.decorator.python}
-    end: (?=\s|$\n?|#)
+      '0': {name: punctuation.definition.decorator.python}
+    end: (?=\s*(#|$))
     patterns:
     - include: '#dotted_name'
 
@@ -295,7 +294,7 @@ patterns:
 # - include: '#generic_object_names'
 
 - name: meta.function-call.python
-  begin: (?=\b[A-Za-z_][A-Za-z0-9_]*\s*(\.\s*[A-Za-z_][A-Za-z0-9_])*\s*\()
+  begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*\s*\()
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
@@ -318,15 +317,11 @@ patterns:
   match: \b(print)(?=\s)(?!\s*\.) # Otherwise this would qualify as a dotted name, which is matched later
 
 - name: meta.item-access.python
-  begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
+  begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
   end: (\])
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\[)
-    end: (?=\s*\[)
-    patterns:
-    - include: '#dotted_name'
   - contentName: meta.item-access.arguments.python
     begin: (\[)
     beginCaptures:
@@ -334,6 +329,10 @@ patterns:
     end: (?=\])
     patterns:
     - include: $self
+  - begin: \G
+    end: (?=\[)
+    patterns:
+    - include: '#dotted_name'
 
 - name: meta.item-access.python
   contentName: meta.item-access.arguments.python
@@ -526,7 +525,7 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?=\b[A-Za-z_][A-Za-z0-9_]*\s*(?:\.\s*[A-Za-z_][A-Za-z0-9_]*)*)
+    begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)
     end: (?![A-Za-z0-9_\.\s])|(?=(?<!\.)\s+[^.])
     contentName: meta.dotted-name.python
     patterns:

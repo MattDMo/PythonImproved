@@ -686,7 +686,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()</string>
+			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z_0-9]*)*\s*\()</string>
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
 			<key>end</key>
@@ -700,24 +700,22 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.function.decorator.python</string>
+			<string>meta.function.decorator-call.python entity.name.function.decorator.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
+					<string>@</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.decorator.python</string>
 						</dict>
 					</dict>
-					<key>contentName</key>
-					<string>entity.name.function.decorator.python</string>
 					<key>end</key>
-					<string>(?=\s*\()</string>
+					<string>(?=\()</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -757,28 +755,28 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)</string>
+			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*)</string>
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
-			<string>(?=\s|$\n?|#)</string>
+			<string>(?=\s*(#|$))</string>
 			<key>name</key>
 			<string>meta.function.decorator.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*)</string>
+					<string>@</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.decorator.python</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?=\s|$\n?|#)</string>
+					<string>(?=\s*(#|$))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -832,7 +830,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*\s*(\.\s*[A-Za-z_][A-Za-z0-9_])*\s*\()</string>
+			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
 			<key>end</key>
 			<string>(\))</string>
 			<key>endCaptures</key>
@@ -899,7 +897,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)</string>
+			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)</string>
 			<key>end</key>
 			<string>(\])</string>
 			<key>endCaptures</key>
@@ -914,19 +912,6 @@
 			<string>meta.item-access.python</string>
 			<key>patterns</key>
 			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\[)</string>
-					<key>end</key>
-					<string>(?=\s*\[)</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#dotted_name</string>
-						</dict>
-					</array>
-				</dict>
 				<dict>
 					<key>begin</key>
 					<string>(\[)</string>
@@ -947,6 +932,19 @@
 						<dict>
 							<key>include</key>
 							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\G</string>
+					<key>end</key>
+					<string>(?=\[)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -1520,7 +1518,7 @@
 		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*\s*(?:\.\s*[A-Za-z_][A-Za-z0-9_]*)*)</string>
+			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)</string>
 			<key>contentName</key>
 			<string>meta.dotted-name.python</string>
 			<key>end</key>
