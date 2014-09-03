@@ -101,7 +101,7 @@ patterns:
 
 - comment: keywords that haven't fit into other groups (yet).
   name: keyword.other.python
-  match: \b(assert)\b
+  match: \b(assert|del)\b
 
 - name: invalid.deprecated.operator.python
   match: <>
@@ -313,6 +313,10 @@ patterns:
     patterns:
     - include: '#dotted_name'
 
+- comment: Py2 print statement that should only be matched after function calls
+  name: keyword.other.print.python
+  match: \b(print)(?!\s*(?!\.))
+
 - name: meta.item-access.python
   begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
   end: (\])
@@ -352,8 +356,6 @@ patterns:
 
 - include: '#line_continuation'
 
-- include: '#language_variables'
-
 - name: constant.language.python
   match: \b(None|True|False|Ellipsis|NotImplemented)\b
 
@@ -361,7 +363,8 @@ patterns:
 
 - include: '#string_quoted_double'
 
-- include: '#dotted_name'
+- comment: Covers every (remaining) identifier
+  include: '#dotted_name'
 
 - begin: (\()
   end: (\))
@@ -1212,6 +1215,7 @@ repository:
     patterns:
     - include: '#string_quoted_double'
     - include: '#string_quoted_single'
+
 author: Matt Morrison @MattDMo mattdmo@pigimal.com
 bundleUUID: 11B0273F-0284-4483-B17B-4B8D0A9294CC
 firstLineMatch: ^#!/.*\bpython[0-9.-]*\b

@@ -239,7 +239,7 @@
 			<key>comment</key>
 			<string>keywords that haven't fit into other groups (yet).</string>
 			<key>match</key>
-			<string>\b(assert)\b</string>
+			<string>\b(assert|del)\b</string>
 			<key>name</key>
 			<string>keyword.other.python</string>
 		</dict>
@@ -890,6 +890,14 @@
 			</array>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Py2 print statement that should only be matched after function calls</string>
+			<key>match</key>
+			<string>\b(print)(?!\s*(?!\.))</string>
+			<key>name</key>
+			<string>keyword.other.print.python</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)</string>
 			<key>end</key>
@@ -1020,6 +1028,8 @@
 			<string>#string_quoted_double</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Covers every (remaining) identifier</string>
 			<key>include</key>
 			<string>#dotted_name</string>
 		</dict>
