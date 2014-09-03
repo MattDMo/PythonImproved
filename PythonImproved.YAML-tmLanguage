@@ -65,7 +65,7 @@ patterns:
   match: \b(?i:(0[o]?[0-7]+)L)
 
 - name: constant.numeric.integer.octal.python
-  match: \b(0[o]?[0-7]+)
+  match: \b(?i:(0[o]?[0-7]+))
 
 - name: constant.numeric.complex.python
   match: \b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?<=[^0-9a-zA-Z_])\.\d+)(e[\-\+]?\d+)?))J)
