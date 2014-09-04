@@ -244,11 +244,10 @@ patterns:
         '2': {name: punctuation.separator.parameters.python}
 
 - comment: a decorator may be a function call which returns a decorator.
-  name: meta.function.decorator-call.python entity.name.function.decorator.python
+  name: meta.function.decorator-call.python
+  contentName: entity.name.function.decorator.python
   begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z_0-9]*)*\s*\()
-  end: (\))
-  endCaptures:
-    '1': {name: punctuation.definition.arguments.end.python}
+  end: (?<=\))
   patterns:
   - begin: '@'
     beginCaptures:
@@ -257,10 +256,12 @@ patterns:
     patterns:
     - include: '#dotted_name'
   - contentName: meta.function.decorator.arguments.python
-    begin: (\()
+    begin: \(
     beginCaptures:
-      '1': {name: punctuation.definition.arguments.begin.python}
-    end: (?=\))
+      '0': {name: punctuation.definition.arguments.begin.python}
+    end: \)
+    endCaptures:
+      '0': {name: punctuation.definition.arguments.end.python}
     patterns:
     - include: '#keyword_arguments'
     - include: $self

@@ -689,18 +689,12 @@
 			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z_0-9]*)*\s*\()</string>
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
+			<key>contentName</key>
+			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
-			<string>(\))</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.arguments.end.python</string>
-				</dict>
-			</dict>
+			<string>(?&lt;=\))</string>
 			<key>name</key>
-			<string>meta.function.decorator-call.python entity.name.function.decorator.python</string>
+			<string>meta.function.decorator-call.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -726,10 +720,10 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(\()</string>
+					<string>\(</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.arguments.begin.python</string>
@@ -738,7 +732,15 @@
 					<key>contentName</key>
 					<string>meta.function.decorator.arguments.python</string>
 					<key>end</key>
-					<string>(?=\))</string>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.end.python</string>
+						</dict>
+					</dict>
 					<key>patterns</key>
 					<array>
 						<dict>
