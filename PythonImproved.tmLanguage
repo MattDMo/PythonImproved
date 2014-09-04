@@ -1524,7 +1524,7 @@
 			<key>contentName</key>
 			<string>meta.dotted-name.python</string>
 			<key>end</key>
-			<string>(?![A-Za-z0-9_\.\s])|(?=(?&lt;!\.)\s+[^.])</string>
+			<string>(?![A-Za-z0-9_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
 			<key>patterns</key>
 			<array>
 				<dict>
