@@ -311,7 +311,7 @@ patterns:
 
 - comment: Py2 print statement that should only be matched after function calls
   name: keyword.other.print.python
-  match: \b(print)(?=\s)(?!\s*\.) # Otherwise this would qualify as a dotted name, which is matched later
+  match: \b(print)(?=\s)(?!\s*[.,]) # Otherwise this would qualify as a dotted name, which is matched later
 
 - name: meta.item-access.python
   begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
