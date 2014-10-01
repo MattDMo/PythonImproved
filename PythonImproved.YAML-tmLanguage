@@ -45,10 +45,6 @@ patterns:
   captures:
     '1': {name: punctuation.definition.comment.python}
 
-- name: constant.other.allcaps.python
-  match: \b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])
-  comment: Match identifiers in ALL_CAPS as constants.
-
 - name: constant.numeric.integer.long.hexadecimal.python
   match: \b(?i:(0x\h*)L)
 
@@ -431,6 +427,11 @@ patterns:
     - include: $self
 
 repository:
+  allcaps_constant:
+    name: constant.other.allcaps.python
+    match: \b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])
+    comment: Match identifiers in ALL_CAPS as constants.
+
   annotated_arguments:
     begin: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)|(?=\()
     beginCaptures:
@@ -538,6 +539,7 @@ repository:
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#illegal_names'
+      - include: '#allcaps_constant'
       - include: '#generic_names'
     - begin: (?=[A-Za-z_])
       end: (?![A-Za-z0-9_])
@@ -549,6 +551,7 @@ repository:
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#language_variables'
+      - include: '#allcaps_constant'
       - include: '#generic_names'
 
   entity_name_class:
