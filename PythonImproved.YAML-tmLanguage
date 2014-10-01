@@ -527,7 +527,7 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)
+    begin: (?=(?:\.\s*)?[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)
     end: (?![A-Za-z0-9_\.\s])|(?=(?<!\.)\s+[^.])|$
     contentName: meta.dotted-name.python
     patterns:

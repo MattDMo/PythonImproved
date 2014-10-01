@@ -1521,7 +1521,7 @@
 		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)</string>
+			<string>(?=(?:\.\s*)?[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)</string>
 			<key>contentName</key>
 			<string>meta.dotted-name.python</string>
 			<key>end</key>
