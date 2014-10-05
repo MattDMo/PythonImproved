@@ -1,10 +1,11 @@
-# PythonImproved
+# Python Improved
 
 A better Python `.tmLanguage` syntax highlighting definition for [Sublime Text](http://www.sublimetext.com) and [TextMate](http://www.macromates.com). Inspired by:
 
 - the original TextMate and Sublime Text `Python.tmLanguage` files
 - facelessuser's [Better Python](https://github.com/facelessuser/sublime-languages)
 - Djaniero's [Django syntax](https://github.com/squ1b3r/Djaneiro)
+- Peter Varo's [Python 3](https://github.com/petervaro/python) `.tmLanguage`
 
 as well as a number of my own changes to make things more consistent and understandable. For customized syntax highlighting taking advantage of all the new scopes, use PythonImproved with the [Neon Color Scheme](https://sublime.wbond.net/packages/Neon%20Color%20Scheme), or modify your own favorite theme with the scopes below.
 
