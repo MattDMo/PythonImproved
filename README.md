@@ -1,12 +1,13 @@
-# PythonImproved
+# Python Improved
 
-A better Python `.tmLanguage` syntax highlighting definition for [Sublime Text](http://www.sublimetext.com) and [TextMate](http://www.macromates.com). Inspired by:
+A better Python `.tmLanguage` syntax highlighting definition for [Sublime Text](http://www.sublimetext.com) and [TextMate](http://www.macromates.com). It includes support for both Python 2 and Python 3. Inspired by:
 
 - the original TextMate and Sublime Text `Python.tmLanguage` files
 - facelessuser's [Better Python](https://github.com/facelessuser/sublime-languages)
 - Djaniero's [Django syntax](https://github.com/squ1b3r/Djaneiro)
+- Peter Varo's [Python 3](https://github.com/petervaro/python) syntax definition
 
-as well as a number of my own changes to make things more consistent and understandable. For customized syntax highlighting taking advantage of all the new scopes, use PythonImproved with the [Neon Color Scheme](https://sublime.wbond.net/packages/Neon%20Color%20Scheme), or modify your own favorite theme with the scopes below.
+as well as a number of my own changes to make things more consistent and understandable. For customized syntax highlighting taking advantage of all the new scopes, use PythonImproved with the [Neon Color Scheme](https://sublime.wbond.net/packages/Neon%20Color%20Scheme), or modify your own favorite color scheme with the scopes below.
 
 ## Installation and Use
 
@@ -22,7 +23,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 - [Django](http://www.djangoproject.com)-specific:
     - `support.type.django.model`: `(meta|models).` `DecimalField`, `EmailField`, `ForeignKey`, `ManyToManyField`, etc.
     - `support.other.django.module`: `django`, `django.contrib`, etc.
-    - `variable.other.django.settings`: [`settings.py`](https://docs.djangoproject.com/en/1.6/ref/settings/) options like `ADMINS`, `DATABASES`, `INSTALLED_APPS`, `MIDDLEWARE_CLASSES`, etc. Should be complete as of Django 1.7.
+    - `variable.other.django.settings`: [`settings.py`](https://docs.djangoproject.com/en/1.7/ref/settings/) options like `ADMINS`, `DATABASES`, `INSTALLED_APPS`, `MIDDLEWARE_CLASSES`, etc. Should be complete as of Django 1.7.
     - `support.function.django.view`: view functions `get_list_or_404`, `get_object_or_404`, `load_and_render`, `loader`, `render_to_response`, `render`
     - `support.function.django.model`: model functions `get_object`, `get_list`, `get_count`, etc.
 - `constant.numeric.integer.(long).binary.python`: binary literals `0b00101010`, `0b00101010L`
