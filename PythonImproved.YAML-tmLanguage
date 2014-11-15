@@ -45,10 +45,6 @@ patterns:
   captures:
     '1': {name: punctuation.definition.comment.python}
 
-- name: constant.other.allcaps.python
-  match: \b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])
-  comment: Match identifiers in ALL_CAPS as constants.
-
 - name: constant.numeric.integer.long.hexadecimal.python
   match: \b(?i:(0x\h*)L)
 
@@ -101,7 +97,7 @@ patterns:
 
 - comment: keywords that haven't fit into other groups (yet).
   name: keyword.other.python
-  match: \b(assert)\b
+  match: \b(assert|del)\b
 
 - name: invalid.deprecated.operator.python
   match: <>
@@ -244,37 +240,37 @@ patterns:
         '2': {name: punctuation.separator.parameters.python}
 
 - comment: a decorator may be a function call which returns a decorator.
-  name: meta.function.decorator.python
-  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()
-  end: (\))
-  endCaptures:
-    '1': {name: punctuation.definition.arguments.end.python}
+  name: meta.function.decorator-call.python
+  contentName: entity.name.function.decorator.python
+  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z_0-9]*)*\s*\()
+  end: (?<=\))
   patterns:
-  - contentName: entity.name.function.decorator.python
-    begin: (?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
+  - begin: '@'
     beginCaptures:
-      '1': {name: punctuation.definition.decorator.python}
-    end: (?=\s*\()
+      '0': {name: punctuation.definition.decorator.python}
+    end: (?=\()
     patterns:
     - include: '#dotted_name'
   - contentName: meta.function.decorator.arguments.python
-    begin: (\()
+    begin: \(
     beginCaptures:
-      '1': {name: punctuation.definition.arguments.begin.python}
-    end: (?=\))
+      '0': {name: punctuation.definition.arguments.begin.python}
+    end: \)
+    endCaptures:
+      '0': {name: punctuation.definition.arguments.end.python}
     patterns:
     - include: '#keyword_arguments'
     - include: $self
 
 - name: meta.function.decorator.python
   contentName: entity.name.function.decorator.python
-  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)
-  end: (?=\s|$\n?|#)
+  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*)
+  end: (?=\s*(#|$))
   patterns:
-  - begin: (?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*)
+  - begin: '@'
     beginCaptures:
-      '1': {name: punctuation.definition.decorator.python}
-    end: (?=\s|$\n?|#)
+      '0': {name: punctuation.definition.decorator.python}
+    end: (?=\s*(#|$))
     patterns:
     - include: '#dotted_name'
 
@@ -290,34 +286,16 @@ patterns:
   - include: '#keyword_arguments'
   - include: $self
 
-- include: '#builtin_functions'
-
-- include: '#builtin_types'
-
-- include: '#builtin_exceptions'
-
 - include: '#docstrings'
 
-- include: '#magic_function_names'
-
-- include: '#magic_variable_names'
-
-- include: '#language_variables'
-
-- include: '#generic_object_names'
+# - include: '#generic_object_names'
 
 - name: meta.function-call.python
-  begin: (?:\.)?([a-zA-Z_][a-zA-Z_0-9]*)\s*(?=\()
-  beginCaptures:
-    '1': {name: meta.function-call.generic.python}
+  begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*\s*\()
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
-    end: (?=\s*\()
-    patterns:
-    - include: '#dotted_name'
   - contentName: meta.function-call.arguments.python
     begin: (\()
     beginCaptures:
@@ -326,17 +304,21 @@ patterns:
     patterns:
     - include: '#keyword_arguments'
     - include: $self
+  - begin: \G
+    end: (?=\()
+    patterns:
+    - include: '#dotted_name'
+
+- comment: Py2 print statement that should only be matched after function calls
+  name: keyword.other.print.python
+  match: \b(print)(?=\s)(?!\s*[.,]) # Otherwise this would qualify as a dotted name, which is matched later
 
 - name: meta.item-access.python
-  begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
+  begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
   end: (\])
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\[)
-    end: (?=\s*\[)
-    patterns:
-    - include: '#dotted_name'
   - contentName: meta.item-access.arguments.python
     begin: (\[)
     beginCaptures:
@@ -344,6 +326,10 @@ patterns:
     end: (?=\])
     patterns:
     - include: $self
+  - begin: \G
+    end: (?=\[)
+    patterns:
+    - include: '#dotted_name'
 
 - name: meta.item-access.python
   contentName: meta.item-access.arguments.python
@@ -366,8 +352,6 @@ patterns:
 
 - include: '#line_continuation'
 
-- include: '#language_variables'
-
 - name: constant.language.python
   match: \b(None|True|False|Ellipsis|NotImplemented)\b
 
@@ -375,7 +359,8 @@ patterns:
 
 - include: '#string_quoted_double'
 
-- include: '#dotted_name'
+- comment: Covers every (remaining) identifier
+  include: '#dotted_name'
 
 - match: \b(\[)(\s*(\]))\b
   captures:
@@ -453,6 +438,11 @@ patterns:
     - include: $self
 
 repository:
+  allcaps_constant:
+    name: constant.other.allcaps.python
+    match: \b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])
+    comment: Match identifiers in ALL_CAPS as constants.
+
   annotated_arguments:
     begin: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)|(?=\()
     beginCaptures:
@@ -497,35 +487,12 @@ repository:
     match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([.a-zA-Z0-9_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([.a-zA-Z0-9_]+)?Exception)\b
 
   builtin_functions:
-    patterns:
-    - name: meta.function-call.python
-      begin: (?<!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|del|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()
-      beginCaptures:
-        '1': {name: support.function.builtin.python}
-      end: (\))
-      endCaptures:
-        '1': {name: punctuation.definition.arguments.end.python}
-      patterns:
-      - begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()
-        end: (?=\s*\()
-        patterns:
-        - include: '#dotted_name'
-      - begin: (\()
-        beginCaptures:
-          '1': {name: punctuation.definition.arguments.begin.python}
-        contentName: meta.function-call.arguments.python
-        end: (?=\))
-        patterns:
-        - include: '#keyword_arguments'
-        - include: $self
-    - comment: "These are statements in Py2, but don't really fit into keyword.control.flow\
-        \ with the rest"
-      name: support.function.builtin.python
-      match: (?<!\.)\b(print|del)\b
+    name: support.function.builtin.python
+    match: (?<!\.)\b(__import__|abs|all|any|apply|ascii|bin|buffer|callable|chr|cmp|coerce|compile|copyright|credits|delattr|dir|divmod|enumerate|eval|exec|execfile|exit|filter|format|getattr|globals|hasattr|hash|help|hex|id|input|intern|isinstance|issubclass|iter|len|license|locals|long|map|max|memoryview|min|next|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|setattr|sorted|sum|unichr|vars|xrange|zip)\b
 
   builtin_types:
     name: support.type.python
-    match: (?<!\.)\b(ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|hex|int|list|long|object|oct|property|reversed|set|slice|staticmethod|str|super|tuple|type|unicode|xrange)\b
+    match: (?<!\.)\b(basestring|bool|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|int|list|object|property|set|slice|staticmethod|str|super|tuple|type|unicode)\b
 
   character-class:
     patterns:
@@ -571,17 +538,21 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)
-    end: (?![A-Za-z0-9_\.])
+    begin: (?=(?:\.\s*)?[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)
+    end: (?![A-Za-z0-9_\.\s])|(?=(?<!\.)\s+[^.])|$
+    contentName: meta.dotted-name.python
     patterns:
-    - begin: (\.)(?=[A-Za-z_][A-Za-z0-9_]*)
+    - begin: \.
+      beginCaptures:
+        '0': {name: meta.dot.python}
       end: (?![A-Za-z0-9_])
       patterns:
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#illegal_names'
+      - include: '#allcaps_constant'
       - include: '#generic_names'
-    - begin: (?<!\.)(?=[A-Za-z_][A-Za-z0-9_]*)
+    - begin: (?=[A-Za-z_])
       end: (?![A-Za-z0-9_])
       patterns:
       - include: '#builtin_functions'
@@ -591,6 +562,7 @@ repository:
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#language_variables'
+      - include: '#allcaps_constant'
       - include: '#generic_names'
 
   entity_name_class:
@@ -628,16 +600,17 @@ repository:
       '2': {name: constant.character.escape.unicode.32-bit-hex.python}
       '3': {name: constant.character.escape.unicode.name.python}
 
-  function_name:
-    patterns:
-    - include: '#magic_function_names'
-    - include: '#magic_variable_names'
-    - include: '#builtin_exceptions'
-    - include: '#builtin_functions'
-    - include: '#builtin_types'
-    - include: '#generic_names'
+  # function_name:
+  #   patterns:
+  #   - include: '#magic_function_names'
+  #   - include: '#magic_variable_names'
+  #   - include: '#builtin_exceptions'
+  #   - include: '#builtin_functions'
+  #   - include: '#builtin_types'
+  #   - include: '#generic_names'
 
   generic_names:
+    name: meta.generic-name.python
     match: '[A-Za-z_][A-Za-z0-9_]*'
 
   generic_object_names:
@@ -1258,6 +1231,7 @@ repository:
     patterns:
     - include: '#string_quoted_double'
     - include: '#string_quoted_single'
+
 author: Matt Morrison @MattDMo mattdmo@pigimal.com
 bundleUUID: 11B0273F-0284-4483-B17B-4B8D0A9294CC
 firstLineMatch: ^#!/.*\bpython[0-9.-]*\b
