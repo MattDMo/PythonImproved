@@ -10,7 +10,8 @@ print keyword print __init__
 
 __init__ . something(arg=22)
 
-callback(print, print , print)
+callback(print, print , print
+         print)
 
 .__init__
 __init__ [2]

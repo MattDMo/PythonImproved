@@ -885,7 +885,7 @@
 			<key>comment</key>
 			<string>Py2 print statement that should only be matched after function calls</string>
 			<key>match</key>
-			<string>\b(print)(?=\s)(?!\s*[.,])</string>
+			<string>\b(print)(?=\s)(?!\s*([.,]|$))</string>
 			<key>name</key>
 			<string>keyword.other.print.python</string>
 		</dict>
