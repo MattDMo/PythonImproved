@@ -3,7 +3,7 @@ list(map(str, range(100)))
 
 super(arg1=1)(arg2=2)
 list abs, map
-some.Ellipsis NotImplemented
+some.Ellipsis NotImplemented  # must be root
 
 print (file=None) print . __class__
 print keyword print __init__
@@ -15,6 +15,7 @@ callback(print, print , print
 
 .__init__
 __init__ [2]
+super().__init__
 
 
 @ deco . __init__ (call=some)  # rator
@@ -32,10 +33,11 @@ class Class():
 
     @wraps(method)#comment
     def wrapper(self):
+        (self, __class__)
         pass
 
+#unicode:
 ccesŝ[2]  # currently matched as "list"
-
 sômething(arg=22)
 
 CONSTANT
