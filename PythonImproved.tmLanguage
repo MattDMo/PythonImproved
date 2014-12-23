@@ -128,14 +128,6 @@
 			<string>comment.line.number-sign.python</string>
 		</dict>
 		<dict>
-			<key>comment</key>
-			<string>Match identifiers in ALL_CAPS as constants.</string>
-			<key>match</key>
-			<string>\b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])</string>
-			<key>name</key>
-			<string>constant.other.allcaps.python</string>
-		</dict>
-		<dict>
 			<key>match</key>
 			<string>\b(?i:(0x\h*)L)</string>
 			<key>name</key>
@@ -239,7 +231,7 @@
 			<key>comment</key>
 			<string>keywords that haven't fit into other groups (yet).</string>
 			<key>match</key>
-			<string>\b(assert)\b</string>
+			<string>\b(assert|del)\b</string>
 			<key>name</key>
 			<string>keyword.other.python</string>
 		</dict>
@@ -686,38 +678,30 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()</string>
+			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z_0-9]*)*\s*\()</string>
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
+			<key>contentName</key>
+			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
-			<string>(\))</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.arguments.end.python</string>
-				</dict>
-			</dict>
+			<string>(?&lt;=\))</string>
 			<key>name</key>
-			<string>meta.function.decorator.python</string>
+			<string>meta.function.decorator-call.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
+					<string>@</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.decorator.python</string>
 						</dict>
 					</dict>
-					<key>contentName</key>
-					<string>entity.name.function.decorator.python</string>
 					<key>end</key>
-					<string>(?=\s*\()</string>
+					<string>(?=\()</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -728,10 +712,10 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(\()</string>
+					<string>\(</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.arguments.begin.python</string>
@@ -740,7 +724,15 @@
 					<key>contentName</key>
 					<string>meta.function.decorator.arguments.python</string>
 					<key>end</key>
-					<string>(?=\))</string>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.end.python</string>
+						</dict>
+					</dict>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -757,28 +749,28 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)</string>
+			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*)</string>
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
-			<string>(?=\s|$\n?|#)</string>
+			<string>(?=\s*(#|$))</string>
 			<key>name</key>
 			<string>meta.function.decorator.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*)</string>
+					<string>@</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.decorator.python</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?=\s|$\n?|#)</string>
+					<string>(?=\s*(#|$))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -828,47 +820,11 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#builtin_functions</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#builtin_types</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#builtin_exceptions</string>
-		</dict>
-		<dict>
-			<key>include</key>
 			<string>#docstrings</string>
 		</dict>
 		<dict>
-			<key>include</key>
-			<string>#magic_function_names</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#magic_variable_names</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#language_variables</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#generic_object_names</string>
-		</dict>
-		<dict>
 			<key>begin</key>
-			<string>(?:\.)?([a-zA-Z_][a-zA-Z_0-9]*)\s*(?=\()</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>meta.function-call.generic.python</string>
-				</dict>
-			</dict>
+			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
 			<key>end</key>
 			<string>(\))</string>
 			<key>endCaptures</key>
@@ -883,19 +839,6 @@
 			<string>meta.function-call.python</string>
 			<key>patterns</key>
 			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
-					<key>end</key>
-					<string>(?=\s*\()</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#dotted_name</string>
-						</dict>
-					</array>
-				</dict>
 				<dict>
 					<key>begin</key>
 					<string>(\()</string>
@@ -923,11 +866,32 @@
 						</dict>
 					</array>
 				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\G</string>
+					<key>end</key>
+					<string>(?=\()</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dotted_name</string>
+						</dict>
+					</array>
+				</dict>
 			</array>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Py2 print statement that should only be matched after function calls</string>
+			<key>match</key>
+			<string>\b(print)(?=\s)(?!\s*([.,]|$))</string>
+			<key>name</key>
+			<string>keyword.other.print.python</string>
+		</dict>
+		<dict>
 			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)</string>
+			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)</string>
 			<key>end</key>
 			<string>(\])</string>
 			<key>endCaptures</key>
@@ -942,19 +906,6 @@
 			<string>meta.item-access.python</string>
 			<key>patterns</key>
 			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\[)</string>
-					<key>end</key>
-					<string>(?=\s*\[)</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#dotted_name</string>
-						</dict>
-					</array>
-				</dict>
 				<dict>
 					<key>begin</key>
 					<string>(\[)</string>
@@ -975,6 +926,19 @@
 						<dict>
 							<key>include</key>
 							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\G</string>
+					<key>end</key>
+					<string>(?=\[)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -1042,10 +1006,6 @@
 			<string>#line_continuation</string>
 		</dict>
 		<dict>
-			<key>include</key>
-			<string>#language_variables</string>
-		</dict>
-		<dict>
 			<key>match</key>
 			<string>\b(None|True|False|Ellipsis|NotImplemented)\b</string>
 			<key>name</key>
@@ -1060,6 +1020,8 @@
 			<string>#string_quoted_double</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Covers every (remaining) identifier</string>
 			<key>include</key>
 			<string>#dotted_name</string>
 		</dict>
@@ -1272,6 +1234,15 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>allcaps_constant</key>
+		<dict>
+			<key>comment</key>
+			<string>Match identifiers in ALL_CAPS as constants.</string>
+			<key>match</key>
+			<string>\b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])</string>
+			<key>name</key>
+			<string>constant.other.allcaps.python</string>
+		</dict>
 		<key>annotated_arguments</key>
 		<dict>
 			<key>begin</key>
@@ -1412,89 +1383,15 @@
 		</dict>
 		<key>builtin_functions</key>
 		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?&lt;!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|del|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.builtin.python</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(\))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.arguments.end.python</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>meta.function-call.python</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
-							<key>end</key>
-							<string>(?=\s*\()</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#dotted_name</string>
-								</dict>
-							</array>
-						</dict>
-						<dict>
-							<key>begin</key>
-							<string>(\()</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>1</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.arguments.begin.python</string>
-								</dict>
-							</dict>
-							<key>contentName</key>
-							<string>meta.function-call.arguments.python</string>
-							<key>end</key>
-							<string>(?=\))</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#keyword_arguments</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>$self</string>
-								</dict>
-							</array>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>comment</key>
-					<string>These are statements in Py2, but don't really fit into keyword.control.flow with the rest</string>
-					<key>match</key>
-					<string>(?&lt;!\.)\b(print|del)\b</string>
-					<key>name</key>
-					<string>support.function.builtin.python</string>
-				</dict>
-			</array>
+			<key>match</key>
+			<string>(?&lt;!\.)\b(__import__|abs|all|any|apply|ascii|bin|buffer|callable|chr|cmp|coerce|compile|copyright|credits|delattr|dir|divmod|enumerate|eval|exec|execfile|exit|filter|format|getattr|globals|hasattr|hash|help|hex|id|input|intern|isinstance|issubclass|iter|len|license|locals|long|map|max|memoryview|min|next|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|setattr|sorted|sum|unichr|vars|xrange|zip)\b</string>
+			<key>name</key>
+			<string>support.function.builtin.python</string>
 		</dict>
 		<key>builtin_types</key>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!\.)\b(ascii|basestring|bin|bool|buffer|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|hex|int|list|long|object|oct|property|reversed|set|slice|staticmethod|str|super|tuple|type|unicode|xrange)\b</string>
+			<string>(?&lt;!\.)\b(basestring|bool|bytearray|bytes|classmethod|complex|dict|file|float|frozenset|int|list|object|property|set|slice|staticmethod|str|super|tuple|type|unicode)\b</string>
 			<key>name</key>
 			<string>support.type.python</string>
 		</dict>
@@ -1624,14 +1521,24 @@
 		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)</string>
+			<string>(?=(?:\.\s*)?[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)</string>
+			<key>contentName</key>
+			<string>meta.dotted-name.python</string>
 			<key>end</key>
-			<string>(?![A-Za-z0-9_\.])</string>
+			<string>(?![A-Za-z0-9_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(\.)(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>\.</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>meta.dot.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>
@@ -1650,13 +1557,17 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#allcaps_constant</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#generic_names</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(?&lt;!\.)(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[A-Za-z_])</string>
 					<key>end</key>
 					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>
@@ -1688,6 +1599,10 @@
 						<dict>
 							<key>include</key>
 							<string>#language_variables</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#allcaps_constant</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -1825,40 +1740,12 @@
 			<key>match</key>
 			<string>(\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z0-9 ]+\})</string>
 		</dict>
-		<key>function_name</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#magic_function_names</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#magic_variable_names</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#builtin_exceptions</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#builtin_functions</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#builtin_types</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#generic_names</string>
-				</dict>
-			</array>
-		</dict>
 		<key>generic_names</key>
 		<dict>
 			<key>match</key>
 			<string>[A-Za-z_][A-Za-z0-9_]*</string>
+			<key>name</key>
+			<string>meta.generic-name.python</string>
 		</dict>
 		<key>generic_object_names</key>
 		<dict>
