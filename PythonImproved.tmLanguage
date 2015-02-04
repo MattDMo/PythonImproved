@@ -1030,19 +1030,6 @@
 			<string>#dotted_name</string>
 		</dict>
 		<dict>
-			<key>begin</key>
-			<string>(\()</string>
-			<key>end</key>
-			<string>(\))</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>$self</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -1062,7 +1049,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(\[)(\s*(\]))\b</string>
+			<string>\b(\[)(\s*(\]))\b</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -1134,9 +1121,59 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(\()(\s*(\)))</string>
+			<string>\b(\()(\s*(\)))\b</string>
 			<key>name</key>
 			<string>meta.structure.tuple.python</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\b(\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tuple.begin.python</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))\b</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tuple.end.python</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.structure.tuple.python</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?&lt;=\(|\,)\s*(?![\),])</string>
+					<key>contentName</key>
+					<string>meta.structure.tuple.item.python</string>
+					<key>end</key>
+					<string>\s*(?:(,)|(?=\)))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.tuple.python</string>
+						</dict>
+					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>captures</key>
