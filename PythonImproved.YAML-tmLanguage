@@ -4,7 +4,7 @@ comment: To make PythonImproved your default Python syntax, open a .py file and 
 name: PythonImproved
 scopeName: source.python
 fileTypes: [py, py3, rpy, pyw, cpy, SConstruct, Sconstruct, sconstruct, SConscript]
-uuid: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
+uuid: 11B0273F-0284-4483-B17B-4B8D0A9294CC
 
 patterns:
 - name: support.ipython.in.python
@@ -28,7 +28,8 @@ patterns:
   captures:
     '1': {name: punctuation.definition.comment.python}
 
-- comment: Match identifiers in ALL_CAPS as constants, except when followed by . or (.
+- comment: Match identifiers in ALL_CAPS as constants, except when followed by . or
+    (.
   name: constant.other.allcaps.python
   match: \b([A-Z_][A-Z0-9_]*)\b(?![\.\(])
 
@@ -360,7 +361,12 @@ patterns:
 
 - include: '#dotted_name'
 
-- match: \b(\[)(\s*(\]))\b
+- begin: (\()
+  end: (\))
+  patterns:
+  - include: $self
+
+- match: (\[)(\s*(\]))\b
   captures:
     '1': {name: punctuation.definition.list.begin.python}
     '2': {name: meta.empty-list.python}
@@ -485,7 +491,8 @@ repository:
         patterns:
         - include: '#keyword_arguments'
         - include: $self
-    - comment: "These are statements in Py2, but don't really fit into keyword.control.flow with the rest"
+    - comment: "These are statements in Py2, but don't really fit into keyword.control.flow\
+        \ with the rest"
       name: support.function.builtin.python
       match: (?<!\.)\b(print|del)\b
 
@@ -1024,7 +1031,7 @@ repository:
     - include: '#string_quoted_double'
     - include: '#string_quoted_single'
 author: Matt Morrison @MattDMo mattdmo@pigimal.com
-bundleUUID: 11B0273F-0284-4483-B17B-4B8D0A9294CC
+bundleUUID: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
 firstLineMatch: ^#!/.*\bpython[0-9.-]*\b
 foldingStartMarker: ^\s*(def|class)\s+([.a-zA-Z0-9_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
 foldingStopMarker: ^\s*$|^\s*\}|^\s*\]|^\s*\)|^\s*"""\s*$
