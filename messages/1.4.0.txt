@@ -1,0 +1,24 @@
+Python Improved v1.4.0
+======================
+
+This is a "mid-way" release while I ponder some major changes to how functions,
+decorators, and other objects are matched. In the meantime, I've put some
+significant changes into this version as well. This biggest differences are that
+Django- and SQL-specific highlighting are gone, as they were, well, distractions.
+There's no reason to suddenly have your string change colors (SQL) or your constant
+or function call look different (Django) for no apparent reason, especially if
+you're not using the respective technologies. If you want them back, dig around
+in the repo archives, they're all there. I also (hopefully) improved highlighting
+of Unicode escape sequences, and I removed some redundancy in the string definitions
+(nothing visible to the average user, hopefully).
+
+To take full advantage of the extra scopes included in Python Improved, check out
+the Neon Color Scheme at https://sublime.wbond.net/packages/Neon%20Color%20Scheme
+If you'd rather modify your own color scheme, a list of scopes is included in
+the README.md on GitHub at https://github.com/MattDMo/PythonImproved#readme
+
+If you have any questions, comments, concerns, bugs, or patches, please open an
+issue or pull request on GitHub and I'll do what I can to help out. You can also
+email me directly at <mattdmo@pigimal.com> or find me on Twitter at @MattDMo.
+This is definitely a work in progress, so if you'd like to contribute I'd love
+to hear from you!
