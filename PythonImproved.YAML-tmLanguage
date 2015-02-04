@@ -70,7 +70,7 @@ patterns:
 
 - name: constant.language.python
   match: \b(None|True|False|Ellipsis|NotImplemented)\b
-
+  
 - name: storage.modifier.declaration.python
   match: \b(global|nonlocal)\b
 
