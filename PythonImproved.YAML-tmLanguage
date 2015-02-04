@@ -528,8 +528,17 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?=(?:\.\s*)?[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)
-    end: (?![A-Za-z0-9_\.\s])|(?=(?<!\.)\s+[^.])|$
+    begin: |
+      (?x)
+      (?=(?:\.(?!\s+import)\s*)?  # exlcude "from . import"
+         [A-Za-z_][A-Za-z0-9_]*
+         (?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*
+      )
+    end: |
+      (?x)
+       (?![A-Za-z0-9_\.\s])
+      |(?=(?<!\.)\s+[^.])
+      |$
     contentName: meta.dotted-name.python
     patterns:
     - begin: \.

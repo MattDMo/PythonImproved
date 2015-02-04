@@ -1521,11 +1521,20 @@
 		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=(?:\.\s*)?[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*)</string>
+			<string>(?x)
+(?=(?:\.(?!\s+import)\s*)?  # exlcude "from . import"
+   [A-Za-z_][A-Za-z0-9_]*
+   (?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*
+)
+</string>
 			<key>contentName</key>
 			<string>meta.dotted-name.python</string>
 			<key>end</key>
-			<string>(?![A-Za-z0-9_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
+			<string>(?x)
+ (?![A-Za-z0-9_\.\s])
+|(?=(?&lt;!\.)\s+[^.])
+|$
+</string>
 			<key>patterns</key>
 			<array>
 				<dict>

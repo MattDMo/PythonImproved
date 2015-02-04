@@ -31,20 +31,36 @@ def sômething():
 @normal.decorator
 class Class():
 
-    @wraps(method)#comment
+    @wraps(method)# comment
     def wrapper(self):
         (self, __class__)
         pass
 
-#unicode:
+# unicode:
 ccesŝ[2]  # currently matched as "list"
 sômething(arg=22)
 
 CONSTANT
 dotted.CONSTANT
 constant.after().FUNCTION
+CONSTANT[1]
+# in theory, these could be constants as well, but they are not highlighted
+# for now
+CONSTANT()
+CONSTANT.s
 
-some.Error y.s.e.Exception
+some.Error
+y.s.e.SomeException
 
 ident = (value.dotted
          .__init__)
+
+# this should not break
+from . import sublimerepl_build_system_hack
+# but this could
+from .s. import repl
+
+
+class Demo(
+        Base Fun):
+    pass
