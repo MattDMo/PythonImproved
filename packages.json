@@ -1,0 +1,18 @@
+{
+    "schema_version": "3.0.0",
+
+    "packages": [
+
+        {
+            "name": "Python Improved",
+            "details": "https://github.com/MattDMo/PythonImproved",
+            "releases": [
+                {
+                    "sublime_text": "*",
+                    "tags": true
+                }
+            ],
+            "labels": ["language syntax"]
+        }
+    ]
+}
