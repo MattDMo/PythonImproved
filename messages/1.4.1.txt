@@ -1,4 +1,4 @@
-Python Improved v1.4.1
+Python Improved v1.4.2
 ======================
 
 This is a "mid-way" release while I ponder some major changes to how functions,
