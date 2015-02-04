@@ -389,22 +389,6 @@ patterns:
     '2': {name: meta.empty-tuple.python}
     '3': {name: punctuation.definition.tuple.end.python}
 
-- name: meta.structure.tuple.python
-  begin: \b(\()
-  beginCaptures:
-    '1': {name: punctuation.definition.tuple.begin.python}
-  end: (\))\b
-  endCaptures:
-    '1': {name: punctuation.definition.tuple.end.python}
-  patterns:
-  - contentName: meta.structure.tuple.item.python
-    begin: (?<=\(|\,)\s*(?![\),])
-    end: \s*(?:(,)|(?=\)))
-    endCaptures:
-      '1': {name: punctuation.separator.tuple.python}
-    patterns:
-    - include: $self
-
 - name: meta.structure.dictionary.python
   match: (\{)(\s*(\}))
   captures:
