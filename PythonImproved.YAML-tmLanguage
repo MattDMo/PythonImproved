@@ -70,7 +70,7 @@ patterns:
 
 - name: constant.language.python
   match: \b(None|True|False|Ellipsis|NotImplemented)\b
-  
+
 - name: storage.modifier.declaration.python
   match: \b(global|nonlocal)\b
 
@@ -360,12 +360,7 @@ patterns:
 
 - include: '#dotted_name'
 
-- begin: (\()
-  end: (\))
-  patterns:
-  - include: $self
-
-- match: (\[)(\s*(\]))\b
+- match: \b(\[)(\s*(\]))\b
   captures:
     '1': {name: punctuation.definition.list.begin.python}
     '2': {name: meta.empty-list.python}
@@ -388,11 +383,27 @@ patterns:
     - include: $self
 
 - name: meta.structure.tuple.python
-  match: (\()(\s*(\)))
+  match: \b(\()(\s*(\)))\b
   captures:
     '1': {name: punctuation.definition.tuple.begin.python}
     '2': {name: meta.empty-tuple.python}
     '3': {name: punctuation.definition.tuple.end.python}
+
+- name: meta.structure.tuple.python
+  begin: \b(\()
+  beginCaptures:
+    '1': {name: punctuation.definition.tuple.begin.python}
+  end: (\))\b
+  endCaptures:
+    '1': {name: punctuation.definition.tuple.end.python}
+  patterns:
+  - contentName: meta.structure.tuple.item.python
+    begin: (?<=\(|\,)\s*(?![\),])
+    end: \s*(?:(,)|(?=\)))
+    endCaptures:
+      '1': {name: punctuation.separator.tuple.python}
+    patterns:
+    - include: $self
 
 - name: meta.structure.dictionary.python
   match: (\{)(\s*(\}))
