@@ -5,7 +5,7 @@
 	<key>author</key>
 	<string>Matt Morrison @MattDMo mattdmo@pigimal.com</string>
 	<key>bundleUUID</key>
-	<string>11B0273F-0284-4483-B17B-4B8D0A9294CC</string>
+	<string>0F24FCF1-6543-4CC6-8B33-2EAED401FE3A</string>
 	<key>comment</key>
 	<string>To make PythonImproved your default Python syntax, open a .py file and select View|Syntax|Open all with current extension as...|PythonImproved.</string>
 	<key>fileTypes</key>
@@ -1030,6 +1030,19 @@
 			<string>#dotted_name</string>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>(\()</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -1049,7 +1062,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(\[)(\s*(\]))\b</string>
+			<string>(\[)(\s*(\]))\b</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -1124,56 +1137,6 @@
 			<string>\b(\()(\s*(\)))\b</string>
 			<key>name</key>
 			<string>meta.structure.tuple.python</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\b(\()</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.tuple.begin.python</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(\))\b</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.tuple.end.python</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.structure.tuple.python</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?&lt;=\(|\,)\s*(?![\),])</string>
-					<key>contentName</key>
-					<string>meta.structure.tuple.item.python</string>
-					<key>end</key>
-					<string>\s*(?:(,)|(?=\)))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.separator.tuple.python</string>
-						</dict>
-					</dict>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -3334,6 +3297,6 @@
 	<key>scopeName</key>
 	<string>source.python</string>
 	<key>uuid</key>
-	<string>0F24FCF1-6543-4CC6-8B33-2EAED401FE3A</string>
+	<string>11B0273F-0284-4483-B17B-4B8D0A9294CC</string>
 </dict>
 </plist>
