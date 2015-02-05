@@ -209,9 +209,9 @@
 		</dict>
 		<dict>
 			<key>comment</key>
-			<string>keywords that haven't fit into other groups (yet).</string>
+			<string>keywords that don't fit into other groups.</string>
 			<key>match</key>
-			<string>\b(assert)\b</string>
+			<string>\b(assert|del)\b</string>
 			<key>name</key>
 			<string>keyword.other.python</string>
 		</dict>
@@ -1382,7 +1382,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?&lt;!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|del|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()</string>
+					<string>(?&lt;!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1446,14 +1446,6 @@
 							</array>
 						</dict>
 					</array>
-				</dict>
-				<dict>
-					<key>comment</key>
-					<string>These are statements in Py2, but don't really fit into keyword.control.flow with the rest</string>
-					<key>match</key>
-					<string>(?&lt;!\.)\b(print|del)\b</string>
-					<key>name</key>
-					<string>support.function.builtin.python</string>
 				</dict>
 			</array>
 		</dict>
