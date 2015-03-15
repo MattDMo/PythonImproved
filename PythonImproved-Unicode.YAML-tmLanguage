@@ -34,16 +34,16 @@ patterns:
   match: \b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(])
 
 - name: constant.numeric.integer.long.hexadecimal.python
-  match: \b(?i:(0x\h*)L)
+  match: \b(?i:(0x\h+)L)
 
 - name: constant.numeric.integer.hexadecimal.python
-  match: \b(?i:(0x\h*))
+  match: \b(?i:(0x\h+))
 
 - name: constant.numeric.integer.long.binary.python
-  match: \b(?i:(0b[01]*)L)
+  match: \b(?i:(0b[01]+)L)
 
 - name: constant.numeric.integer.binary.python
-  match: \b(?i:(0b[01]*))
+  match: \b(?i:(0b[01]+))
 
 - name: constant.numeric.integer.long.octal.python
   match: \b(?i:(0[o]?[0-7]+)L)
@@ -52,7 +52,7 @@ patterns:
   match: \b(?i:(0[o]?[0-7]+))
 
 - name: constant.numeric.complex.python
-  match: \b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?<=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)
+  match: \b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?<=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)
 
 - name: constant.numeric.float.python
   match: \b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])
