@@ -18,13 +18,13 @@ patterns:
     '2': {name: support.ipython.cell-number.python}
 
 - name: comment.line.note.python
-  match: (#)\s*(BUG|FIXME|TODO|XXX).*$\n?
+  match: (#)+\s*(BUG|FIXME|TODO|XXX).*$\n?
   captures:
     '1': {name: punctuation.definition.comment.python}
     '2': {name: comment.line.note.notation.python}
 
 - name: comment.line.number-sign.python
-  match: (#).*$\n?
+  match: (#)+.*$\n?
   captures:
     '1': {name: punctuation.definition.comment.python}
 
@@ -532,7 +532,7 @@ repository:
 
   constant_placeholder:
     name: constant.other.placeholder.python
-    match: (?i:%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])
+    match: (?i:%(\([\p{Lower}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[\p{Lower}%])
 
   docstrings:
     patterns:
@@ -582,7 +582,7 @@ repository:
     - include: '#generic_names'
 
   escaped_char:
-    match: (\\x[0-9a-fA-F]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)
+    match: (\\x[\h]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)
     captures:
       '1': {name: constant.character.escape.hex.python}
       '2': {name: constant.character.escape.octal.python}
@@ -599,7 +599,7 @@ repository:
       '13': {name: constant.character.escape.vertical-tab.python}
 
   escaped_unicode_char:
-    match: (\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z0-9\, ]+\})
+    match: (\\U[\h]{8})|(\\u[\h]{4})|(\\N\{[a-zA-Z0-9\, ]+\})
     captures:
       '1': {name: constant.character.escape.unicode.16-bit-hex.python}
       '2': {name: constant.character.escape.unicode.32-bit-hex.python}
