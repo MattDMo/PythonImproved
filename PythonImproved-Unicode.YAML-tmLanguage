@@ -77,14 +77,14 @@ patterns:
   match: \b(None|True|False|Ellipsis|NotImplemented)\b
 
 - name: storage.modifier.declaration.python
-  match: \b(global|nonlocal)\b
+  match: \b(global|nonlocal|async)\b
 
 - name: keyword.control.import.python
   match: \b(?:(import|from|as))\b
 
 - comment: keywords that delimit flow blocks or alter flow from within a block
   name: keyword.control.flow.python
-  match: \b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield)\b
+  match: \b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield|await)\b
 
 - comment: keyword operators that evaluate to True or False
   name: keyword.operator.logical.python
@@ -101,10 +101,10 @@ patterns:
   match: <\=|>\=|\=\=|<|>|\!\=
 
 - name: keyword.operator.assignment.augmented.python
-  match: \+\=|-\=|\*\=|/\=|//\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=|\*\*\=
+  match: \+\=|-\=|\*\=|/\=|//\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=|\*\*\=|@\=
 
 - name: keyword.operator.arithmetic.python
-  match: \+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~
+  match: \+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~|(?!^)@
 
 - name: keyword.operator.assignment.python
   match: \=
@@ -626,7 +626,7 @@ repository:
 
   illegal_names:
     name: invalid.illegal.name.python
-    match: \b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b
+    match: \b(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b
 
   keyword_arguments:
     begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(=)(?!=)
