@@ -138,24 +138,32 @@
 			<string>constant.numeric.integer.octal.python</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Not quite perfect...</string>
 			<key>match</key>
 			<string>\b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?&lt;=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)</string>
 			<key>name</key>
 			<string>constant.numeric.complex.python</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Ummm... why do we have three of these? This is one...</string>
 			<key>match</key>
 			<string>\b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>This is two...</string>
 			<key>match</key>
 			<string>(?&lt;=[^\p{Alnum}_])(?i:(\.\d+(e[\-\+]?\d+)?))</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>And this is three...</string>
 			<key>match</key>
 			<string>\b(?i:(\d+e[\-\+]?\d+))</string>
 			<key>name</key>
@@ -181,7 +189,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(global|nonlocal)\b</string>
+			<string>\b(global|nonlocal|async)\b</string>
 			<key>name</key>
 			<string>storage.modifier.declaration.python</string>
 		</dict>
@@ -195,7 +203,7 @@
 			<key>comment</key>
 			<string>keywords that delimit flow blocks or alter flow from within a block</string>
 			<key>match</key>
-			<string>\b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield)\b</string>
+			<string>\b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield|await)\b</string>
 			<key>name</key>
 			<string>keyword.control.flow.python</string>
 		</dict>
@@ -229,13 +237,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=</string>
+			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=|@\=</string>
 			<key>name</key>
 			<string>keyword.operator.assignment.augmented.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~</string>
+			<string>\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~|(?!^)@</string>
 			<key>name</key>
 			<string>keyword.operator.arithmetic.python</string>
 		</dict>
@@ -1372,7 +1380,7 @@
 		<key>builtin_exceptions</key>
 		<dict>
 			<key>match</key>
-			<string>\b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alnum}_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alnum}_]+)?Exception)\b</string>
+			<string>\b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alpha}_][\p{Alnum}_]*)?Exception)\b</string>
 			<key>name</key>
 			<string>support.type.exception.python</string>
 		</dict>
@@ -1858,7 +1866,7 @@
 		<key>illegal_names</key>
 		<dict>
 			<key>match</key>
-			<string>\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b</string>
+			<string>\b(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b</string>
 			<key>name</key>
 			<string>invalid.illegal.name.python</string>
 		</dict>
