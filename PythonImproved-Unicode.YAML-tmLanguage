@@ -51,16 +51,20 @@ patterns:
 - name: constant.numeric.integer.octal.python
   match: \b(?i:(0[o]?[0-7]+))
 
-- name: constant.numeric.complex.python
+- comment: Not quite perfect...
+  name: constant.numeric.complex.python
   match: \b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?<=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)
 
-- name: constant.numeric.float.python
+- comment: Ummm... why do we have three of these? This is one...
+  name: constant.numeric.float.python
   match: \b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])
 
-- name: constant.numeric.float.python
+- comment: This is two...
+  name: constant.numeric.float.python
   match: (?<=[^\p{Alnum}_])(?i:(\.\d+(e[\-\+]?\d+)?))
 
-- name: constant.numeric.float.python
+- comment: And this is three...
+  name: constant.numeric.float.python
   match: \b(?i:(\d+e[\-\+]?\d+))
 
 - name: constant.numeric.integer.long.decimal.python
@@ -467,7 +471,7 @@ repository:
 
   builtin_exceptions:
     name: support.type.exception.python
-    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alnum}_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alnum}_]+)?Exception)\b
+    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alpha}_][\p{Alnum}_]*)?Exception)\b
 
   builtin_functions:
     patterns:
