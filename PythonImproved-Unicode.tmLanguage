@@ -75,7 +75,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(#)\s*(BUG|FIXME|TODO|XXX).*$\n?</string>
+			<string>(#)+\s*(BUG|FIXME|TODO|XXX).*$\n?</string>
 			<key>name</key>
 			<string>comment.line.note.python</string>
 		</dict>
@@ -89,7 +89,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(#).*$\n?</string>
+			<string>(#)+.*$\n?</string>
 			<key>name</key>
 			<string>comment.line.number-sign.python</string>
 		</dict>
@@ -103,25 +103,25 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0x\h*)L)</string>
+			<string>\b(?i:(0x\h+)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.long.hexadecimal.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0x\h*))</string>
+			<string>\b(?i:(0x\h+))</string>
 			<key>name</key>
 			<string>constant.numeric.integer.hexadecimal.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0b[01]*)L)</string>
+			<string>\b(?i:(0b[01]+)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.long.binary.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0b[01]*))</string>
+			<string>\b(?i:(0b[01]+))</string>
 			<key>name</key>
 			<string>constant.numeric.integer.binary.python</string>
 		</dict>
@@ -139,7 +139,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?&lt;=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)</string>
+			<string>\b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?&lt;=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)</string>
 			<key>name</key>
 			<string>constant.numeric.complex.python</string>
 		</dict>
@@ -1571,7 +1571,7 @@
 		<key>constant_placeholder</key>
 		<dict>
 			<key>match</key>
-			<string>(?i:%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])</string>
+			<string>(?i:%(\([\p{Lower}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[\p{Lower}%])</string>
 			<key>name</key>
 			<string>constant.other.placeholder.python</string>
 		</dict>
@@ -1790,7 +1790,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(\\x[0-9a-fA-F]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)</string>
+			<string>(\\x[\h]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)</string>
 		</dict>
 		<key>escaped_unicode_char</key>
 		<dict>
@@ -1813,7 +1813,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z0-9\, ]+\})</string>
+			<string>(\\U[\h]{8})|(\\u[\h]{4})|(\\N\{[a-zA-Z0-9\, ]+\})</string>
 		</dict>
 		<key>function_name</key>
 		<dict>
