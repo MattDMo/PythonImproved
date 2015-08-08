@@ -84,7 +84,7 @@ patterns:
 
 - comment: keywords that delimit flow blocks or alter flow from within a block
   name: keyword.control.flow.python
-  match: \b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield|await)\b
+  match: \b(await|break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|with|yield)\b
 
 - comment: keyword operators that evaluate to True or False
   name: keyword.operator.logical.python
