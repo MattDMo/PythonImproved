@@ -97,6 +97,9 @@ patterns:
 - name: invalid.deprecated.operator.python
   match: <>
 
+- name: invalid.deprecated.function.python
+  match: (?<!\.)(apply|buffer|coerce|intern)\s*(?=\()
+
 - name: keyword.operator.comparison.python
   match: <\=|>\=|\=\=|<|>|\!\=
 
@@ -471,12 +474,12 @@ repository:
 
   builtin_exceptions:
     name: support.type.exception.python
-    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alpha}_][\p{Alnum}_]*)?Exception)\b
+    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|Stop(Async)?Iteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alpha}_][\p{Alnum}_]*)?Exception)\b
 
   builtin_functions:
     patterns:
     - name: meta.function-call.python
-      begin: (?<!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()
+      begin: (?<!\.)(__import__|abs|all|any|ascii|basestring|bin|bool|bytearray|bytes|callable|chr|classmethod|cmp|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\s*(?=\()
       beginCaptures:
         '1': {name: support.function.builtin.python}
       end: (\))
@@ -651,7 +654,7 @@ repository:
   magic_function_names:
     comment: these methods have magic interpretation by python and are generally called
       indirectly through syntactic constructs
-    match: (\.)?\b(__(?:abs|add|and|bool|call|ceil|cmp|coerce|complex|contains|copy|deepcopy|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floor|floordiv|format|ge|get|getattr|getattribute|getinitargs|getitem|getnewargs|getslice|getstate|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|missing|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|reduce|reduce_ex|repr|reversed|rfloordiv|rlshift|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|setstate|sizeof|str|sub|subclasscheck|truediv|trunc|unicode|xor)__)\b
+    match: (\.)?\b(__(?:abs|add|and|bool|call|ceil|cmp|complex|contains|copy|deepcopy|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floor|floordiv|format|ge|get|getattr|getattribute|getinitargs|getitem|getnewargs|getslice|getstate|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|missing|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|reduce|reduce_ex|repr|reversed|rfloordiv|rlshift|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|setstate|sizeof|str|sub|subclasscheck|truediv|trunc|unicode|xor)__)\b
     captures:
       '2': {name: support.function.magic.python}
 
