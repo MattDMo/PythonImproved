@@ -4,7 +4,7 @@ comment: To make PythonImproved your default Python syntax, open a .py file and 
 name: PythonImproved-Unicode
 scopeName: source.python
 fileTypes: [py, py3, rpy, pyw, cpy, SConstruct, Sconstruct, sconstruct, SConscript]
-uuid: 11B0273F-0284-4483-B17B-4B8D0A9294CC
+uuid: 74FE3C79-C1DD-41A7-99C9-41CE48307997
 
 patterns:
 - name: support.ipython.in.python
@@ -18,13 +18,13 @@ patterns:
     '2': {name: support.ipython.cell-number.python}
 
 - name: comment.line.note.python
-  match: (#)\s*(BUG|FIXME|TODO|XXX).*$\n?
+  match: (#)+\s*(BUG|FIXME|TODO|XXX).*$\n?
   captures:
     '1': {name: punctuation.definition.comment.python}
     '2': {name: comment.line.note.notation.python}
 
 - name: comment.line.number-sign.python
-  match: (#).*$\n?
+  match: (#)+.*$\n?
   captures:
     '1': {name: punctuation.definition.comment.python}
 
@@ -34,10 +34,10 @@ patterns:
   match: \b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(])
 
 - name: constant.numeric.integer.long.hexadecimal.python
-  match: \b(?i:(0x\h*)L)
+  match: \b(?i:(0x\h+)L)
 
 - name: constant.numeric.integer.hexadecimal.python
-  match: \b(?i:(0x\h*))
+  match: \b(?i:(0x\h+))
 
 - name: constant.numeric.integer.long.binary.python
   match: \b(?i:(0b[01]+)L)
@@ -51,16 +51,20 @@ patterns:
 - name: constant.numeric.integer.octal.python
   match: \b(?i:(0[o]?[0-7]+))
 
-- name: constant.numeric.complex.python
-  match: \b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?<=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)
+- comment: Not quite perfect...
+  name: constant.numeric.complex.python
+  match: \b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?<=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)
 
-- name: constant.numeric.float.python
+- comment: Ummm... why do we have three of these? This is one...
+  name: constant.numeric.float.python
   match: \b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])
 
-- name: constant.numeric.float.python
+- comment: This is two...
+  name: constant.numeric.float.python
   match: (?<=[^\p{Alnum}_])(?i:(\.\d+(e[\-\+]?\d+)?))
 
-- name: constant.numeric.float.python
+- comment: And this is three...
+  name: constant.numeric.float.python
   match: \b(?i:(\d+e[\-\+]?\d+))
 
 - name: constant.numeric.integer.long.decimal.python
@@ -78,10 +82,6 @@ patterns:
 - name: keyword.control.import.python
   match: \b(?:(import|from|as))\b
 
-- comment: keywords that delimit flow blocks or alter flow from within a block
-  name: keyword.control.flow.python
-  match: \b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield)\b
-
 - comment: keyword operators that evaluate to True or False
   name: keyword.operator.logical.python
   match: \b(and|in|is|not|or)\b
@@ -93,14 +93,17 @@ patterns:
 - name: invalid.deprecated.operator.python
   match: <>
 
+- name: invalid.deprecated.function.python
+  match: (?<!\.)(apply|buffer|coerce|intern)\s*(?=\()
+
 - name: keyword.operator.comparison.python
   match: <\=|>\=|\=\=|<|>|\!\=
 
 - name: keyword.operator.assignment.augmented.python
-  match: \+\=|-\=|\*\=|/\=|//\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=|\*\*\=
+  match: \+\=|-\=|\*\=|/\=|//\=|%\=|&\=|\|\=|\^\=|>>\=|<<\=|\*\*\=|@\=
 
 - name: keyword.operator.arithmetic.python
-  match: \+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~
+  match: \+|\-|\*|\*\*|/|//|%|<<|>>|&|\||\^|~|(?!^)@
 
 - name: keyword.operator.assignment.python
   match: \=
@@ -161,7 +164,7 @@ patterns:
     - include: '#entity_name_function'
 
 - name: meta.function.python
-  begin: \s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
+  begin: \s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\:)
@@ -196,7 +199,7 @@ patterns:
     - include: $self
 
 - name: meta.function.python
-  begin: \s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)
+  begin: \s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -209,6 +212,26 @@ patterns:
     end: (?![\p{Alnum}_])
     patterns:
     - include: '#entity_name_function'
+
+- match: \b(((?:async\s+)?def)|lambda)\b
+  captures:
+    '1': {name: storage.type.function.python}
+
+-
+  comment: |
+      Keywords that delimit flow blocks or alter flow from within a
+      block.
+
+      This block should be matched *after* meta.function.python to
+      let 'async def' be matched *first*.
+
+  name: keyword.control.flow.python
+  match: |
+    (?x) \b(
+      async | await | break | continue | elif | else | except | finally | for |
+      if | pass | raise | return | try | while | with |
+      (yield(?:\s+from)?)
+    )\b
 
 - name: meta.function.inline.python
   begin: (lambda)(?=\s+|:)
@@ -343,10 +366,6 @@ patterns:
   patterns:
   - include: $self
 
-- match: \b(def|lambda)\b
-  captures:
-    '1': {name: storage.type.function.python}
-
 - match: \b(class)\b
   captures:
     '1': {name: storage.type.class.python}
@@ -467,12 +486,35 @@ repository:
 
   builtin_exceptions:
     name: support.type.exception.python
-    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alnum}_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alnum}_]+)?Exception)\b
+    match: |
+      (?x) \b(
+        (
+          Arithmetic | Assertion | Attribute | Buffer | BlockingIO |
+          BrokenPipe | ChildProcess |
+          (Connection (Aborted | Refused | Reset)?) |
+          EOF | Environment | FileExists | FileNotFound |
+          FloatingPoint | IO | Import | Indentation | Index | Interrupted |
+          IsADirectory | NotADirectory | Permission | ProcessLookup |
+          Timeout |
+          Key | Lookup | Memory | Name | NotImplemented | OS | Overflow |
+          Reference | Runtime | Recursion | Standard | Syntax | System |
+          Tab | Type | UnboundLocal | Unicode(Encode|Decode|Translate)? |
+          Value | VMS | Windows | ZeroDivision
+        )? Error
+      |
+        ((Pending)?Deprecation | Runtime | Syntax | User | Future | Import |
+          Unicode | Bytes | Resource
+        )? Warning
+      |
+        SystemExit | Stop(Async)?Iteration | NotImplemented |
+        KeyboardInterrupt |
+        GeneratorExit | Exception
+      )\b
 
   builtin_functions:
     patterns:
     - name: meta.function-call.python
-      begin: (?<!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()
+      begin: (?<!\.)(__import__|abs|all|any|ascii|basestring|bin|bool|bytearray|bytes|callable|chr|classmethod|cmp|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\s*(?=\()
       beginCaptures:
         '1': {name: support.function.builtin.python}
       end: (\))
@@ -532,7 +574,7 @@ repository:
 
   constant_placeholder:
     name: constant.other.placeholder.python
-    match: (?i:%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])
+    match: (?i:%(\([\p{Lower}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[\p{Lower}%])
 
   docstrings:
     patterns:
@@ -582,7 +624,7 @@ repository:
     - include: '#generic_names'
 
   escaped_char:
-    match: (\\x[0-9a-fA-F]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)
+    match: (\\x[\h]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)
     captures:
       '1': {name: constant.character.escape.hex.python}
       '2': {name: constant.character.escape.octal.python}
@@ -599,7 +641,7 @@ repository:
       '13': {name: constant.character.escape.vertical-tab.python}
 
   escaped_unicode_char:
-    match: (\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z0-9\, ]+\})
+    match: (\\U[\h]{8})|(\\u[\h]{4})|(\\N\{[a-zA-Z0-9\, ]+\})
     captures:
       '1': {name: constant.character.escape.unicode.16-bit-hex.python}
       '2': {name: constant.character.escape.unicode.32-bit-hex.python}
@@ -622,7 +664,7 @@ repository:
 
   illegal_names:
     name: invalid.illegal.name.python
-    match: \b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b
+    match: \b(and|as|assert|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b
 
   keyword_arguments:
     begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(=)(?!=)
@@ -647,7 +689,7 @@ repository:
   magic_function_names:
     comment: these methods have magic interpretation by python and are generally called
       indirectly through syntactic constructs
-    match: (\.)?\b(__(?:abs|add|and|bool|call|ceil|cmp|coerce|complex|contains|copy|deepcopy|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floor|floordiv|format|ge|get|getattr|getattribute|getinitargs|getitem|getnewargs|getslice|getstate|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|missing|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|reduce|reduce_ex|repr|reversed|rfloordiv|rlshift|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|setstate|sizeof|str|sub|subclasscheck|truediv|trunc|unicode|xor)__)\b
+    match: (\.)?\b(__(?:abs|add|and|bool|call|ceil|cmp|complex|contains|copy|deepcopy|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floor|floordiv|format|ge|get|getattr|getattribute|getinitargs|getitem|getnewargs|getslice|getstate|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|missing|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|reduce|reduce_ex|repr|reversed|rfloordiv|rlshift|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|setstate|sizeof|str|sub|subclasscheck|truediv|trunc|unicode|xor)__)\b
     captures:
       '2': {name: support.function.magic.python}
 
@@ -1029,6 +1071,6 @@ repository:
 author: Matt Morrison @MattDMo mattdmo@pigimal.com
 bundleUUID: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
 firstLineMatch: ^#!/.*\bpython[0-9.-]*\b
-foldingStartMarker: ^\s*(def|class)\s+([.\p{Alnum}_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
+foldingStartMarker: ^\s*(((?:async\s+)?def)|class)\s+([.\p{Alnum}_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
 foldingStopMarker: ^\s*$|^\s*\}|^\s*\]|^\s*\)|^\s*"""\s*$
 keyEquivalent: ^~P
