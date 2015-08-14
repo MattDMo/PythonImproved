@@ -77,14 +77,10 @@ patterns:
   match: \b(None|True|False|Ellipsis|NotImplemented)\b
 
 - name: storage.modifier.declaration.python
-  match: \b(global|nonlocal|async)\b
+  match: \b(global|nonlocal)\b
 
 - name: keyword.control.import.python
   match: \b(?:(import|from|as))\b
-
-- comment: keywords that delimit flow blocks or alter flow from within a block
-  name: keyword.control.flow.python
-  match: \b(await|break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|with|yield)\b
 
 - comment: keyword operators that evaluate to True or False
   name: keyword.operator.logical.python
@@ -168,7 +164,7 @@ patterns:
     - include: '#entity_name_function'
 
 - name: meta.function.python
-  begin: \s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
+  begin: \s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\:)
@@ -203,7 +199,7 @@ patterns:
     - include: $self
 
 - name: meta.function.python
-  begin: \s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)
+  begin: \s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -216,6 +212,26 @@ patterns:
     end: (?![\p{Alnum}_])
     patterns:
     - include: '#entity_name_function'
+
+- match: \b(((?:async\s+)?def)|lambda)\b
+  captures:
+    '1': {name: storage.type.function.python}
+
+-
+  comment: |
+      Keywords that delimit flow blocks or alter flow from within a
+      block.
+
+      This block should be matched *after* meta.function.python to
+      let 'async def' be matched *first*.
+
+  name: keyword.control.flow.python
+  match: |
+    (?x) \b(
+      async | await | break | continue | elif | else | except | finally | for |
+      if | pass | raise | return | try | while | with |
+      (yield(?:\s+from)?)
+    )\b
 
 - name: meta.function.inline.python
   begin: (lambda)(?=\s+|:)
@@ -350,10 +366,6 @@ patterns:
   patterns:
   - include: $self
 
-- match: \b(def|lambda)\b
-  captures:
-    '1': {name: storage.type.function.python}
-
 - match: \b(class)\b
   captures:
     '1': {name: storage.type.class.python}
@@ -474,7 +486,30 @@ repository:
 
   builtin_exceptions:
     name: support.type.exception.python
-    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|Stop(Async)?Iteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alpha}_][\p{Alnum}_]*)?Exception)\b
+    match: |
+      (?x) \b(
+        (
+          Arithmetic | Assertion | Attribute | Buffer | BlockingIO |
+          BrokenPipe | ChildProcess |
+          (Connection (Aborted | Refused | Reset)?) |
+          EOF | Environment | FileExists | FileNotFound |
+          FloatingPoint | IO | Import | Indentation | Index | Interrupted |
+          IsADirectory | NotADirectory | Permission | ProcessLookup |
+          Timeout |
+          Key | Lookup | Memory | Name | NotImplemented | OS | Overflow |
+          Reference | Runtime | Recursion | Standard | Syntax | System |
+          Tab | Type | UnboundLocal | Unicode(Encode|Decode|Translate)? |
+          Value | VMS | Windows | ZeroDivision
+        )? Error
+      |
+        ((Pending)?Deprecation | Runtime | Syntax | User | Future | Import |
+          Unicode | Bytes | Resource
+        )? Warning
+      |
+        SystemExit | Stop(Async)?Iteration | NotImplemented |
+        KeyboardInterrupt |
+        GeneratorExit | Exception
+      )\b
 
   builtin_functions:
     patterns:
@@ -629,7 +664,7 @@ repository:
 
   illegal_names:
     name: invalid.illegal.name.python
-    match: \b(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b
+    match: \b(and|as|assert|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b
 
   keyword_arguments:
     begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(=)(?!=)
@@ -1036,6 +1071,6 @@ repository:
 author: Matt Morrison @MattDMo mattdmo@pigimal.com
 bundleUUID: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
 firstLineMatch: ^#!/.*\bpython[0-9.-]*\b
-foldingStartMarker: ^\s*(def|class)\s+([.\p{Alnum}_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
+foldingStartMarker: ^\s*(((?:async\s+)?def)|class)\s+([.\p{Alnum}_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
 foldingStopMarker: ^\s*$|^\s*\}|^\s*\]|^\s*\)|^\s*"""\s*$
 keyEquivalent: ^~P
