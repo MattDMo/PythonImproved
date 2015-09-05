@@ -226,12 +226,7 @@ patterns:
       let 'async def' be matched *first*.
 
   name: keyword.control.flow.python
-  match: |
-    (?x) \b(
-      async | await | break | continue | elif | else | except | finally | for |
-      if | pass | raise | return | try | while | with |
-      (yield(?:\s+from)?)
-    )\b
+  match: (?x)\b(async|await|break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|with|(yield(?:\s+from)?))\b
 
 - name: meta.function.inline.python
   begin: (lambda)(?=\s+|:)
@@ -486,30 +481,7 @@ repository:
 
   builtin_exceptions:
     name: support.type.exception.python
-    match: |
-      (?x) \b(
-        (
-          Arithmetic | Assertion | Attribute | Buffer | BlockingIO |
-          BrokenPipe | ChildProcess |
-          (Connection (Aborted | Refused | Reset)?) |
-          EOF | Environment | FileExists | FileNotFound |
-          FloatingPoint | IO | Import | Indentation | Index | Interrupted |
-          IsADirectory | NotADirectory | Permission | ProcessLookup |
-          Timeout |
-          Key | Lookup | Memory | Name | NotImplemented | OS | Overflow |
-          Reference | Runtime | Recursion | Standard | Syntax | System |
-          Tab | Type | UnboundLocal | Unicode(Encode|Decode|Translate)? |
-          Value | VMS | Windows | ZeroDivision
-        )? Error
-      |
-        ((Pending)?Deprecation | Runtime | Syntax | User | Future | Import |
-          Unicode | Bytes | Resource
-        )? Warning
-      |
-        SystemExit | Stop(Async)?Iteration | NotImplemented |
-        KeyboardInterrupt |
-        GeneratorExit | Exception
-      )\b
+    match: (?x)\b((Arithmetic|Assertion|Attribute|Buffer|BlockingIO|BrokenPipe|ChildProcess|(Connection(Aborted|Refused|Reset)?)|EOF|Environment|FileExists|FileNotFound|FloatingPoint|IO|Import|Indentation|Index|Interrupted|IsADirectory|NotADirectory|Permission|ProcessLookup|Timeout|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Recursion|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision)?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes|Resource)?Warning|SystemExit|Stop(Async)?Iteration|NotImplemented|KeyboardInterrupt|GeneratorExit|Exception)\b
 
   builtin_functions:
     patterns:
