@@ -299,7 +299,7 @@ patterns:
 
 - include: '#builtin_types'
 
-- include: '#builtin_exceptions'
+- include: '#errors_warnings_exceptions'
 
 - include: '#docstrings'
 
@@ -479,10 +479,6 @@ repository:
         '1': {name: punctuation.separator.parameters.python}
     - include: '#comments'
 
-  builtin_exceptions:
-    name: support.type.exception.python
-    match: (?x)\b((Arithmetic|Assertion|Attribute|Buffer|BlockingIO|BrokenPipe|ChildProcess|(Connection(Aborted|Refused|Reset)?)|EOF|Environment|FileExists|FileNotFound|FloatingPoint|IO|Import|Indentation|Index|Interrupted|IsADirectory|NotADirectory|Permission|ProcessLookup|Timeout|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Recursion|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision)?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes|Resource)?Warning|SystemExit|Stop(Async)?Iteration|NotImplemented|KeyboardInterrupt|GeneratorExit|Exception)\b
-
   builtin_functions:
     patterns:
     - name: meta.function-call.python
@@ -577,7 +573,7 @@ repository:
       patterns:
       - include: '#builtin_functions'
       - include: '#builtin_types'
-      - include: '#builtin_exceptions'
+      - include: '#errors_warnings_exceptions'
       - include: '#illegal_names'
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
@@ -594,6 +590,10 @@ repository:
     - include: '#magic_function_names'
     - include: '#illegal_names'
     - include: '#generic_names'
+
+  errors_warnings_exceptions:
+    name: support.type.exception.python
+    match: (?x)\b((Arithmetic|Assertion|Attribute|Buffer|BlockingIO|BrokenPipe|ChildProcess|(Connection(Aborted|Refused|Reset)?)|EOF|Environment|FileExists|FileNotFound|FloatingPoint|IO|Import|Indentation|Index|Interrupted|IsADirectory|NotADirectory|Permission|ProcessLookup|Timeout|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Recursion|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes|Resource)?Warning|SystemExit|Stop(Async)?Iteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alpha}_][\p{Alnum}_]*)?Exception)\b
 
   escaped_char:
     match: (\\x[\h]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)
@@ -623,7 +623,7 @@ repository:
     patterns:
     - include: '#magic_function_names'
     - include: '#magic_variable_names'
-    - include: '#builtin_exceptions'
+    - include: '#errors_warnings_exceptions'
     - include: '#builtin_functions'
     - include: '#builtin_types'
     - include: '#generic_names'
