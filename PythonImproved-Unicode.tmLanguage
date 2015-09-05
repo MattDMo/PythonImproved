@@ -23,7 +23,7 @@
 	<key>firstLineMatch</key>
 	<string>^#!/.*\bpython[0-9.-]*\b</string>
 	<key>foldingStartMarker</key>
-	<string>^\s*(def|class)\s+([.\p{Alnum}_ &lt;]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")</string>
+	<string>^\s*(((?:async\s+)?def)|class)\s+([.\p{Alnum}_ &lt;]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")</string>
 	<key>foldingStopMarker</key>
 	<string>^\s*$|^\s*\}|^\s*\]|^\s*\)|^\s*"""\s*$</string>
 	<key>keyEquivalent</key>
@@ -189,7 +189,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(global|nonlocal|async)\b</string>
+			<string>\b(global|nonlocal)\b</string>
 			<key>name</key>
 			<string>storage.modifier.declaration.python</string>
 		</dict>
@@ -198,14 +198,6 @@
 			<string>\b(?:(import|from|as))\b</string>
 			<key>name</key>
 			<string>keyword.control.import.python</string>
-		</dict>
-		<dict>
-			<key>comment</key>
-			<string>keywords that delimit flow blocks or alter flow from within a block</string>
-			<key>match</key>
-			<string>\b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield|await)\b</string>
-			<key>name</key>
-			<string>keyword.control.flow.python</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -228,6 +220,12 @@
 			<string>&lt;&gt;</string>
 			<key>name</key>
 			<string>invalid.deprecated.operator.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\.)(apply|buffer|coerce|intern)\s*(?=\()</string>
+			<key>name</key>
+			<string>invalid.deprecated.function.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -429,7 +427,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
+			<string>\s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -550,7 +548,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+			<string>\s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -594,6 +592,36 @@
 					</array>
 				</dict>
 			</array>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.python</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(((?:async\s+)?def)|lambda)\b</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Keywords that delimit flow blocks or alter flow from within a
+block.
+
+This block should be matched *after* meta.function.python to
+let 'async def' be matched *first*.
+</string>
+			<key>match</key>
+			<string>(?x) \b(
+  async | await | break | continue | elif | else | except | finally | for |
+  if | pass | raise | return | try | while | with |
+  (yield(?:\s+from)?)
+)\b
+</string>
+			<key>name</key>
+			<string>keyword.control.flow.python</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -999,18 +1027,6 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.function.python</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(def|lambda)\b</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
 					<string>storage.type.class.python</string>
 				</dict>
 			</dict>
@@ -1380,7 +1396,30 @@
 		<key>builtin_exceptions</key>
 		<dict>
 			<key>match</key>
-			<string>\b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alpha}_][\p{Alnum}_]*)?Exception)\b</string>
+			<string>(?x) \b(
+  (
+    Arithmetic | Assertion | Attribute | Buffer | BlockingIO |
+    BrokenPipe | ChildProcess |
+    (Connection (Aborted | Refused | Reset)?) |
+    EOF | Environment | FileExists | FileNotFound |
+    FloatingPoint | IO | Import | Indentation | Index | Interrupted |
+    IsADirectory | NotADirectory | Permission | ProcessLookup |
+    Timeout |
+    Key | Lookup | Memory | Name | NotImplemented | OS | Overflow |
+    Reference | Runtime | Recursion | Standard | Syntax | System |
+    Tab | Type | UnboundLocal | Unicode(Encode|Decode|Translate)? |
+    Value | VMS | Windows | ZeroDivision
+  )? Error
+|
+  ((Pending)?Deprecation | Runtime | Syntax | User | Future | Import |
+    Unicode | Bytes | Resource
+  )? Warning
+|
+  SystemExit | Stop(Async)?Iteration | NotImplemented |
+  KeyboardInterrupt |
+  GeneratorExit | Exception
+)\b
+</string>
 			<key>name</key>
 			<string>support.type.exception.python</string>
 		</dict>
@@ -1390,7 +1429,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?&lt;!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()</string>
+					<string>(?&lt;!\.)(__import__|abs|all|any|ascii|basestring|bin|bool|bytearray|bytes|callable|chr|classmethod|cmp|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\s*(?=\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1866,7 +1905,7 @@
 		<key>illegal_names</key>
 		<dict>
 			<key>match</key>
-			<string>\b(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b</string>
+			<string>\b(and|as|assert|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b</string>
 			<key>name</key>
 			<string>invalid.illegal.name.python</string>
 		</dict>
@@ -1938,7 +1977,7 @@
 			<key>comment</key>
 			<string>these methods have magic interpretation by python and are generally called indirectly through syntactic constructs</string>
 			<key>match</key>
-			<string>(\.)?\b(__(?:abs|add|and|bool|call|ceil|cmp|coerce|complex|contains|copy|deepcopy|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floor|floordiv|format|ge|get|getattr|getattribute|getinitargs|getitem|getnewargs|getslice|getstate|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|missing|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|reduce|reduce_ex|repr|reversed|rfloordiv|rlshift|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|setstate|sizeof|str|sub|subclasscheck|truediv|trunc|unicode|xor)__)\b</string>
+			<string>(\.)?\b(__(?:abs|add|and|bool|call|ceil|cmp|complex|contains|copy|deepcopy|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floor|floordiv|format|ge|get|getattr|getattribute|getinitargs|getitem|getnewargs|getslice|getstate|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|missing|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|reduce|reduce_ex|repr|reversed|rfloordiv|rlshift|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|setstate|sizeof|str|sub|subclasscheck|truediv|trunc|unicode|xor)__)\b</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>
