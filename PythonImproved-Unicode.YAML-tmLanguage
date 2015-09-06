@@ -250,13 +250,13 @@ patterns:
 
 - comment: a decorator may be a function call which returns a decorator.
   name: meta.function.decorator.python
-  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
-  end: (\))
+  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+  end: (?<=\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
   - contentName: entity.name.function.decorator.python
-    begin: (?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+    begin: (?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
     beginCaptures:
       '1': {name: punctuation.definition.decorator.python}
     end: (?=\s*\()
@@ -266,17 +266,19 @@ patterns:
     begin: (\()
     beginCaptures:
       '1': {name: punctuation.definition.arguments.begin.python}
-    end: (?=\))
+    end: (?=(\)))
+    endCaptures:
+      '1': {name: punctuation.definition.arguments.end.python}
     patterns:
     - include: '#keyword_arguments'
     - include: $self
 
 - name: meta.function.decorator.python
   contentName: entity.name.function.decorator.python
-  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*)
+  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)
   end: (?=\s|$\n?|#)
   patterns:
-  - begin: (?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\.[\p{Alpha}_][\p{Alnum}_]*)*)
+  - begin: (?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)
     beginCaptures:
       '1': {name: punctuation.definition.decorator.python}
     end: (?=\s|$\n?|#)
@@ -312,9 +314,10 @@ patterns:
 - include: '#generic_object_names'
 
 - name: meta.function-call.python
-  begin: (?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=\()
+  begin: (?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=(\())
   beginCaptures:
     '1': {name: meta.function-call.generic.python}
+    '2': {name: punctuation.definition.arguments.begin.python}
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
@@ -327,18 +330,28 @@ patterns:
     begin: (\()
     beginCaptures:
       '1': {name: punctuation.definition.arguments.begin.python}
-    end: (?=\))
+    end: (?=(\)))
+    endCaptures:
+      '1': {name: punctuation.definition.arguments.end.python}
     patterns:
     - include: '#keyword_arguments'
     - include: $self
+  - begin: \G
+    end: (?=\()
+    patterns:
+    - include: '#dotted_name'
+
+- comment: Py2 print statement that should only be matched after function calls
+  name: keyword.other.print.python
+  match: \b(print)(?=\s)(?!\s*([.,]|$))
 
 - name: meta.item-access.python
-  begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)
+  begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)
   end: (\])
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)
+  - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)
     end: (?=\s*\[)
     patterns:
     - include: '#dotted_name'
@@ -346,9 +359,15 @@ patterns:
     begin: (\[)
     beginCaptures:
       '1': {name: punctuation.definition.arguments.begin.python}
-    end: (?=\])
+    end: (?=(\]))
+    endCaptures:
+      '1': {name: punctuation.definition.arguments.end.python}
     patterns:
     - include: $self
+  - begin: \G
+    end: (?=\[)
+    patterns:
+    - include: '#dotted_name'
 
 - name: meta.item-access.python
   contentName: meta.item-access.arguments.python
@@ -482,14 +501,15 @@ repository:
   builtin_functions:
     patterns:
     - name: meta.function-call.python
-      begin: (?<!\.)(__import__|abs|all|any|ascii|basestring|bin|bool|bytearray|bytes|callable|chr|classmethod|cmp|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\s*(?=\()
+      begin: (?<!\.)(__import__|abs|all|any|ascii|basestring|bin|bool|bytearray|bytes|callable|chr|classmethod|cmp|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\s*(?=(\())
       beginCaptures:
         '1': {name: support.function.builtin.python}
+        '2': {name: punctuation.definition.arguments.begin.python}
       end: (\))
       endCaptures:
         '1': {name: punctuation.definition.arguments.end.python}
       patterns:
-      - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+      - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
         end: (?=\s*\()
         patterns:
         - include: '#dotted_name'
@@ -558,10 +578,13 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*)
-    end: (?![\p{Alnum}_\.])
+    begin: (?x)(?=(?:\.(?!\s+import)\s*)?[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)
+    end: (?x)(?![\p{Alnum}_\.\s])|(?=(?<!\.)\s+[^.])|$
+    contentName: meta.dotted-name.python
     patterns:
     - begin: (\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
+      beginCaptures:
+        '1': {name: meta.dot.python}
       end: (?![\p{Alnum}_])
       patterns:
       - include: '#magic_function_names'
@@ -593,7 +616,7 @@ repository:
 
   errors_warnings_exceptions:
     name: support.type.exception.python
-    match: (?x)\b((Arithmetic|Assertion|Attribute|Buffer|BlockingIO|BrokenPipe|ChildProcess|(Connection(Aborted|Refused|Reset)?)|EOF|Environment|FileExists|FileNotFound|FloatingPoint|IO|Import|Indentation|Index|Interrupted|IsADirectory|NotADirectory|Permission|ProcessLookup|Timeout|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Recursion|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes|Resource)?Warning|SystemExit|Stop(Async)?Iteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alpha}_][\p{Alnum}_]*)?Exception)\b
+    match: (?x)\b((Arithmetic|Assertion|Attribute|Buffer|BlockingIO|BrokenPipe|ChildProcess|(Connection(Aborted|Refused|Reset)?)|EOF|Environment|FileExists|FileNotFound|FloatingPoint|IO|Import|Indentation|Index|Interrupted|IsADirectory|NotADirectory|Permission|ProcessLookup|Timeout|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Recursion|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\.\p{Alpha}_][\p{Alnum}_]*))?Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes|Resource)?Warning|SystemExit|Stop(Async)?Iteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\.\p{Alpha}_][\p{Alnum}_]*)?Exception)\b
 
   escaped_char:
     match: (\\x[\h]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)
@@ -629,6 +652,7 @@ repository:
     - include: '#generic_names'
 
   generic_names:
+    name: meta.identifier.python
     match: '[\p{Alpha}_][\p{Alnum}_]*'
 
   generic_object_names:
