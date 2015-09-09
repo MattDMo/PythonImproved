@@ -578,9 +578,9 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?x)(?=(?:\.(?!\s+import)\s*)?[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)
-    end: (?x)(?![\p{Alnum}_\.\s])|(?=(?<!\.)\s+[^.])|$
-    contentName: meta.dotted-name.python
+    begin: (?=(?:\.(?!\s+import)\s*)?[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)
+    end: (?![\p{Alnum}_\.\s])|(?=(?<!\.)\s+[^.])|$
+    # contentName: meta.dotted-name.python
     patterns:
     - begin: (\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
       beginCaptures:
