@@ -18,13 +18,13 @@ patterns:
     '2': {name: support.ipython.cell-number.python}
 
 - name: comment.line.note.python
-  match: (#)+\s*(BUG|FIXME|TODO|XXX).*$\n?
+  match: (#+)\s*(BUG|FIXME|TODO|XXX).*$\n?
   captures:
     '1': {name: punctuation.definition.comment.python}
     '2': {name: comment.line.note.notation.python}
 
 - name: comment.line.number-sign.python
-  match: (#)+.*$\n?
+  match: (#+).*$\n?
   captures:
     '1': {name: punctuation.definition.comment.python}
 
@@ -577,12 +577,12 @@ repository:
   comments:
     patterns:
     - name: comment.line.note.python
-      match: (#)\s*(BUG|FIXME|TODO|XXX).*$\n?
+      match: (#+)\s*(BUG|FIXME|TODO|XXX).*$\n?
       captures:
         '1': {name: punctuation.definition.comment.python}
         '2': {name: comment.line.note.notation.python}
     - name: comment.line.number-sign.python
-      match: (#).*$\n?
+      match: (#+).*$\n?
       captures:
         '1': {name: punctuation.definition.comment.python}
 
