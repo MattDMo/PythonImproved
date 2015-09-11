@@ -22,7 +22,7 @@ patterns:
   match: (meta|models)\.(Admin|AutoField|BigIntegerField|BinaryField|BooleanField|CharField|CommaSeparatedIntegerField|DateField|DateTimeField|DecimalField|EmailField|FileField|FilePathField|FloatField|ForeignKey|ImageField|IntegerField|IPAddressField|GenericIPAddressField|ManyToManyField|NullBooleanField|OneToOneField|PhoneNumberField|PositiveIntegerField|PositiveSmallIntegerField|SlugField|SmallIntegerField|TextField|TimeField|URLField|USStateField|XMLField)\b
 
 - name: support.other.django.module
-  match: 'django(\.[A-Za-z_][A-Za-z0-9_]+){0,} '
+  match: 'django(\.[\p{Alpha}_][\p{Word}_]+){0,} '
 
 - name: variable.other.django.settings
   comment: updated for 1.7, backwards-compatible with 1.6
@@ -32,7 +32,7 @@ patterns:
   match: (get_list_or_404|get_object_or_404|load_and_render|loader|render_to_response|render)\b
 
 - name: support.function.django.model
-  match: '[A-Za-z_][A-Za-z0-9_]+\.get_(object|list|iterator|count|values|values_iterator|in_bulk)\b'
+  match: '[\p{Alpha}_][\p{Word}_]+\.get_(object|list|iterator|count|values|values_iterator|in_bulk)\b'
 
 - name: comment.line.note.python
   match: (#)\s*(BUG|FIXME|TODO|XXX).*$\n?
@@ -116,7 +116,7 @@ patterns:
 
 - name: meta.class.old-style.python
   contentName: entity.name.type.class.python
-  begin: \s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\:)
+  begin: \s*(class)\s+(?=[\p{Alpha}_][a-zA-Z_0-9]*\s*\:)
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: \s*(:)
@@ -126,7 +126,7 @@ patterns:
   - include: '#entity_name_class'
 
 - name: meta.class.python
-  begin: \s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\()
+  begin: \s*(class)\s+(?=[\p{Alpha}_][a-zA-Z_0-9]*\s*\()
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: (\))\s*(?:(\:)|(.*$\n?))
@@ -136,8 +136,8 @@ patterns:
     '3': {name: invalid.illegal.missing-section-begin.python}
   patterns:
   - contentName: entity.name.type.class.python
-    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
-    end: (?![A-Za-z0-9_])
+    begin: (?=[\p{Alpha}_][\p{Word}_]*)
+    end: (?![\p{Word}_])
     patterns:
     - include: '#entity_name_class'
   - contentName: meta.class.inheritance.python
@@ -155,7 +155,7 @@ patterns:
       - include: $self
 
 - name: meta.class.python
-  begin: \s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9])
+  begin: \s*(class)\s+(?=[\p{Alpha}_][a-zA-Z_0-9])
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -164,13 +164,13 @@ patterns:
     '2': {name: invalid.illegal.missing-inheritance.python}
   patterns:
   - contentName: entity.name.type.class.python
-    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
-    end: (?![A-Za-z0-9_])
+    begin: (?=[\p{Alpha}_][\p{Word}_]*)
+    end: (?![\p{Word}_])
     patterns:
     - include: '#entity_name_function'
 
 - name: meta.function.python
-  begin: \s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*\s*\()
+  begin: \s*(def)\s+(?=[\p{Alpha}_][\p{Word}_]*\s*\()
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\:)
@@ -178,8 +178,8 @@ patterns:
     '1': {name: punctuation.section.function.begin.python}
   patterns:
   - contentName: entity.name.function.python
-    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
-    end: (?![A-Za-z0-9_])
+    begin: (?=[\p{Alpha}_][\p{Word}_]*)
+    end: (?![\p{Word}_])
     patterns:
     - include: '#entity_name_function'
   - contentName: meta.function.parameters.python
@@ -191,7 +191,7 @@ patterns:
     - include: '#annotated_arguments'
     - include: '#keyword_arguments'
     - include: '#comments'
-    - match: \b(?:(self|cls)|([a-zA-Z_][a-zA-Z_0-9]*))\s*(?:(,)|(?=[\n\)]))
+    - match: \b(?:(self|cls)|([\p{Alpha}_][a-zA-Z_0-9]*))\s*(?:(,)|(?=[\n\)]))
       captures:
         '1': {name: variable.parameter.function.language.python}
         '2': {name: variable.parameter.function.python}
@@ -205,7 +205,7 @@ patterns:
     - include: $self
 
 - name: meta.function.python
-  begin: \s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*)
+  begin: \s*(def)\s+(?=[\p{Alpha}_][\p{Word}_]*)
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -214,8 +214,8 @@ patterns:
     '2': {name: invalid.illegal.missing-parameters.python}
   patterns:
   - contentName: entity.name.function.python
-    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
-    end: (?![A-Za-z0-9_])
+    begin: (?=[\p{Alpha}_][\p{Word}_]*)
+    end: (?![\p{Word}_])
     patterns:
     - include: '#entity_name_function'
 
@@ -234,7 +234,7 @@ patterns:
     end: (?=\:)
     patterns:
     - include: '#keyword_arguments'
-    - match: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(?:(,)|(?=[\n\)\:]))
+    - match: \b([\p{Alpha}_][a-zA-Z_0-9]*)\s*(?:(,)|(?=[\n\)\:]))
       captures:
         '1': {name: variable.parameter.function.python}
         '2': {name: punctuation.separator.parameters.python}
@@ -242,7 +242,7 @@ patterns:
 - comment: a decorator may be a function call which returns a decorator.
   name: meta.function.decorator-call.python
   contentName: entity.name.function.decorator.python
-  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z_0-9]*)*\s*\()
+  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Word}_]*(?:\s*\.\s*[\p{Alpha}_][A-Za-z_0-9]*)*\s*\()
   end: (?<=\))
   patterns:
   - begin: '@'
@@ -264,7 +264,7 @@ patterns:
 
 - name: meta.function.decorator.python
   contentName: entity.name.function.decorator.python
-  begin: ^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*)
+  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Word}_]*(?:\s*\.\s*[\p{Alpha}_][a-zA-Z_0-9]*)*)
   end: (?=\s*(#|$))
   patterns:
   - begin: '@'
@@ -291,7 +291,7 @@ patterns:
 # - include: '#generic_object_names'
 
 - name: meta.function-call.python
-  begin: (?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*\s*\()
+  begin: (?=\b[\p{Alpha}_][\p{Word}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Word}_]*)*\s*\()
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
@@ -315,7 +315,7 @@ patterns:
                                         # which is matched later
 
 - name: meta.item-access.python
-  begin: (?=[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)
+  begin: (?=[\p{Alpha}_][\p{Word}_]*(?:\s*\.\s*[\p{Alpha}_][a-zA-Z_0-9]*)*\s*\[)
   end: (\])
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
@@ -430,11 +430,11 @@ patterns:
 repository:
   allcaps_constant:
     name: constant.other.allcaps.python
-    match: \b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])
+    match: \b([\p{Upper}_][A-Z0-9_]*)\b(?![\.|\(])
     comment: Match identifiers in ALL_CAPS as constants.
 
   annotated_arguments:
-    begin: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)|(?=\()
+    begin: \b([\p{Alpha}_][a-zA-Z_0-9]*)\s*(:)|(?=\()
     beginCaptures:
       '1': {name: variable.parameter.function.python}
       '2': {name: punctuation.separator.annotation.python}
@@ -455,7 +455,7 @@ repository:
     endCaptures:
       '1': {name: punctuation.definition.parameters-group.end.python}
     patterns:
-    - begin: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)
+    - begin: \b([\p{Alpha}_][a-zA-Z_0-9]*)\s*(:)
       beginCaptures:
         '1': {name: variable.parameter.function.python}
         '2': {name: punctuation.separator.annotation.python}
@@ -464,7 +464,7 @@ repository:
         '1': {name: punctuation.separator.parameters.python}
       patterns:
       - include: $self
-    - begin: \b([a-zA-Z_][a-zA-Z_0-9]*)
+    - begin: \b([\p{Alpha}_][a-zA-Z_0-9]*)
       beginCaptures:
         '1': {name: variable.parameter.function.python}
       end: \s*(?:(,)|(?=$\n?|\)))
@@ -512,7 +512,7 @@ repository:
 
   constant_placeholder:
     name: constant.other.placeholder.python
-    match: (?i:%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])
+    match: (?i:%(\([\p{Upper}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])
 
   docstrings:
     patterns:
@@ -530,9 +530,9 @@ repository:
   dotted_name:
     begin: |
       (?x)
-      (?=(?:\.(?!\s+import)\s*)?  # exlcude "from . import"
-         [A-Za-z_][A-Za-z0-9_]*
-         (?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*
+      (?=(?:\.(?!\s+import)\s*)?
+         [\p{Alpha}_][\p{Word}_]*
+         (?:\s*\.\s*[\p{Alpha}_][\p{Word}_]*)*
       )
     end: |
       (?x)
@@ -544,15 +544,15 @@ repository:
     - begin: \.
       beginCaptures:
         '0': {name: meta.dot.python}
-      end: (?![A-Za-z0-9_])
+      end: (?![\p{Word}_])
       patterns:
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#illegal_names'
       - include: '#allcaps_constant'
       - include: '#generic_names'
-    - begin: (?=[A-Za-z_])
-      end: (?![A-Za-z0-9_])
+    - begin: (?=[\p{Alpha}_])
+      end: (?![\p{Word}_])
       patterns:
       - include: '#builtin_functions'
       - include: '#builtin_types'
@@ -610,17 +610,17 @@ repository:
 
   generic_names:
     name: meta.generic-name.python
-    match: '[A-Za-z_][A-Za-z0-9_]*'
+    match: '[\p{Alpha}_][\p{Word}_]*'
 
   generic_object_names:
-    match: (\.\b([A-Za-z_][A-Za-z0-9_]*)\b(?!\(|\[)|\b([A-Za-z_][A-Za-z0-9_]*)\b\.)
+    match: (\.\b([\p{Alpha}_][\p{Word}_]*)\b(?!\(|\[)|\b([\p{Alpha}_][\p{Word}_]*)\b\.)
 
   illegal_names:
     name: invalid.illegal.name.python
     match: \b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|with|yield)\b
 
   keyword_arguments:
-    begin: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(=)(?!=)
+    begin: \b([\p{Alpha}_][a-zA-Z_0-9]*)\s*(=)(?!=)
     beginCaptures:
       '1': {name: variable.parameter.function.keyword.python}
       '2': {name: keyword.operator.assignment.python}

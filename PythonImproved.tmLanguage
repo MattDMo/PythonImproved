@@ -70,7 +70,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>django(\.[A-Za-z_][A-Za-z0-9_]+){0,} </string>
+			<string>django(\.[\p{Alpha}_][\p{Word}_]+){0,} </string>
 			<key>name</key>
 			<string>support.other.django.module</string>
 		</dict>
@@ -90,7 +90,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>[A-Za-z_][A-Za-z0-9_]+\.get_(object|list|iterator|count|values|values_iterator|in_bulk)\b</string>
+			<string>[\p{Alpha}_][\p{Word}_]+\.get_(object|list|iterator|count|values|values_iterator|in_bulk)\b</string>
 			<key>name</key>
 			<string>support.function.django.model</string>
 		</dict>
@@ -267,7 +267,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\:)</string>
+			<string>\s*(class)\s+(?=[\p{Alpha}_][a-zA-Z_0-9]*\s*\:)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -300,7 +300,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\()</string>
+			<string>\s*(class)\s+(?=[\p{Alpha}_][a-zA-Z_0-9]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -335,11 +335,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Word}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Word}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -394,7 +394,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9])</string>
+			<string>\s*(class)\s+(?=[\p{Alpha}_][a-zA-Z_0-9])</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -424,11 +424,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Word}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Word}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -441,7 +441,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*\s*\()</string>
+			<string>\s*(def)\s+(?=[\p{Alpha}_][\p{Word}_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -466,11 +466,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Word}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Word}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -528,7 +528,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b(?:(self|cls)|([a-zA-Z_][a-zA-Z_0-9]*))\s*(?:(,)|(?=[\n\)]))</string>
+							<string>\b(?:(self|cls)|([\p{Alpha}_][a-zA-Z_0-9]*))\s*(?:(,)|(?=[\n\)]))</string>
 						</dict>
 					</array>
 				</dict>
@@ -562,7 +562,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+			<string>\s*(def)\s+(?=[\p{Alpha}_][\p{Word}_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -592,11 +592,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Word}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Word}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -670,7 +670,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(?:(,)|(?=[\n\)\:]))</string>
+							<string>\b([\p{Alpha}_][a-zA-Z_0-9]*)\s*(?:(,)|(?=[\n\)\:]))</string>
 						</dict>
 					</array>
 				</dict>
@@ -678,7 +678,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z_0-9]*)*\s*\()</string>
+			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Word}_]*(?:\s*\.\s*[\p{Alpha}_][A-Za-z_0-9]*)*\s*\()</string>
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
 			<key>contentName</key>
@@ -749,7 +749,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*)</string>
+			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Word}_]*(?:\s*\.\s*[\p{Alpha}_][a-zA-Z_0-9]*)*)</string>
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
@@ -824,7 +824,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=\b[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
+			<string>(?=\b[\p{Alpha}_][\p{Word}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Word}_]*)*\s*\()</string>
 			<key>end</key>
 			<string>(\))</string>
 			<key>endCaptures</key>
@@ -891,7 +891,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)</string>
+			<string>(?=[\p{Alpha}_][\p{Word}_]*(?:\s*\.\s*[\p{Alpha}_][a-zA-Z_0-9]*)*\s*\[)</string>
 			<key>end</key>
 			<string>(\])</string>
 			<key>endCaptures</key>
@@ -1239,14 +1239,14 @@
 			<key>comment</key>
 			<string>Match identifiers in ALL_CAPS as constants.</string>
 			<key>match</key>
-			<string>\b([A-Z_][A-Z0-9_]*)\b(?![\.|\(])</string>
+			<string>\b([\p{Upper}_][A-Z0-9_]*)\b(?![\.|\(])</string>
 			<key>name</key>
 			<string>constant.other.allcaps.python</string>
 		</dict>
 		<key>annotated_arguments</key>
 		<dict>
 			<key>begin</key>
-			<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)|(?=\()</string>
+			<string>\b([\p{Alpha}_][a-zA-Z_0-9]*)\s*(:)|(?=\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1314,7 +1314,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)</string>
+					<string>\b([\p{Alpha}_][a-zA-Z_0-9]*)\s*(:)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1348,7 +1348,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>\b([a-zA-Z_][a-zA-Z_0-9]*)</string>
+					<string>\b([\p{Alpha}_][a-zA-Z_0-9]*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1478,7 +1478,7 @@
 		<key>constant_placeholder</key>
 		<dict>
 			<key>match</key>
-			<string>(?i:%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])</string>
+			<string>(?i:%(\([\p{Upper}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])</string>
 			<key>name</key>
 			<string>constant.other.placeholder.python</string>
 		</dict>
@@ -1522,9 +1522,9 @@
 		<dict>
 			<key>begin</key>
 			<string>(?x)
-(?=(?:\.(?!\s+import)\s*)?  # exlcude "from . import"
-   [A-Za-z_][A-Za-z0-9_]*
-   (?:\s*\.\s*[A-Za-z_][A-Za-z0-9_]*)*
+(?=(?:\.(?!\s+import)\s*)?
+   [\p{Alpha}_][\p{Word}_]*
+   (?:\s*\.\s*[\p{Alpha}_][\p{Word}_]*)*
 )
 </string>
 			<key>contentName</key>
@@ -1549,7 +1549,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Word}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1576,9 +1576,9 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_])</string>
+					<string>(?=[\p{Alpha}_])</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Word}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1752,14 +1752,14 @@
 		<key>generic_names</key>
 		<dict>
 			<key>match</key>
-			<string>[A-Za-z_][A-Za-z0-9_]*</string>
+			<string>[\p{Alpha}_][\p{Word}_]*</string>
 			<key>name</key>
 			<string>meta.generic-name.python</string>
 		</dict>
 		<key>generic_object_names</key>
 		<dict>
 			<key>match</key>
-			<string>(\.\b([A-Za-z_][A-Za-z0-9_]*)\b(?!\(|\[)|\b([A-Za-z_][A-Za-z0-9_]*)\b\.)</string>
+			<string>(\.\b([\p{Alpha}_][\p{Word}_]*)\b(?!\(|\[)|\b([\p{Alpha}_][\p{Word}_]*)\b\.)</string>
 		</dict>
 		<key>illegal_names</key>
 		<dict>
@@ -1771,7 +1771,7 @@
 		<key>keyword_arguments</key>
 		<dict>
 			<key>begin</key>
-			<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(=)(?!=)</string>
+			<string>\b([\p{Alpha}_][a-zA-Z_0-9]*)\s*(=)(?!=)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
