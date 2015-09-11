@@ -620,30 +620,30 @@ repository:
       patterns:
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
-      - include: '#illegal_names'
       - include: '#generic_names'
+      - include: '#illegal_names'
     - begin: (?<!\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
       end: (?![\p{Alnum}_])
       patterns:
       - include: '#builtin_functions'
       - include: '#builtin_types'
       - include: '#errors_warnings_exceptions'
-      - include: '#illegal_names'
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#language_variables'
       - include: '#generic_names'
+      - include: '#illegal_names'
 
   entity_name_class:
     patterns:
-    - include: '#illegal_names'
     - include: '#generic_names'
+    - include: '#illegal_names'
 
   entity_name_function:
     patterns:
     - include: '#magic_function_names'
-    - include: '#illegal_names'
     - include: '#generic_names'
+    - include: '#illegal_names'
 
   errors_warnings_exceptions:
     name: support.type.exception.python
