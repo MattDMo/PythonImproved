@@ -61,7 +61,7 @@ patterns:
   - include: $self
 
 - name: meta.group.regex
-  begin: (\()((\?P<)([a-z]\w*)(>)|(\?:))?
+  begin: (\()((\?P<)([A-Za-z]\w*)(>)|(\?:))?
   beginCaptures:
     '1': {name: punctuation.definition.group.regex}
     '3': {name: punctuation.definition.group.capture.regex}
@@ -79,8 +79,23 @@ patterns:
 repository:
   character-class:
     patterns:
-    - name: constant.character.character-class.regex
-      match: \\[wWsSdDhH]|\.
+    - match: |-
+        (?x)\\
+        (
+          (w) |
+          (W) |
+          (s) |
+          (S) |
+          (d) |
+          (D)
+        )
+      captures:
+        '2': {name: constant.character.character-class.word.regex}
+        '3': {name: constant.character.character-class.non-word.regex}
+        '4': {name: constant.character.character-class.whitespace.regex}
+        '5': {name: constant.character.character-class.non-whitespace.regex}
+        '6': {name: constant.character.character-class.digit.regex}
+        '7': {name: constant.character.character-class.non-digit.regex}
     - name: constant.character.escape.backslash.regex
       match: \\.
     - name: constant.other.character-class.set.regex
