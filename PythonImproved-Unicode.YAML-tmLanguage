@@ -536,7 +536,7 @@ repository:
         - include: $self
 
   builtin_functions_name:
-  - name: support.function.builtin.python
+    name: support.function.builtin.python
     match: |
       (?x)
         (?<!\.)

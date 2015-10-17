@@ -1524,10 +1524,9 @@ let 'async def' be matched *first*.
 			</array>
 		</dict>
 		<key>builtin_functions_name</key>
-		<array>
-			<dict>
-				<key>match</key>
-				<string>(?x)
+		<dict>
+			<key>match</key>
+			<string>(?x)
   (?&lt;!\.)
   \b(
     __import__ | abs | all | any | ascii | basestring | bin | bool |
@@ -1543,10 +1542,9 @@ let 'async def' be matched *first*.
     xrange | zip)
   \b
 </string>
-				<key>name</key>
-				<string>support.function.builtin.python</string>
-			</dict>
-		</array>
+			<key>name</key>
+			<string>support.function.builtin.python</string>
+		</dict>
 		<key>builtin_types</key>
 		<dict>
 			<key>comment</key>
