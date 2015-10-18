@@ -7,6 +7,9 @@ fileTypes: [py, py3, rpy, pyw, cpy, SConstruct, Sconstruct, sconstruct, SConscri
 uuid: 11B0273F-0284-4483-B17B-4B8D0A9294CC
 
 patterns:
+- name: support.type.ellipsis.python
+  match: (\.{3})
+
 - name: support.ipython.in.python
   match: (^In \[(\d+)\]\:)
   captures:
@@ -288,11 +291,11 @@ patterns:
   - include: '#keyword_arguments'
   - include: $self
 
+- include: '#builtin_types'
+
 - include: '#builtin_functions_name'
 
 - include: '#builtin_functions_call'
-
-- include: '#builtin_types'
 
 - include: '#errors_warnings_exceptions'
 
@@ -512,7 +515,7 @@ repository:
             xrange | zip)
           \b\s*(?=(\())
       beginCaptures:
-        '1': {name: support.function.builtin.python}
+        '1': {name: support.function.builtin.call.python}
         '2': {name: punctuation.definition.arguments.begin.python}
       end: (\))
       endCaptures:
@@ -534,7 +537,7 @@ repository:
         - include: $self
 
   builtin_functions_name:
-    name: support.function.builtin.python
+    name: support.function.builtin.name.python
     match: |-
       (?x)
         (?<!\.)
@@ -546,11 +549,11 @@ repository:
           globals | hasattr | hash | help | hex | id | input | int |
           isinstance | issubclass | iter | len | list | locals | long | map |
           max | memoryview | min | next | object | oct | open | ord | pow |
-          print | property | range | raw_input | reduce | reload | repr |
+          property | range | raw_input | reduce | reload | repr |
           reversed | round | set | setattr | slice | sorted | staticmethod |
           str | sum | super | tuple | type | unichr | unicode | vars |
           xrange | zip)
-        \b
+        \b\s*(?!(\())
 
   builtin_types:
     name: support.type.python
@@ -560,10 +563,10 @@ repository:
       (?x)
         (?<!\.)
         \b(
-          \.{3} | bool | buffer | bytearray | bytes | complex | dict | float |
+          bool | buffer | bytearray | bytes | complex | dict | float |
           frozenset | int | list | long | memoryview | object | property |
           range | set | slice | str | tuple | type | unicode | xrange)
-        \b
+        \b\s*(?!(\())
 
   character-class:
     patterns:
@@ -638,9 +641,9 @@ repository:
     - begin: (?<!\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
       end: (?![\p{Alnum}_])
       patterns:
+      - include: '#builtin_types'
       - include: '#builtin_functions_name'
       - include: '#builtin_functions_call'
-      - include: '#builtin_types'
       - include: '#errors_warnings_exceptions'
       - include: '#magic_function_names'
       - include: '#magic_function_calls'
@@ -796,9 +799,9 @@ repository:
           setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
           unicode | xor)
         __)
-      \b
+      \b\s*(?!(\())
     captures:
-      '2': {name: support.function.magic.python}
+      '2': {name: support.function.magic.name.python}
 
   magic_function_calls:
     patterns:
@@ -827,7 +830,7 @@ repository:
             __)
           \s*(?=(\())
       beginCaptures:
-        '2': {name: support.function.magic.python}
+        '2': {name: support.function.magic.call.python}
         '4': {name: punctuation.definition.arguments.begin.python}
       end: (\))
       endCaptures:
