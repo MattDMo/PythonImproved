@@ -29,7 +29,7 @@
 	<key>keyEquivalent</key>
 	<string>^~P</string>
 	<key>name</key>
-	<string>PythonImproved-Unicode</string>
+	<string>PythonImproved</string>
 	<key>patterns</key>
 	<array>
 		<dict>
