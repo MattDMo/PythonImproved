@@ -33,6 +33,12 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>match</key>
+			<string>(\.{3})</string>
+			<key>name</key>
+			<string>support.type.ellipsis.python</string>
+		</dict>
+		<dict>
 			<key>captures</key>
 			<dict>
 				<key>2</key>
@@ -809,15 +815,15 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#builtin_types</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#builtin_functions_name</string>
 		</dict>
 		<dict>
 			<key>include</key>
 			<string>#builtin_functions_call</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#builtin_types</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -1454,7 +1460,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>support.function.builtin.python</string>
+							<string>support.function.builtin.call.python</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -1541,13 +1547,13 @@
     globals | hasattr | hash | help | hex | id | input | int |
     isinstance | issubclass | iter | len | list | locals | long | map |
     max | memoryview | min | next | object | oct | open | ord | pow |
-    print | property | range | raw_input | reduce | reload | repr |
+    property | range | raw_input | reduce | reload | repr |
     reversed | round | set | setattr | slice | sorted | staticmethod |
     str | sum | super | tuple | type | unichr | unicode | vars |
     xrange | zip)
-  \b</string>
+  \b\s*(?!(\())</string>
 			<key>name</key>
-			<string>support.function.builtin.python</string>
+			<string>support.function.builtin.name.python</string>
 		</dict>
 		<key>builtin_types</key>
 		<dict>
@@ -1557,10 +1563,10 @@
 			<string>(?x)
   (?&lt;!\.)
   \b(
-    \.{3} | bool | buffer | bytearray | bytes | complex | dict | float |
+    bool | buffer | bytearray | bytes | complex | dict | float |
     frozenset | int | list | long | memoryview | object | property |
     range | set | slice | str | tuple | type | unicode | xrange)
-  \b</string>
+  \b\s*(?!(\())</string>
 			<key>name</key>
 			<string>support.type.python</string>
 		</dict>
@@ -1777,15 +1783,15 @@
 					<array>
 						<dict>
 							<key>include</key>
+							<string>#builtin_types</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#builtin_functions_name</string>
 						</dict>
 						<dict>
 							<key>include</key>
 							<string>#builtin_functions_call</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#builtin_types</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2111,7 +2117,7 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>support.function.magic.python</string>
+							<string>support.function.magic.call.python</string>
 						</dict>
 						<key>4</key>
 						<dict>
@@ -2192,7 +2198,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>support.function.magic.python</string>
+					<string>support.function.magic.name.python</string>
 				</dict>
 			</dict>
 			<key>comment</key>
@@ -2219,7 +2225,7 @@
     setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
     unicode | xor)
   __)
-\b</string>
+\b\s*(?!(\())</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>
