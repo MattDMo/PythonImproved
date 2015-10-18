@@ -1,7 +1,7 @@
 # [PackageDev] target_format: plist, ext: tmLanguage
 comment: To make PythonImproved your default Python syntax, open a .py file and select
   View|Syntax|Open all with current extension as...|PythonImproved.
-name: PythonImproved-Unicode
+name: PythonImproved
 scopeName: source.python
 fileTypes: [py, py3, rpy, pyw, cpy, SConstruct, Sconstruct, sconstruct, SConscript]
 uuid: 11B0273F-0284-4483-B17B-4B8D0A9294CC
