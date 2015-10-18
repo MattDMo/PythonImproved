@@ -540,7 +540,7 @@ repository:
     name: support.function.builtin.name.python
     match: |-
       (?x)
-        (?<!\.)
+        (?<!\.|@)
         \b(
           __import__ | abs | all | any | ascii | basestring | bin | bool |
           bytearray | bytes | callable | chr | classmethod | cmp | compile |
