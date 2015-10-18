@@ -180,7 +180,7 @@
 		</dict>
 		<dict>
 			<key>comment</key>
-			<string>keywords that don't fit into other groups.</string>
+			<string>keywords that do not fit into other groups.</string>
 			<key>match</key>
 			<string>\b(assert|del)\b</string>
 			<key>name</key>
@@ -578,19 +578,13 @@
 		</dict>
 		<dict>
 			<key>comment</key>
-			<string>Keywords that delimit flow blocks or alter flow from within a
-block.
-
-This block should be matched *after* meta.function.python to
-let 'async def' be matched *first*.
-</string>
+			<string>Keywords that delimit flow blocks or alter flow from within a block. This block should be matched *after* meta.function.python to let `async def` be matched *first*.</string>
 			<key>match</key>
 			<string>(?x) \b(
   async | await | break | continue | elif | else | except | finally |
   for | if | pass | raise | return | try | while | with |
   (yield(?:\s+from)?)
-)\b
-</string>
+)\b</string>
 			<key>name</key>
 			<string>keyword.control.flow.python</string>
 		</dict>
@@ -836,6 +830,10 @@ let 'async def' be matched *first*.
 		<dict>
 			<key>include</key>
 			<string>#magic_function_names</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#magic_function_calls</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -1450,8 +1448,7 @@ let 'async def' be matched *first*.
     reversed | round | set | setattr | slice | sorted | staticmethod |
     str | sum | super | tuple | type | unichr | unicode | vars |
     xrange | zip)
-  \b\s*(?=\()
-</string>
+  \b\s*(?=(\())</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1507,6 +1504,14 @@ let 'async def' be matched *first*.
 							<string>meta.function-call.arguments.python</string>
 							<key>end</key>
 							<string>(?=\))</string>
+							<key>endCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.arguments.end.python</string>
+								</dict>
+							</dict>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -1524,10 +1529,9 @@ let 'async def' be matched *first*.
 			</array>
 		</dict>
 		<key>builtin_functions_name</key>
-		<array>
-			<dict>
-				<key>match</key>
-				<string>(?x)
+		<dict>
+			<key>match</key>
+			<string>(?x)
   (?&lt;!\.)
   \b(
     __import__ | abs | all | any | ascii | basestring | bin | bool |
@@ -1541,12 +1545,10 @@ let 'async def' be matched *first*.
     reversed | round | set | setattr | slice | sorted | staticmethod |
     str | sum | super | tuple | type | unichr | unicode | vars |
     xrange | zip)
-  \b
-</string>
-				<key>name</key>
-				<string>support.function.builtin.python</string>
-			</dict>
-		</array>
+  \b</string>
+			<key>name</key>
+			<string>support.function.builtin.python</string>
+		</dict>
 		<key>builtin_types</key>
 		<dict>
 			<key>comment</key>
@@ -1558,8 +1560,7 @@ let 'async def' be matched *first*.
     \.{3} | bool | buffer | bytearray | bytes | complex | dict | float |
     frozenset | int | list | long | memoryview | object | property |
     range | set | slice | str | tuple | type | unicode | xrange)
-  \b
-</string>
+  \b</string>
 			<key>name</key>
 			<string>support.type.python</string>
 		</dict>
@@ -1725,8 +1726,7 @@ let 'async def' be matched *first*.
   (?:\.(?!\s+import)\s*)?
   [\p{Alpha}_][\p{Alnum}_]*
   (?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*
-)
-</string>
+)</string>
 			<key>end</key>
 			<string>(?![\p{Alnum}_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
 			<key>patterns</key>
@@ -1746,6 +1746,10 @@ let 'async def' be matched *first*.
 					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
+						<dict>
+							<key>include</key>
+							<string>#builtin_functions_name</string>
+						</dict>
 						<dict>
 							<key>include</key>
 							<string>#magic_function_names</string>
@@ -1790,6 +1794,10 @@ let 'async def' be matched *first*.
 						<dict>
 							<key>include</key>
 							<string>#magic_function_names</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#magic_function_calls</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -1875,8 +1883,7 @@ let 'async def' be matched *first*.
     ([\p{Alpha}_][\p{Alnum}_]*)
     ?Exception
   )
-\b
-</string>
+\b</string>
 			<key>name</key>
 			<string>support.type.exception.python</string>
 		</dict>
@@ -1922,7 +1929,7 @@ let 'async def' be matched *first*.
 				<key>4</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.backlash.python</string>
+					<string>constant.character.escape.backslash.python</string>
 				</dict>
 				<key>5</key>
 				<dict>
@@ -1964,8 +1971,7 @@ let 'async def' be matched *first*.
   (\\n) |
   (\\r) |
   (\\t) |
-  (\\v)
-</string>
+  (\\v)</string>
 		</dict>
 		<key>escaped_unicode_char</key>
 		<dict>
@@ -1974,12 +1980,12 @@ let 'async def' be matched *first*.
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.unicode.16-bit-hex.python</string>
+					<string>constant.character.escape.unicode.32-bit-hex.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.unicode.32-bit-hex.python</string>
+					<string>constant.character.escape.unicode.16-bit-hex.python</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -2013,8 +2019,7 @@ let 'async def' be matched *first*.
   del | elif | else | except | exec | finally | for | from | global | if |
   import | in | is | lambda | nonlocal | not | or | pass | print | raise |
   return | try | while | with | yield)
-\b
-</string>
+\b</string>
 			<key>name</key>
 			<string>invalid.illegal.name.python</string>
 		</dict>
@@ -2073,48 +2078,15 @@ let 'async def' be matched *first*.
 			<key>match</key>
 			<string>(\\)(.*)$\n?</string>
 		</dict>
-		<key>magic_function_names</key>
+		<key>magic_function_calls</key>
 		<dict>
-			<key>captures</key>
-			<dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.magic.python</string>
-				</dict>
-			</dict>
-			<key>comment</key>
-			<string>these methods have magic interpretation by python and are generally called indirectly through syntactic constructs. Names are from https://docs.python.org/X/reference/datamodel.html where X is 2.7 and 3.5 See also http://www.rafekettler.com/magicmethods.html</string>
-			<key>match</key>
-			<string>(?x)
-(\.)?
-\b (
-  __(?:
-    abs | add | aenter | aexit | aiter | and | anext | await | bool |
-    bytes | call | ceil | cmp | coerce | complex | contains | copy |
-    deepcopy | del | delattr | delete | delitem | delslice | dir | div |
-    divmod | enter | eq | exit | float | floor | floordiv | format | ge |
-    get | getattr | getattribute | getinitargs | getitem | getnewargs |
-    getnewargs_ex | getslice | getstate | gt | hash | hex | iadd | iand |
-    idiv | idivmod | ifloordiv | ilshift | imatmul | imod | imul | index |
-    init | instancecheck | int | invert | iop | ior | ipow | irshift |
-    isub | iter | itruediv | ixor | le | len | length_hint | long |
-    lshift | lt | matmul | missing | mod | mul | ne | neg | new | next |
-    nonzero | oct | op | or | pos | pow | prepare | radd | rand | rcmp |
-    rdiv | rdivmod | reduce | reduce_ex | repr | reversed | rfloordiv |
-    rlshift | rmatmul | rmod | rmul | rop | ror | round | rpow | rrshift |
-    rshift | rsub | rtruediv | rxor | set | setattr | setitem | setslice |
-    setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
-    unicode | xor)
-  __)
-\b
-</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
 					<string>(?x)
-  (?&lt;!\.)\b(
+  (\.)?
+  \b(
     __(?:
       abs | add | aenter | aexit | aiter | and | anext | await | bool |
       bytes | call | ceil | cmp | coerce | complex | contains | copy |
@@ -2133,16 +2105,15 @@ let 'async def' be matched *first*.
       setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
       unicode | xor)
     __)
-  \s*(?=\()
-</string>
+  \s*(?=(\())</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>2</key>
 						<dict>
 							<key>name</key>
 							<string>support.function.magic.python</string>
 						</dict>
-						<key>2</key>
+						<key>4</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.arguments.begin.python</string>
@@ -2190,6 +2161,14 @@ let 'async def' be matched *first*.
 							<string>meta.function-call.arguments.python</string>
 							<key>end</key>
 							<string>(?=\))</string>
+							<key>endCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.arguments.end.python</string>
+								</dict>
+							</dict>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -2205,6 +2184,42 @@ let 'async def' be matched *first*.
 					</array>
 				</dict>
 			</array>
+		</dict>
+		<key>magic_function_names</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.magic.python</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>these methods have magic interpretation by python and are generally called indirectly through syntactic constructs. Names are from https://docs.python.org/X/reference/datamodel.html where X is 2.7 and 3.5 See also http://www.rafekettler.com/magicmethods.html</string>
+			<key>match</key>
+			<string>(?x)
+(\.)?
+\b (
+  __(?:
+    abs | add | aenter | aexit | aiter | and | anext | await | bool |
+    bytes | call | ceil | cmp | coerce | complex | contains | copy |
+    deepcopy | del | delattr | delete | delitem | delslice | dir | div |
+    divmod | enter | eq | exit | float | floor | floordiv | format | ge |
+    get | getattr | getattribute | getinitargs | getitem | getnewargs |
+    getnewargs_ex | getslice | getstate | gt | hash | hex | iadd | iand |
+    idiv | idivmod | ifloordiv | ilshift | imatmul | imod | imul | index |
+    init | instancecheck | int | invert | iop | ior | ipow | irshift |
+    isub | iter | itruediv | ixor | le | len | length_hint | long |
+    lshift | lt | matmul | missing | mod | mul | ne | neg | new | next |
+    nonzero | oct | op | or | pos | pow | prepare | radd | rand | rcmp |
+    rdiv | rdivmod | reduce | reduce_ex | repr | reversed | rfloordiv |
+    rlshift | rmatmul | rmod | rmul | rop | ror | round | rpow | rrshift |
+    rshift | rsub | rtruediv | rxor | set | setattr | setitem | setslice |
+    setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
+    unicode | xor)
+  __)
+\b</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>
@@ -2227,16 +2242,17 @@ let 'async def' be matched *first*.
     defaults | dict | doc | file | func | globals | kwdefaults |
     members | metaclass | methods | module | mro | name | qualname |
     self | slots | subclasses | version | weakref)
-  __) \b
-</string>
+  __) \b</string>
 		</dict>
 		<key>regular_expressions</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>comment</key>
+					<string>source.regexp.python is the default, this is the PI version</string>
 					<key>include</key>
-					<string>source.regexp.python</string>
+					<string>source.regex.python</string>
 				</dict>
 			</array>
 		</dict>

@@ -5,7 +5,6 @@ name: PythonImproved-Unicode
 scopeName: source.python
 fileTypes: [py, py3, rpy, pyw, cpy, SConstruct, Sconstruct, sconstruct, SConscript]
 uuid: 11B0273F-0284-4483-B17B-4B8D0A9294CC
-# uuid: A4AB2A88-CBF6-4515-84B7-396046E21286
 
 patterns:
 - name: support.ipython.in.python
@@ -78,7 +77,7 @@ patterns:
   name: keyword.operator.logical.python
   match: \b(and|in|is|not|or)\b
 
-- comment: keywords that don't fit into other groups.
+- comment: keywords that do not fit into other groups.
   name: keyword.other.python
   match: \b(assert|del)\b
 
@@ -209,21 +208,16 @@ patterns:
   captures:
     '1': {name: storage.type.function.python}
 
--
-  comment: |
-      Keywords that delimit flow blocks or alter flow from within a
-      block.
-
-      This block should be matched *after* meta.function.python to
-      let 'async def' be matched *first*.
-
+- comment: 'Keywords that delimit flow blocks or alter flow from within a
+    block. This block should be matched *after* meta.function.python to
+    let `async def` be matched *first*.'
   name: keyword.control.flow.python
-  match: |
-        (?x) \b(
-          async | await | break | continue | elif | else | except | finally |
-          for | if | pass | raise | return | try | while | with |
-          (yield(?:\s+from)?)
-        )\b
+  match: |-
+    (?x) \b(
+      async | await | break | continue | elif | else | except | finally |
+      for | if | pass | raise | return | try | while | with |
+      (yield(?:\s+from)?)
+    )\b
 
 - name: meta.function.inline.python
   begin: (lambda)(?=\s+|:)
@@ -305,6 +299,8 @@ patterns:
 - include: '#docstrings'
 
 - include: '#magic_function_names'
+
+- include: '#magic_function_calls'
 
 - include: '#magic_variable_names'
 
@@ -500,7 +496,7 @@ repository:
   builtin_functions_call:
     patterns:
     - name: meta.function-call.python
-      begin: |
+      begin: |-
         (?x)
           (?<!\.)\b(
             __import__ | abs | all | any | ascii | basestring | bin | bool |
@@ -514,7 +510,7 @@ repository:
             reversed | round | set | setattr | slice | sorted | staticmethod |
             str | sum | super | tuple | type | unichr | unicode | vars |
             xrange | zip)
-          \b\s*(?=\()
+          \b\s*(?=(\())
       beginCaptures:
         '1': {name: support.function.builtin.python}
         '2': {name: punctuation.definition.arguments.begin.python}
@@ -526,18 +522,20 @@ repository:
         end: (?=\s*\()
         patterns:
         - include: '#dotted_name'
-      - begin: (\()
+      - contentName: meta.function-call.arguments.python
+        begin: (\()
         beginCaptures:
           '1': {name: punctuation.definition.arguments.begin.python}
-        contentName: meta.function-call.arguments.python
         end: (?=\))
+        endCaptures:
+          '0': {name: punctuation.definition.arguments.end.python}
         patterns:
         - include: '#keyword_arguments'
         - include: $self
 
   builtin_functions_name:
-  - name: support.function.builtin.python
-    match: |
+    name: support.function.builtin.python
+    match: |-
       (?x)
         (?<!\.)
         \b(
@@ -556,9 +554,9 @@ repository:
 
   builtin_types:
     name: support.type.python
-    comment: These are from https://docs.python.org/X/library/functions.html
-      where X is 2.7 or 3.5 and the item is a class. Also stdtypes.html
-    match: |
+    comment: 'These are from https://docs.python.org/X/library/functions.html
+      where X is 2.7 or 3.5 and the item is a class. Also stdtypes.html'
+    match: |-
       (?x)
         (?<!\.)
         \b(
@@ -619,20 +617,20 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: |
+    begin: |-
       (?x)(?=
         (?:\.(?!\s+import)\s*)?
         [\p{Alpha}_][\p{Alnum}_]*
         (?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*
       )
     end: (?![\p{Alnum}_\.\s])|(?=(?<!\.)\s+[^.])|$
-    # contentName: meta.dotted-name.python
     patterns:
     - begin: (\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
       beginCaptures:
         '1': {name: meta.dot.python}
       end: (?![\p{Alnum}_])
       patterns:
+      - include: '#builtin_functions_name'
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#generic_names'
@@ -645,6 +643,7 @@ repository:
       - include: '#builtin_types'
       - include: '#errors_warnings_exceptions'
       - include: '#magic_function_names'
+      - include: '#magic_function_calls'
       - include: '#magic_variable_names'
       - include: '#language_variables'
       - include: '#generic_names'
@@ -664,7 +663,7 @@ repository:
 
   errors_warnings_exceptions:
     name: support.type.exception.python
-    match: |
+    match: |-
       (?x)
       \b(
         (
@@ -693,7 +692,7 @@ repository:
       \b
 
   escaped_char:
-    match: |
+    match: |-
       (?x)
         (\\x[\h]{2}) |
         (\\[0-7]{3}) |
@@ -712,7 +711,7 @@ repository:
       '1': {name: constant.character.escape.hex.python}
       '2': {name: constant.character.escape.octal.python}
       '3': {name: constant.character.escape.newline.python}
-      '4': {name: constant.character.escape.backlash.python}
+      '4': {name: constant.character.escape.backslash.python}
       '5': {name: constant.character.escape.double-quote.python}
       '6': {name: constant.character.escape.single-quote.python}
       '7': {name: constant.character.escape.bell.python}
@@ -726,8 +725,8 @@ repository:
   escaped_unicode_char:
     match: (\\U[\h]{8})|(\\u[\h]{4})|(\\N\{[a-zA-Z0-9\, ]+\})
     captures:
-      '1': {name: constant.character.escape.unicode.16-bit-hex.python}
-      '2': {name: constant.character.escape.unicode.32-bit-hex.python}
+      '1': {name: constant.character.escape.unicode.32-bit-hex.python}
+      '2': {name: constant.character.escape.unicode.16-bit-hex.python}
       '3': {name: constant.character.escape.unicode.name.python}
 
   generic_names:
@@ -738,10 +737,10 @@ repository:
     match: (\.\b([\p{Alpha}_][\p{Alnum}_]*)\b(?!\(|\[)|\b([\p{Alpha}_][\p{Alnum}_]*)\b\.)
 
   illegal_names:
-    comment: from Lib/keyword.py, in kwlist. `async` and `await` not keywords
-      until Python 3.7 (according to PEP-0492)
+    comment: 'from Lib/keyword.py, in kwlist. `async` and `await` not keywords
+      until Python 3.7 (according to PEP-0492)'
     name: invalid.illegal.name.python
-    match: |
+    match: |-
       (?x)
       \b (
         False | None | True | and | as | assert | break | class | continue | def |
@@ -755,7 +754,6 @@ repository:
     beginCaptures:
       '1': {name: variable.parameter.function.keyword.python}
       '2': {name: keyword.operator.assignment.python}
-    # Change #2 to something else?
     end: \s*(?:(,)|(?=$\n?|[\)\:]))
     endCaptures:
       '1': {name: punctuation.separator.parameters.python}
@@ -772,11 +770,11 @@ repository:
       '1': {name: punctuation.separator.continuation.line.python}
 
   magic_function_names:
-    comment: these methods have magic interpretation by python and are generally
+    comment: 'these methods have magic interpretation by python and are generally
       called indirectly through syntactic constructs. Names are from
       https://docs.python.org/X/reference/datamodel.html where X is 2.7 and 3.5
-      See also http://www.rafekettler.com/magicmethods.html
-    match: |
+      See also http://www.rafekettler.com/magicmethods.html'
+    match: |-
       (?x)
       (\.)?
       \b (
@@ -801,11 +799,14 @@ repository:
       \b
     captures:
       '2': {name: support.function.magic.python}
+
+  magic_function_calls:
     patterns:
     - name: meta.function-call.python
-      begin: |
+      begin: |-
         (?x)
-          (?<!\.)\b(
+          (\.)?
+          \b(
             __(?:
               abs | add | aenter | aexit | aiter | and | anext | await | bool |
               bytes | call | ceil | cmp | coerce | complex | contains | copy |
@@ -824,10 +825,10 @@ repository:
               setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
               unicode | xor)
             __)
-          \s*(?=\()
+          \s*(?=(\())
       beginCaptures:
-        '1': {name: support.function.magic.python}
-        '2': {name: punctuation.definition.arguments.begin.python}
+        '2': {name: support.function.magic.python}
+        '4': {name: punctuation.definition.arguments.begin.python}
       end: (\))
       endCaptures:
         '1': {name: punctuation.definition.arguments.end.python}
@@ -836,18 +837,20 @@ repository:
         end: (?=\s*\()
         patterns:
         - include: '#dotted_name'
-      - begin: (\()
+      - contentName: meta.function-call.arguments.python
+        begin: (\()
         beginCaptures:
           '1': {name: punctuation.definition.arguments.begin.python}
-        contentName: meta.function-call.arguments.python
         end: (?=\))
+        endCaptures:
+          '0': {name: punctuation.definition.arguments.end.python}
         patterns:
         - include: '#keyword_arguments'
         - include: $self
 
   magic_variable_names:
     comment: magic attributes which a class/module may have.
-    match: |
+    match: |-
       (?x)
       (\.)?
       \b(
@@ -862,7 +865,8 @@ repository:
 
   regular_expressions:
     patterns:
-    - include: source.regexp.python
+    - include: source.regex.python
+      comment: source.regexp.python is the default, this is the PI version
 
   string_quoted_double:
     patterns:
@@ -1231,7 +1235,6 @@ repository:
     - include: '#string_quoted_single'
 
 author: Matt Morrison @MattDMo mattdmo@pigimal.com
-# bundleUUID: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
 bundleUUID: EB590797-FBEE-4BEA-A140-8339AFD2CE1B
 firstLineMatch: ^#!/.*\bpython[0-9.-]*\b
 foldingStartMarker: ^\s*(((?:async\s+)?def)|class)\s+([.\p{Alnum}_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
