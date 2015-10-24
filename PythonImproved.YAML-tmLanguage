@@ -868,8 +868,86 @@ repository:
 
   regular_expressions:
     patterns:
-    - include: source.regex.python
-      comment: source.regexp.python is the default, this is the PI version
+    - include: source.regexp.python.improved
+
+  string_formatting:
+    comment: Attempt from @sprt to add support for new-style string formatting.
+    match: |-
+      (?x)
+      (?<![^\{]\{)
+      \{
+      (?<fieldname>
+        (
+          (?<argname>
+            (
+              (?<identifier>([\p{Alpha}_][\p{Alnum}_]*)) |
+              (?<integer>
+                ([1-9]\d* | 0) |
+                (
+                  0
+                  (
+                    (?i:
+                      ([o]?[0-7]+) |
+                      ([x][0-9a-f]+) |
+                      ([b][01]+)
+                    )
+                  )
+                )
+              )
+            )
+          )?
+        )
+        (
+          (?<attributename>
+            (\.\g<identifier>)
+          ) |
+          \[
+          (
+            (?<elementindex>
+              (
+                (\g<integer>) |
+                (?<indexstring>[^\]\}\{]+)
+              )
+            )
+          )
+          \]
+        )*
+      )?
+      (
+        ((?<conversion>(\![rsa])))
+      )?
+      (
+        (?<formatspec>
+          (
+            \:
+            (
+              (?<fill>.)?
+              (?<align>([<>=\^]))
+            )?
+            (?<sign>([\ +-]))?
+            \#?0?
+            (?<width>
+              (\g<integer>)
+            )?
+            ,?
+            (?<precision>
+              \.
+              (\g<integer>)
+            )?
+            (?<type>([bcdEeFfGgnosXx%]))?
+          )?
+        )
+      )?
+      \}
+      (?!\}[^\}])
+    captures:
+      '6': {name: identifier}
+      '8': {name: constant.numeric.integer.decimal.python}
+      '11': {name: constant.numeric.integer.octal.python}
+      '12': {name: constant.numeric.integer.hexadecimal.python}
+      '13': {name: constant.numeric.integer.binary.python}
+      '14': {name: attribute.name}
+      '16': {name: attribute.identifier}
 
   string_quoted_double:
     patterns:
