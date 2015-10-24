@@ -1538,7 +1538,7 @@
 		<dict>
 			<key>match</key>
 			<string>(?x)
-  (?&lt;!\.)
+  (?&lt;!\.|@)
   \b(
     __import__ | abs | all | any | ascii | basestring | bin | bool |
     bytearray | bytes | callable | chr | classmethod | cmp | compile |
@@ -2255,12 +2255,121 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>comment</key>
-					<string>source.regexp.python is the default, this is the PI version</string>
 					<key>include</key>
-					<string>source.regex.python</string>
+					<string>source.regexp.python.improved</string>
 				</dict>
 			</array>
+		</dict>
+		<key>string_formatting</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>11</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.integer.octal.python</string>
+				</dict>
+				<key>12</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.integer.hexadecimal.python</string>
+				</dict>
+				<key>13</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.integer.binary.python</string>
+				</dict>
+				<key>14</key>
+				<dict>
+					<key>name</key>
+					<string>attribute.name</string>
+				</dict>
+				<key>16</key>
+				<dict>
+					<key>name</key>
+					<string>attribute.identifier</string>
+				</dict>
+				<key>6</key>
+				<dict>
+					<key>name</key>
+					<string>identifier</string>
+				</dict>
+				<key>8</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.integer.decimal.python</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Attempt from @sprt to add support for new-style string formatting.</string>
+			<key>match</key>
+			<string>(?x)
+(?&lt;![^\{]\{)
+\{
+(?&lt;fieldname&gt;
+  (
+    (?&lt;argname&gt;
+      (
+        (?&lt;identifier&gt;([\p{Alpha}_][\p{Alnum}_]*)) |
+        (?&lt;integer&gt;
+          ([1-9]\d* | 0) |
+          (
+            0
+            (
+              (?i:
+                ([o]?[0-7]+) |
+                ([x][0-9a-f]+) |
+                ([b][01]+)
+              )
+            )
+          )
+        )
+      )
+    )?
+  )
+  (
+    (?&lt;attributename&gt;
+      (\.\g&lt;identifier&gt;)
+    ) |
+    \[
+    (
+      (?&lt;elementindex&gt;
+        (
+          (\g&lt;integer&gt;) |
+          (?&lt;indexstring&gt;[^\]\}\{]+)
+        )
+      )
+    )
+    \]
+  )*
+)?
+(
+  ((?&lt;conversion&gt;(\![rsa])))
+)?
+(
+  (?&lt;formatspec&gt;
+    (
+      \:
+      (
+        (?&lt;fill&gt;.)?
+        (?&lt;align&gt;([&lt;&gt;=\^]))
+      )?
+      (?&lt;sign&gt;([\ +-]))?
+      \#?0?
+      (?&lt;width&gt;
+        (\g&lt;integer&gt;)
+      )?
+      ,?
+      (?&lt;precision&gt;
+        \.
+        (\g&lt;integer&gt;)
+      )?
+      (?&lt;type&gt;([bcdEeFfGgnosXx%]))?
+    )?
+  )
+)?
+\}
+(?!\}[^\}])</string>
 		</dict>
 		<key>string_quoted_double</key>
 		<dict>
