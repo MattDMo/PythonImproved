@@ -25,7 +25,7 @@ patterns:
 - comment: Match identifiers in ALL_CAPS as constants, except when followed by . or
     (.
   name: constant.other.allcaps.python
-  match: \b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(])
+  match: \b([\p{Upper}_][\p{Upper}\p{Nl}\p{Nd}\p{Pc}_]*)\b(?![\.\(])
 
 - name: constant.numeric.integer.long.hexadecimal.python
   match: \b(?i:(0x\h+)L)
@@ -47,11 +47,11 @@ patterns:
 
 - comment: Not quite perfect...
   name: constant.numeric.complex.python
-  match: \b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?<=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)
+  match: \b(?i:(((\d+(\.(?=[^\p{Letter}\p{Nl}_])\d*)?|(?<=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)
 
 - comment: Ummm... why do we have three of these? This is one...
   name: constant.numeric.float.python
-  match: \b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])
+  match: \b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Letter}\p{Nl}_])
 
 - comment: This is two...
   name: constant.numeric.float.python
@@ -104,7 +104,7 @@ patterns:
 
 - name: meta.class.old-style.python
   contentName: entity.name.type.class.python
-  begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\:)
+  begin: \s*(class)\s+(?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*\s*\:)
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: \s*(:)
@@ -114,7 +114,7 @@ patterns:
   - include: '#entity_name_class'
 
 - name: meta.class.python
-  begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
+  begin: \s*(class)\s+(?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*\s*\()
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: (\))\s*(?:(\:)|(.*$\n?))
@@ -124,8 +124,8 @@ patterns:
     '3': {name: invalid.illegal.missing-section-begin.python}
   patterns:
   - contentName: entity.name.type.class.python
-    begin: (?=[\p{Alpha}_][\p{Alnum}_]*)
-    end: (?![\p{Alnum}_])
+    begin: (?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
+    end: (?![[\p{Word}\p{Nl}]&&[^\p{Me}]])
     patterns:
     - include: '#entity_name_class'
   - contentName: meta.class.inheritance.python
@@ -143,7 +143,7 @@ patterns:
       - include: $self
 
 - name: meta.class.python
-  begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_])
+  begin: \s*(class)\s+(?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]])
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -158,7 +158,7 @@ patterns:
     - include: '#entity_name_function'
 
 - name: meta.function.python
-  begin: \s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
+  begin: \s*((?:async\s+)?def)\s+(?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*\s*\()
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\:)
@@ -166,7 +166,7 @@ patterns:
     '1': {name: punctuation.section.function.begin.python}
   patterns:
   - contentName: entity.name.function.python
-    begin: (?=[\p{Alpha}_][\p{Alnum}_]*)
+    begin: (?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
     end: (?![A-Za-z0-9_])
     patterns:
     - include: '#entity_name_function'
@@ -179,7 +179,7 @@ patterns:
     - include: '#annotated_arguments'
     - include: '#keyword_arguments'
     - include: '#comments'
-    - match: \b(?:(self|cls)|([\p{Alpha}_][\p{Alnum}_]*))\s*(?:(,)|(?=[\n\)]))
+    - match: \b(?:(self|cls)|([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*))\s*(?:(,)|(?=[\n\)]))
       captures:
         '1': {name: variable.parameter.function.language.python}
         '2': {name: variable.parameter.function.python}
@@ -193,7 +193,7 @@ patterns:
     - include: $self
 
 - name: meta.function.python
-  begin: \s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)
+  begin: \s*((?:async\s+)?def)\s+(?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -202,8 +202,8 @@ patterns:
     '2': {name: invalid.illegal.missing-parameters.python}
   patterns:
   - contentName: entity.name.function.python
-    begin: (?=[\p{Alpha}_][\p{Alnum}_]*)
-    end: (?![\p{Alnum}_])
+    begin: (?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
+    end: (?![[\p{Word}\p{Nl}]&&[^\p{Me}]])
     patterns:
     - include: '#entity_name_function'
 
@@ -237,20 +237,20 @@ patterns:
     end: (?=\:)
     patterns:
     - include: '#keyword_arguments'
-    - match: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(?:(,)|(?=[\n\)\:]))
+    - match: \b([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)\s*(?:(,)|(?=[\n\)\:]))
       captures:
         '1': {name: variable.parameter.function.python}
         '2': {name: punctuation.separator.parameters.python}
 
 - comment: a decorator may be a function call which returns a decorator.
   name: meta.function.decorator.python
-  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+  begin: ^\s*(?=@\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(?:\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*\s*\()
   end: (?<=\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
   - contentName: entity.name.function.decorator.python
-    begin: (?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+    begin: (?=(@)\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(?:\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*\s*\()
     beginCaptures:
       '1': {name: punctuation.definition.decorator.python}
     end: (?=\s*\()
@@ -269,10 +269,10 @@ patterns:
 
 - name: meta.function.decorator.python
   contentName: entity.name.function.decorator.python
-  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)
+  begin: ^\s*(?=@\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(?:\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*)
   end: (?=\s|$\n?|#)
   patterns:
-  - begin: (?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)
+  - begin: (?=(@)\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*)
     beginCaptures:
       '1': {name: punctuation.definition.decorator.python}
     end: (?=\s|$\n?|#)
@@ -312,7 +312,7 @@ patterns:
 - include: '#generic_object_names'
 
 - name: meta.function-call.python
-  begin: (?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=(\())
+  begin: (?:\.)?([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)\s*(?=(\())
   beginCaptures:
     '1': {name: meta.function-call.generic.python}
     '2': {name: punctuation.definition.arguments.begin.python}
@@ -320,7 +320,7 @@ patterns:
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+  - begin: (?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(?:\.[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*\s*\()
     end: (?=\s*\()
     patterns:
     - include: '#dotted_name'
@@ -344,12 +344,12 @@ patterns:
   match: (?<!\.)\b(print)(?=\s|$)
 
 - name: meta.item-access.python
-  begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)
+  begin: (?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(?:\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*\s*\[)
   end: (\])
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)
+  - begin: (?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(?:\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*\s*\[)
     end: (?=\s*\[)
     patterns:
     - include: '#dotted_name'
@@ -458,7 +458,7 @@ patterns:
 
 repository:
   annotated_arguments:
-    begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)|(?=\()
+    begin: \b([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)\s*(:)|(?=\()
     beginCaptures:
       '1': {name: variable.parameter.function.python}
       '2': {name: punctuation.separator.annotation.python}
@@ -479,7 +479,7 @@ repository:
     endCaptures:
       '1': {name: punctuation.definition.parameters-group.end.python}
     patterns:
-    - begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)
+    - begin: \b([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)\s*(:)
       beginCaptures:
         '1': {name: variable.parameter.function.python}
         '2': {name: punctuation.separator.annotation.python}
@@ -488,7 +488,7 @@ repository:
         '1': {name: punctuation.separator.parameters.python}
       patterns:
       - include: $self
-    - begin: \b([\p{Alpha}_][\p{Alnum}_]*)
+    - begin: \b([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
       beginCaptures:
         '1': {name: variable.parameter.function.python}
       end: \s*(?:(,)|(?=$\n?|\)))
@@ -521,7 +521,7 @@ repository:
       endCaptures:
         '1': {name: punctuation.definition.arguments.end.python}
       patterns:
-      - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+      - begin: (?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(?:\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*\s*\()
         end: (?=\s*\()
         patterns:
         - include: '#dotted_name'
@@ -623,23 +623,23 @@ repository:
     begin: |-
       (?x)(?=
         (?:\.(?!\s+import)\s*)?
-        [\p{Alpha}_][\p{Alnum}_]*
-        (?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*
+        [\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*
+        (?:\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*
       )
     end: (?![\p{Alnum}_\.\s])|(?=(?<!\.)\s+[^.])|$
     patterns:
-    - begin: (\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
+    - begin: (\.)(?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
       beginCaptures:
         '1': {name: meta.dot.python}
-      end: (?![\p{Alnum}_])
+      end: (?![[\p{Word}\p{Nl}]&&[^\p{Me}]])
       patterns:
       - include: '#builtin_functions_name'
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#generic_names'
       - include: '#illegal_names'
-    - begin: (?<!\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
-      end: (?![\p{Alnum}_])
+    - begin: (?<!\.)(?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
+      end: (?![[\p{Word}\p{Nl}]&&[^\p{Me}]])
       patterns:
       - include: '#builtin_types'
       - include: '#builtin_functions_name'
@@ -678,18 +678,18 @@ repository:
             Memory | Name | NotImplemented | OS | Overflow | Reference | Runtime |
             Recursion | Standard | Syntax | System | Tab | Type | UnboundLocal |
             Unicode(Encode | Decode | Translate)? | Value | VMS | Windows |
-            ZeroDivision | ([\p{Alpha}_][\p{Alnum}_]*))
+            ZeroDivision | ([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*))
           ?Error
           |
           (
             (Pending)?Deprecation | Bytes | Future | Import | Resource |
-            Runtime | Syntax | Unicode | User | [\p{Alpha}_][\p{Alnum}_]*)
+            Runtime | Syntax | Unicode | User | [\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
           ?Warning
           |
           SystemExit | Stop(Async)?Iteration | NotImplemented |
           KeyboardInterrupt | GeneratorExit
           |
-          ([\p{Alpha}_][\p{Alnum}_]*)
+          ([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)
           ?Exception
         )
       \b
@@ -734,10 +734,10 @@ repository:
 
   generic_names:
     name: meta.identifier.python
-    match: '[\p{Alpha}_][\p{Alnum}_]*'
+    match: '[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*'
 
   generic_object_names:
-    match: (\.\b([\p{Alpha}_][\p{Alnum}_]*)\b(?!\(|\[)|\b([\p{Alpha}_][\p{Alnum}_]*)\b\.)
+    match: (\.\b([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)\b(?!\(|\[)|\b([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)\b\.)
 
   illegal_names:
     comment: 'from Lib/keyword.py, in kwlist. `async` and `await` not keywords
@@ -753,7 +753,7 @@ repository:
       \b
 
   keyword_arguments:
-    begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(=)(?!=)
+    begin: \b([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)\s*(=)(?!=)
     beginCaptures:
       '1': {name: variable.parameter.function.keyword.python}
       '2': {name: keyword.operator.assignment.python}
@@ -836,7 +836,7 @@ repository:
       endCaptures:
         '1': {name: punctuation.definition.arguments.end.python}
       patterns:
-      - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+      - begin: (?=[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*(?:\s*\.\s*[\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)*\s*\()
         end: (?=\s*\()
         patterns:
         - include: '#dotted_name'
@@ -880,7 +880,7 @@ repository:
         (
           (?<argname>
             (
-              (?<identifier>([\p{Alpha}_][\p{Alnum}_]*)) |
+              (?<identifier>([\p{Letter}\p{Nl}_][[\p{Word}\p{Nl}]&&[^\p{Me}]]*)) |
               (?<integer>
                 ([1-9]\d* | 0) |
                 (
