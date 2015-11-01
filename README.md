@@ -1,6 +1,8 @@
 # Python Improved
 
-A better Python `.tmLanguage` syntax highlighting definition for [Sublime Text](http://www.sublimetext.com) and [TextMate](http://www.macromates.com). It includes support for both Python 2 and Python 3. Inspired by:
+A better Python `.tmLanguage` syntax highlighting definition for [Sublime Text](http://www.sublimetext.com) and [TextMate](http://www.macromates.com). It includes support for both Python 2 and Python 3, and unlike any other Python syntax definition now fully supports Unicode identifiers anywhere in your code! It also provides its own improved regex syntax definition for inline highlighting of raw string literals.
+
+Inspired by:
 
 - the original TextMate and Sublime Text `Python.tmLanguage` files
 - facelessuser's [Better Python](https://github.com/facelessuser/sublime-languages)
@@ -21,9 +23,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 - `support.ipython.in` and `support.ipython.out`: [IPython](http://ipython.org) `In [1]:`/`Out [1]:` fields &mdash; designed for use with [SublimeREPL](https://sublime.wbond.net/packages/SublimeREPL). The cell number can be themed with a different color using `support.ipython.cell-number`.
 - `constant.numeric.integer.(long).binary.python`: binary literals `0b00101010`, `0b00101010L`
 - `keyword.control.import.python` now contains `import`, `from`, _and_ `as`
-- `keyword.other.python` now only contains `assert` &mdash; `as`, `del`, `exec`, and `print` have been relocated
 - `support.type.exception.python` now matches any identifier that ends with `Exception` or `Error`, not just the built-in ones like `IndentationError` or `RuntimeException`, allowing for the highlighting of custom exceptions such as those included in third-party modules
-- Miscellaneous changes to `support.function.builtin.python` and `support.type.python` &mdash; a lot of personal judgement went in to deciding which word went where (for example, `list` is a built-in function, but it's also a type, so I put it in `type`), so if you have a good reason for disagreeing please tell me.
 - [Function annotation](http://www.python.org/dev/peps/pep-3107/) support for Python 3, thanks to [@facelessuser](https://github.com/facelessuser).  New scopes added: `punctuation.separator.annotation.python`, `punctuation.separator.annotation.result.python`, `punctuation.definition.parameters-group.begin.python`, and `punctuation.definition.parameters-group.end.python`.
 - You can now have comments in multi-line function definitions:
 
@@ -44,11 +44,21 @@ def myfunc(self,            # gotta have self
 
 - `constant.other.allcaps.python` captures variable names that are in all caps (`OPENING_PORT`, for example), assuming the convention that these are generally treated as constants in the code. Matches `CONSTANT`, `class.CONSTANT` and the `CONSTANT` part of `CLASS.CONSTANT`, but not `CLASS.function()`, `class.FUNCTION()`, or `FUNCTION()`.
 - Fixed the octal integers so the Python 3-style `0o123` is matched as well as the old-style `0123`
-- Built-in functions like `any()`, `dict()`, `len()`, `raw_input()`, etc. now have their arguments highlighted just like any other function. Many thanks to [@facelessuser](https://github.com/facelessuser) for the regex, and [@FichteFoll](https://github.com/FichteFoll) for valuable discussion. For those working with Python 2, `print` is still a standalone keyword, as is `del`. If you can think of any others that should be as well, please [let me know](https://github.com/MattDMo/PythonImproved/issues/8).
+- Built-in functions like `any()`, `dict()`, `len()`, `raw_input()`, etc. now have their arguments highlighted just like any other function. Many thanks to [@facelessuser](https://github.com/facelessuser) for the regex, and [@FichteFoll](https://github.com/FichteFoll) for valuable discussion. For those working with Python 2, `print` is still a standalone keyword (as are `assert` and `del`).
+- `support.function.magic` and `support.function.builtin` have now been split in two &mdash; `name` and `call`, so that `__init__` (`support.function.magic.name.python`), for example, can be themed differently than `__init__()` (`support.function.magic.call.python`).
+- Relatedly, magic function names (and calls), also known as the "dunder" methods for being surrounded by double underscores, have been collated from the 2.7 and 3.5 Data Model docs and cleaned up so that as much as possible is included there, but outdated or incorrect things are not. The same is true of the magic variables (`support.variable.magic`).
+- `support.type` now contains *only* what's defined in https://docs.python.org/X/library/functions.html and stdtypes.html (where `X` is `2` or `3`) *where the item is a class*. They are highlighted as such only if not followed by an opening parenthesis &mdash; if it is, it's highlighted as `support.function.builtin.call`. This addresses [#16](https://github.com/MattDMo/PythonImproved/issues/16).
+- Defined escaped characters (like `\n`, `\'`, `\\`, etc.) are now individually named as `constant.character.escape.*`, where `*` is `newline`, `single-quote`, `backslash`, etc.
+- And probably some more stuff I forgot about...
+
+
+## Notes
+
 - To facilitate hacking, I'm also including my `.YAML-tmLanguage` file in the repo, which I use for my day-to-day work (I really hate debugging regexes embedded in XML). Install [`AAAPackageDev`](https://sublime.wbond.net/packages/AAAPackageDev) for syntax highlighting, and tools for converting between YAML, JSON, and XML/Plist formats. [Neon](https://sublime.wbond.net/packages/Neon%20Color%20Scheme) of course has great coloring for the `.YAML-tmLanguage` format, and especially the regexes :)
 - All Django-related stuff has been removed. If you want it back, just dig through the repo's history and you can find it. It was just too distracting.
 - I removed the SQL-related stuff from the string definitions, because 1) somebody complained, and 2) like Django, it was distracting. It didn't cover all of SQL, only highlighted some keywords, and just wasn't worth it.
 - Unicode escapes should now appear correctly in all strings, as with Python 3 all strings are Unicode. I think I got it right, if you think otherwise just let me know.
+- I've begun working on correctly highlighting all the various elements of the new-style string formatting mini-language, but I haven't applied it to the most recent release while I work out the kinks. Feel free to [join the discussion](https://github.com/MattDMo/PythonImproved/issues/38).
 
 ## Issues
 
