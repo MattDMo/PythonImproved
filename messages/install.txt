@@ -1,7 +1,7 @@
 Python Improved
 ===============
 
-Thank you for installing Python Improved, the better Python language definition
+Thank you for installing Python Improved, the best Python language definition
 for Sublime Text! To make this your default Python, open a `.py` Python file.
 Select `View -> Syntax -> Open all with current extension as... -> PythonImproved`
 and you should be all set.
