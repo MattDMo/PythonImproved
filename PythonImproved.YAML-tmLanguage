@@ -659,9 +659,9 @@ repository:
 
   entity_name_function:
     patterns:
+    # - include: '#generic_names'
     - include: '#builtin_functions_name'
     - include: '#magic_function_names'
-    - include: '#generic_names'
     - include: '#illegal_names'
 
   errors_warnings_exceptions:
@@ -757,7 +757,7 @@ repository:
     beginCaptures:
       '1': {name: variable.parameter.function.keyword.python}
       '2': {name: keyword.operator.assignment.python}
-    end: \s*(?:(,)|(?=$\n?|[\)\:]))
+    end: \s*(?:(,)|(?=[\)\:]))
     endCaptures:
       '1': {name: punctuation.separator.parameters.python}
     patterns:
@@ -799,7 +799,7 @@ repository:
           setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
           unicode | xor)
         __)
-      \b\s*(?!(\())
+      \b\s*(?!(\(.*:\n(\s*\#.*)?$))
     captures:
       '2': {name: support.function.magic.name.python}
 
