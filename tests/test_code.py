@@ -1,3 +1,14 @@
+from . import foo
+from .. import bar
+from ... import baz
+
+import ...snurp
+
+def blah(...):
+    pass
+
+
+
 class Foo(tuple):
     @staticmethod
     def __new__(cls, initialValue=(0,0)):
@@ -13,6 +24,7 @@ class Bar(tuple):
     def somefunc(arg, arrg=pirate):
         pass
 
+    @property
 
 list(map(str, range(100)))
 [str(i) for i in range(100)]
@@ -25,9 +37,12 @@ def sâomething():
 class sâomething(object):
     pass
 
+__init__(something)
 
 list(map(str, range(100)))
+#        ^^^ support.type.python
 [str(i) for i in range(100)]
+#^^^ support.function.builtin.call.python
 
 super(arg1=1)(arg2=2)
 list abs, map
@@ -52,6 +67,11 @@ __init__ [2]
 def function():
     pass
 
+@classmethod
+def from_foo(cls, foo):
+    return cls(foo, bar='baz')
+# highlighting for arguments broken
+
 
 mod.func()
 mod.submod.func()
@@ -74,3 +94,19 @@ class MyWarning(Warning):
 
     foo(text="line 1"
              "line 2")
+
+foobar(param=r"()")
+
+
+def f():
+    print(r"()")
+
+f()
+
+def hi(name):
+    r""" Say hi!
+    with a \) special characters.
+    """
+    return 'hi ' + name
+
+print(hi('avi'))
