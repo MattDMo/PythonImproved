@@ -6,7 +6,7 @@ fileTypes: [re]
 uuid: DD867ABF-1EC6-415D-B047-687F550A1D51
 
 patterns:
-- match: \(.*$
+# - match: \(.*$
 
 - name: keyword.control.anchor.regexp
   match: \\[bBAZzG]|\^|\$

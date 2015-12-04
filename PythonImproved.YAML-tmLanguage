@@ -8,7 +8,7 @@ uuid: 11B0273F-0284-4483-B17B-4B8D0A9294CC
 
 patterns:
 - name: support.type.ellipsis.python
-  match: (\.{3})
+  match: (?<!^from\s|^import\s)(\.{3})
 
 - name: support.ipython.in.python
   match: (^In \[(\d+)\]\:)
@@ -22,10 +22,9 @@ patterns:
 
 - include: '#comments'
 
-- comment: Match identifiers in ALL_CAPS as constants, except when followed by . or
-    (.
+- comment: Match identifiers in ALL_CAPS as constants, except when followed by `.`, `(`, `'`, or `"`.
   name: constant.other.allcaps.python
-  match: \b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(])
+  match: \b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(\'\"])
 
 - name: constant.numeric.integer.long.hexadecimal.python
   match: \b(?i:(0x\h+)L)
@@ -779,8 +778,8 @@ repository:
       See also http://www.rafekettler.com/magicmethods.html'
     match: |-
       (?x)
-      (\.)?
-      \b (
+      (def|\.)?
+      \s*\b(
         __(?:
           abs | add | aenter | aexit | aiter | and | anext | await | bool |
           bytes | call | ceil | cmp | coerce | complex | contains | copy |
@@ -799,7 +798,7 @@ repository:
           setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
           unicode | xor)
         __)
-      \b\s*(?!(\(.*:\n(\s*\#.*)?$))
+      \b
     captures:
       '2': {name: support.function.magic.name.python}
 
@@ -951,9 +950,8 @@ repository:
 
   string_quoted_double:
     patterns:
-    - comment: single quoted unicode-raw string
-      name: string.quoted.double.block.unicode-raw-regex.python
-      begin: ([uU][rR])(""")
+    - name: string.quoted.double.block.unicode-raw-regex.python
+      begin: ([uU]r)(""")
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -963,12 +961,9 @@ repository:
         '2': {name: meta.empty-string.double.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_unicode_char'
-      - include: '#escaped_char'
       - include: '#regular_expressions'
-    - comment: single quoted bytes-raw string
-      name: string.quoted.double.block.bytes-raw-regex.python
-      begin: ([bB][rR])(""")
+    - name: string.quoted.double.block.unicode-raw.python
+      begin: ([uU]R)(""")
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -978,12 +973,8 @@ repository:
         '2': {name: meta.empty-string.double.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
-      - include: '#escaped_unicode_char'
-      - include: '#regular_expressions'
-    - comment: double quoted raw string
-      name: string.quoted.double.block.raw-regex.python
-      begin: ([rR])(""")
+    - name: string.quoted.double.block.bytes-raw-regex.python
+      begin: ([bB]r)(""")
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -993,9 +984,41 @@ repository:
         '2': {name: meta.empty-string.double.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
-      - include: '#escaped_unicode_char'
       - include: '#regular_expressions'
+    - name: string.quoted.double.block.bytes-raw.python
+      begin: ([bB]R)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+    - name: string.quoted.double.block.raw-regex.python
+      begin: (r)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#regular_expressions'
+    - name: string.quoted.double.block.raw.python
+      begin: (R)(""")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=""")(")""|""")
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+      patterns:
+      - include: '#constant_placeholder'
     - comment: double quoted unicode string
       name: string.quoted.double.block.unicode.python
       begin: ([uU])(""")
@@ -1022,10 +1045,10 @@ repository:
         '2': {name: meta.empty-string.double.python}
       patterns:
       - include: '#constant_placeholder'
+      - include: '#escaped_unicode_char'
       - include: '#escaped_char'
-    - comment: double-quoted raw string
-      name: string.quoted.double.single-line.unicode-raw-regex.python
-      begin: ([uU][rR])(")
+    - name: string.quoted.double.single-line.unicode-raw-regex.python
+      begin: ([uU]r)(")
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1036,12 +1059,9 @@ repository:
         '3': {name: invalid.illegal.unclosed-string.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_unicode_char'
-      - include: '#escaped_char'
       - include: '#regular_expressions'
-    - comment: double-quoted raw string
-      name: string.quoted.double.single-line.bytes-raw-regex.python
-      begin: ([bB][rR])(")
+    - name: string.quoted.double.single-line.unicode-raw.python
+      begin: ([uU]R)(")
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1052,12 +1072,8 @@ repository:
         '3': {name: invalid.illegal.unclosed-string.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
-      - include: '#escaped_unicode_char'
-      - include: '#regular_expressions'
-    - comment: double-quoted raw string
-      name: string.quoted.double.single-line.raw-regex.python
-      begin: ([rR])(")
+    - name: string.quoted.double.single-line.bytes-raw-regex.python
+      begin: ([bB]r)(")
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1068,9 +1084,44 @@ repository:
         '3': {name: invalid.illegal.unclosed-string.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
-      - include: '#escaped_unicode_char'
       - include: '#regular_expressions'
+    - name: string.quoted.double.single-line.bytes-raw.python
+      begin: ([bB]R)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+    - name: string.quoted.double.single-line.raw-regex.python
+      begin: (r)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#regular_expressions'
+    - name: string.quoted.double.single-line.raw.python
+      begin: (R)(")
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=")(")|")|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.double.python}
+        '3': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
     - comment: double quoted unicode string
       name: string.quoted.double.single-line.unicode.python
       begin: ([uU])(")
@@ -1099,8 +1150,8 @@ repository:
         '3': {name: invalid.illegal.unclosed-string.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
       - include: '#escaped_unicode_char'
+      - include: '#escaped_char'
     - comment: double quoted string
       name: string.quoted.double.block.python
       begin: (""")
@@ -1137,9 +1188,8 @@ repository:
         '1': {name: punctuation.definition.string.begin.python}
         '2': {name: punctuation.definition.string.end.python}
         '3': {name: meta.empty-string.single.python}
-    - comment: single quoted unicode-raw string
-      name: string.quoted.single.block.unicode-raw-regex.python
-      begin: ([uU][rR])(''')
+    - name: string.quoted.single.block.unicode-raw-regex.python
+      begin: ([uU]r)(''')
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1149,12 +1199,9 @@ repository:
         '2': {name: meta.empty-string.single.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_unicode_char'
-      - include: '#escaped_char'
       - include: '#regular_expressions'
-    - comment: single quoted bytes-raw string
-      name: string.quoted.single.block.bytes-raw-regex.python
-      begin: ([bB][rR])(''')
+    - name: string.quoted.single.block.unicode-raw.python
+      begin: ([uU]R)(''')
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1164,12 +1211,8 @@ repository:
         '2': {name: meta.empty-string.single.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
-      - include: '#escaped_unicode_char'
-      - include: '#regular_expressions'
-    - comment: single quoted raw string
-      name: string.quoted.single.block.raw-regex.python
-      begin: ([rR])(''')
+    - name: string.quoted.single.block.bytes-raw-regex.python
+      begin: ([bB]r)(''')
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1179,11 +1222,42 @@ repository:
         '2': {name: meta.empty-string.single.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
-      - include: '#escaped_unicode_char'
       - include: '#regular_expressions'
-    - comment: single quoted unicode string
-      name: string.quoted.single.block.unicode.python
+    - name: string.quoted.single.block.bytes-raw.python
+      begin: ([bB]R)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+    - name: string.quoted.single.block.raw-regex.python
+      begin: (r)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#regular_expressions'
+    - name: string.quoted.single.block.raw.python
+      begin: (R)(''')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: ((?<=''')(')''|''')
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: meta.empty-string.single.python}
+      patterns:
+      - include: '#constant_placeholder'
+    - name: string.quoted.single.block.unicode.python
       begin: ([uU])(''')
       beginCaptures:
         '1': {name: storage.type.string.python}
@@ -1210,9 +1284,8 @@ repository:
       - include: '#constant_placeholder'
       - include: '#escaped_char'
       - include: '#escaped_unicode_char'
-    - comment: single quoted unicode-raw string
-      name: string.quoted.single.single-line.unicode-raw-regex.python
-      begin: ([uU][rR])(')
+    - name: string.quoted.single.single-line.unicode-raw-regex.python
+      begin: ([uU]r)(')
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1222,12 +1295,9 @@ repository:
         '2': {name: invalid.illegal.unclosed-string.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_unicode_char'
-      - include: '#escaped_char'
       - include: '#regular_expressions'
-    - comment: single quoted bytes-raw string
-      name: string.quoted.single.single-line.bytes-raw-regex.python
-      begin: ([bB][rR])(')
+    - name: string.quoted.single.single-line.unicode-raw.python
+      begin: ([uU]R)(')
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1237,12 +1307,8 @@ repository:
         '2': {name: invalid.illegal.unclosed-string.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
-      - include: '#escaped_unicode_char'
-      - include: '#regular_expressions'
-    - comment: single quoted raw string
-      name: string.quoted.single.single-line.raw-regex.python
-      begin: ([rR])(')
+    - name: string.quoted.single.single-line.bytes-raw-regex.python
+      begin: ([bB]r)(')
       beginCaptures:
         '1': {name: storage.type.string.python}
         '2': {name: punctuation.definition.string.begin.python}
@@ -1252,9 +1318,41 @@ repository:
         '2': {name: invalid.illegal.unclosed-string.python}
       patterns:
       - include: '#constant_placeholder'
-      - include: '#escaped_char'
-      - include: '#escaped_unicode_char'
       - include: '#regular_expressions'
+    - name: string.quoted.single.single-line.bytes-raw.python
+      begin: ([bB]R)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+    - name: string.quoted.single.single-line.raw-regex.python
+      begin: (r)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
+      - include: '#regular_expressions'
+    - name: string.quoted.single.single-line.raw.python
+      begin: (R)(')
+      beginCaptures:
+        '1': {name: storage.type.string.python}
+        '2': {name: punctuation.definition.string.begin.python}
+      end: (')|(\n)
+      endCaptures:
+        '1': {name: punctuation.definition.string.end.python}
+        '2': {name: invalid.illegal.unclosed-string.python}
+      patterns:
+      - include: '#constant_placeholder'
     - comment: single quoted unicode string
       name: string.quoted.single.single-line.unicode.python
       begin: ([uU])(')

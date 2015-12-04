@@ -34,7 +34,7 @@
 	<array>
 		<dict>
 			<key>match</key>
-			<string>(\.{3})</string>
+			<string>(?&lt;!^from\s|^import\s)(\.{3})</string>
 			<key>name</key>
 			<string>support.type.ellipsis.python</string>
 		</dict>
@@ -72,9 +72,9 @@
 		</dict>
 		<dict>
 			<key>comment</key>
-			<string>Match identifiers in ALL_CAPS as constants, except when followed by . or (.</string>
+			<string>Match identifiers in ALL_CAPS as constants, except when followed by `.`, `(`, `'`, or `"`.</string>
 			<key>match</key>
-			<string>\b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(])</string>
+			<string>\b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(\'\"])</string>
 			<key>name</key>
 			<string>constant.other.allcaps.python</string>
 		</dict>
@@ -1853,10 +1853,6 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#generic_names</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#illegal_names</string>
 				</dict>
 			</array>
@@ -2047,7 +2043,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\s*(?:(,)|(?=$\n?|[\)\:]))</string>
+			<string>\s*(?:(,)|(?=[\)\:]))</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -2205,8 +2201,8 @@
 			<string>these methods have magic interpretation by python and are generally called indirectly through syntactic constructs. Names are from https://docs.python.org/X/reference/datamodel.html where X is 2.7 and 3.5 See also http://www.rafekettler.com/magicmethods.html</string>
 			<key>match</key>
 			<string>(?x)
-(\.)?
-\b (
+(def|\.)?
+\s*\b(
   __(?:
     abs | add | aenter | aexit | aiter | and | anext | await | bool |
     bytes | call | ceil | cmp | coerce | complex | contains | copy |
@@ -2225,7 +2221,7 @@
     setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
     unicode | xor)
   __)
-\b\s*(?!(\())</string>
+\b</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>
@@ -2377,7 +2373,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>([uU][rR])(""")</string>
+					<string>([uU]r)(""")</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -2391,8 +2387,6 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted unicode-raw string</string>
 					<key>end</key>
 					<string>((?&lt;=""")(")""|""")</string>
 					<key>endCaptures</key>
@@ -2418,21 +2412,13 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([bB][rR])(""")</string>
+					<string>([uU]R)(""")</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -2446,8 +2432,47 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted bytes-raw string</string>
+					<key>end</key>
+					<string>((?&lt;=""")(")""|""")</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.block.unicode-raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>([bB]r)(""")</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>((?&lt;=""")(")""|""")</string>
 					<key>endCaptures</key>
@@ -2473,21 +2498,13 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([rR])(""")</string>
+					<string>([bB]R)(""")</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -2501,8 +2518,47 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>double quoted raw string</string>
+					<key>end</key>
+					<string>((?&lt;=""")(")""|""")</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.block.bytes-raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(r)(""")</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>((?&lt;=""")(")""|""")</string>
 					<key>endCaptures</key>
@@ -2528,15 +2584,48 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(R)(""")</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>((?&lt;=""")(")""|""")</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.block.raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
 						</dict>
 					</array>
 				</dict>
@@ -2634,13 +2723,17 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_unicode_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#escaped_char</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([uU][rR])(")</string>
+					<string>([uU]r)(")</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -2654,8 +2747,6 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>double-quoted raw string</string>
 					<key>end</key>
 					<string>((?&lt;=")(")|")|(\n)</string>
 					<key>endCaptures</key>
@@ -2686,21 +2777,13 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([bB][rR])(")</string>
+					<string>([uU]R)(")</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -2714,8 +2797,52 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>double-quoted raw string</string>
+					<key>end</key>
+					<string>((?&lt;=")(")|")|(\n)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.single-line.unicode-raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>([bB]r)(")</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>((?&lt;=")(")|")|(\n)</string>
 					<key>endCaptures</key>
@@ -2746,21 +2873,13 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([rR])(")</string>
+					<string>([bB]R)(")</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -2774,8 +2893,52 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>double-quoted raw string</string>
+					<key>end</key>
+					<string>((?&lt;=")(")|")|(\n)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.single-line.bytes-raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(r)(")</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>((?&lt;=")(")|")|(\n)</string>
 					<key>endCaptures</key>
@@ -2806,15 +2969,53 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(R)(")</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>((?&lt;=")(")|")|(\n)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.single-line.raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
 						</dict>
 					</array>
 				</dict>
@@ -2922,11 +3123,11 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_unicode_char</string>
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
+							<string>#escaped_char</string>
 						</dict>
 					</array>
 				</dict>
@@ -3059,7 +3260,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([uU][rR])(''')</string>
+					<string>([uU]r)(''')</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -3073,8 +3274,6 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted unicode-raw string</string>
 					<key>end</key>
 					<string>((?&lt;=''')(')''|''')</string>
 					<key>endCaptures</key>
@@ -3100,21 +3299,13 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([bB][rR])(''')</string>
+					<string>([uU]R)(''')</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -3128,8 +3319,47 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted bytes-raw string</string>
+					<key>end</key>
+					<string>((?&lt;=''')(')''|''')</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.single.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.single.block.unicode-raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>([bB]r)(''')</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>((?&lt;=''')(')''|''')</string>
 					<key>endCaptures</key>
@@ -3155,21 +3385,13 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([rR])(''')</string>
+					<string>([bB]R)(''')</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -3183,8 +3405,47 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted raw string</string>
+					<key>end</key>
+					<string>((?&lt;=''')(')''|''')</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.single.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.single.block.bytes-raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(r)(''')</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>((?&lt;=''')(')''|''')</string>
 					<key>endCaptures</key>
@@ -3210,15 +3471,48 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(R)(''')</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>((?&lt;=''')(')''|''')</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.single.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.single.block.raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
 						</dict>
 					</array>
 				</dict>
@@ -3238,8 +3532,6 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted unicode string</string>
 					<key>end</key>
 					<string>((?&lt;=''')(')''|''')</string>
 					<key>endCaptures</key>
@@ -3326,7 +3618,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([uU][rR])(')</string>
+					<string>([uU]r)(')</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -3340,8 +3632,6 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted unicode-raw string</string>
 					<key>end</key>
 					<string>(')|(\n)</string>
 					<key>endCaptures</key>
@@ -3367,21 +3657,13 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([bB][rR])(')</string>
+					<string>([uU]R)(')</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -3395,8 +3677,47 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted bytes-raw string</string>
+					<key>end</key>
+					<string>(')|(\n)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.single.single-line.unicode-raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>([bB]r)(')</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>(')|(\n)</string>
 					<key>endCaptures</key>
@@ -3422,21 +3743,13 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([rR])(')</string>
+					<string>([bB]R)(')</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -3450,8 +3763,47 @@
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
 					</dict>
-					<key>comment</key>
-					<string>single quoted raw string</string>
+					<key>end</key>
+					<string>(')|(\n)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.single.single-line.bytes-raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(r)(')</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>(')|(\n)</string>
 					<key>endCaptures</key>
@@ -3477,15 +3829,48 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#regular_expressions</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(R)(')</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(')|(\n)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.single.single-line.raw.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#constant_placeholder</string>
 						</dict>
 					</array>
 				</dict>
