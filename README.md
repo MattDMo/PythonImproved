@@ -8,11 +8,11 @@ Inspired by:
 - facelessuser's [Better Python](https://github.com/facelessuser/sublime-languages)
 - Peter Varo's [Python 3](https://github.com/petervaro/python) syntax definition
 
-as well as a number of my own changes to make things more consistent and understandable. For customized syntax highlighting taking advantage of all the new scopes, use **PythonImproved** with the [Neon Color Scheme](https://sublime.wbond.net/packages/Neon%20Color%20Scheme), or modify your own favorite color scheme with the scopes below.
+as well as a number of my own changes to make things more consistent and understandable. For customized syntax highlighting taking advantage of all the new scopes, use **PythonImproved** with the [Neon Color Scheme](https://packagecontrol.io/packages/Neon%20Color%20Scheme), or modify your own favorite color scheme with the scopes below.
 
 ## Installation and Use
 
-If you haven't already, [install Package Control](https://sublime.wbond.net/installation), then select `Python Improved` from the `Package Control: Install Package` option in the Command Palette. To use PythonImproved as your default Python syntax, open a `.py` file, then select **`View -> Syntax -> Open all with current extension as... -> PythonImproved`**.
+If you haven't already, [install Package Control](https://packagecontrol.io/installation), then select `Python Improved` from the `Package Control: Install Package` option in the Command Palette. To use PythonImproved as your default Python syntax, open a `.py` file, then select **`View -> Syntax -> Open all with current extension as... -> PythonImproved`**.
 
 While I haven't yet tried to install PythonImproved with TextMate, I can't think of a good reason as to why it wouldn't work. You could try putting it in the same directory as the standard `Python.tmbundle` package, in the `Syntaxes` subdirectory. Then, just pick `PythonImproved` from the syntax menu.
 
@@ -20,7 +20,7 @@ While I haven't yet tried to install PythonImproved with TextMate, I can't think
 
 If you prefer to modify your own color scheme, here is a list of new/modified scopes, along with some examples. It's not perfectly complete, but it's a start.
 
-- `support.ipython.in` and `support.ipython.out`: [IPython](http://ipython.org) `In [1]:`/`Out [1]:` fields &mdash; designed for use with [SublimeREPL](https://sublime.wbond.net/packages/SublimeREPL). The cell number can be themed with a different color using `support.ipython.cell-number`.
+- `support.ipython.in` and `support.ipython.out`: [IPython](http://ipython.org) `In [1]:`/`Out [1]:` fields &mdash; designed for use with [SublimeREPL](https://packagecontrol.io/packages/SublimeREPL). The cell number can be themed with a different color using `support.ipython.cell-number`.
 - `constant.numeric.integer.(long).binary.python`: binary literals `0b00101010`, `0b00101010L`
 - `keyword.control.import.python` now contains `import`, `from`, _and_ `as`
 - `support.type.exception.python` now matches any identifier that ends with `Exception` or `Error`, not just the built-in ones like `IndentationError` or `RuntimeException`, allowing for the highlighting of custom exceptions such as those included in third-party modules
@@ -31,6 +31,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 def myfunc(self,            # gotta have self
            param1="value",  # values are cool
            param2=True,     # or False, whatever
+           *args,           # I'm here for an argument
            **kwargs):       # you never know
 ```
 
@@ -46,7 +47,7 @@ def myfunc(self,            # gotta have self
 - Fixed the octal integers so the Python 3-style `0o123` is matched as well as the old-style `0123`
 - Built-in functions like `any()`, `dict()`, `len()`, `raw_input()`, etc. now have their arguments highlighted just like any other function. Many thanks to [@facelessuser](https://github.com/facelessuser) for the regex, and [@FichteFoll](https://github.com/FichteFoll) for valuable discussion. For those working with Python 2, `print` is still a standalone keyword (as are `assert` and `del`).
 - `support.function.magic` and `support.function.builtin` have now been split in two &mdash; `name` and `call`, so that `__init__` (`support.function.magic.name.python`), for example, can be themed differently than `__init__()` (`support.function.magic.call.python`).
-- Relatedly, magic function names (and calls), also known as the "dunder" methods for being surrounded by double underscores, have been collated from the 2.7 and 3.5 Data Model docs and cleaned up so that as much as possible is included there, but outdated or incorrect things are not. The same is true of the magic variables (`support.variable.magic`).
+- Relatedly, magic function names (and calls), also known as the "dunder" methods for being surrounded by double underscores, have been collated from the [2.7](https://docs.python.org/2/reference/datamodel.html) and [3.5](https://docs.python.org/3/reference/datamodel.html) Data Model docs and cleaned up so that as much as possible is included there, but outdated or incorrect things are not. The same is true of the magic variables (`support.variable.magic`).
 - `support.type` now contains *only* what's defined in https://docs.python.org/X/library/functions.html and stdtypes.html (where `X` is `2` or `3`) *where the item is a class*. They are highlighted as such only if not followed by an opening parenthesis &mdash; if it is, it's highlighted as `support.function.builtin.call`. This addresses [#16](https://github.com/MattDMo/PythonImproved/issues/16).
 - Defined escaped characters (like `\n`, `\'`, `\\`, etc.) are now individually named as `constant.character.escape.*`, where `*` is `newline`, `single-quote`, `backslash`, etc.
 - And probably some more stuff I forgot about...
@@ -54,7 +55,7 @@ def myfunc(self,            # gotta have self
 
 ## Notes
 
-- To facilitate hacking, I'm also including my `.YAML-tmLanguage` file in the repo, which I use for my day-to-day work (I really hate debugging regexes embedded in XML). Install [`AAAPackageDev`](https://sublime.wbond.net/packages/AAAPackageDev) for syntax highlighting, and tools for converting between YAML, JSON, and XML/Plist formats. [Neon](https://sublime.wbond.net/packages/Neon%20Color%20Scheme) of course has great coloring for the `.YAML-tmLanguage` format, and especially the regexes :)
+- To facilitate hacking, I'm also including my `.YAML-tmLanguage` file in the repo, which I use for my day-to-day work (I really hate debugging regexes embedded in XML). Install [`AAAPackageDev`](https://packagecontrol.io/packages/AAAPackageDev) for syntax highlighting, and tools for converting between YAML, JSON, and XML/Plist formats. [Neon](https://packagecontrol.io/packages/Neon%20Color%20Scheme) of course has great coloring for the `.YAML-tmLanguage` format, and especially the regexes :)
 - All Django-related stuff has been removed. If you want it back, just dig through the repo's history and you can find it. It was just too distracting.
 - I removed the SQL-related stuff from the string definitions, because 1) somebody complained, and 2) like Django, it was distracting. It didn't cover all of SQL, only highlighted some keywords, and just wasn't worth it.
 - Unicode escapes should now appear correctly in all strings, as with Python 3 all strings are Unicode. I think I got it right, if you think otherwise just let me know.
