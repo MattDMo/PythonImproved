@@ -31,6 +31,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 def myfunc(self,            # gotta have self
            param1="value",  # values are cool
            param2=True,     # or False, whatever
+           *args,           # I'm here for an argument
            **kwargs):       # you never know
 ```
 
