@@ -1,7 +1,24 @@
 Python Improved v2.1.0
 ======================
 
+Lots of bug fixes in this version, as expected after a new major release. I suppose
+one of the most user-facing changes is the reversion back to the old style of
+highlighting raw/regex string literals. `r"blah"` will still be scoped as
+before, with regex highlighting (if any is present). However, you now have the
+option of declining regex highlighting by using a capital R (`R"blah"`) instead.
+Python doesn't care if the R is in caps or not, it simply treats the string as a
+raw string literal.
 
+Other changes include fixing magic functions (again) so that function calls are
+properly scoped as `support.function.magic.call` while magic function definitions
+are `support.function.magic.name`. If you use Neon the highlighting is still
+identical, for now. I also fixed an edge case where using `cls` as a function call
+broke highlighting of the arguments (`self` can now be used as well, obviously
+assuming `__call__` has been implemented in your class). I also got rid of some
+unnecessary(?) code that wasn't, as far as I could tell, actually doing anything.
+If something breaks, please tell me. I've also added `tests/test_code.py` which is
+just a bunch of random snippets for testing. Finally, I've made some changes to the
+README, mostly updating (or adding) URLS, as well as detailing all of the above.
 
 To take full advantage of the extra scopes included in Python Improved, check out
 the Neon Color Scheme at https://packagecontrol.io/packages/Neon%20Color%20Scheme
