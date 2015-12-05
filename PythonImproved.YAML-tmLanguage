@@ -101,24 +101,6 @@ patterns:
 - name: keyword.operator.assignment.python
   match: \=
 
-- include: '#builtin_types'
-
-- include: '#builtin_functions_name'
-
-- include: '#builtin_functions_call'
-
-- include: '#errors_warnings_exceptions'
-
-- include: '#docstrings'
-
-- include: '#magic_function_calls'
-
-- include: '#magic_function_names'
-
-- include: '#magic_variable_names'
-
-- include: '#generic_object_names'
-
 - name: meta.class.old-style.python
   contentName: entity.name.type.class.python
   begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\:)
@@ -173,35 +155,6 @@ patterns:
     end: (?![A-Za-z0-9_])
     patterns:
     - include: '#entity_name_function'
-
-- name: meta.function-call.python
-  begin: (?:\.)?((self|cls)|([\p{Alpha}_][\p{Alnum}_]*))\s*(?=(\())
-  beginCaptures:
-    '2': {name: variable.parameter.function.language.python}
-    '3': {name: meta.function-call.generic.python}
-    '4': {name: punctuation.definition.arguments.begin.python}
-  end: (\))
-  endCaptures:
-    '1': {name: punctuation.definition.arguments.end.python}
-  patterns:
-  - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
-    end: (?=\s*\()
-    patterns:
-    - include: '#dotted_name'
-  - contentName: meta.function-call.arguments.python
-    begin: (\()
-    beginCaptures:
-      '1': {name: punctuation.definition.arguments.begin.python}
-    end: (?=(\)))
-    endCaptures:
-      '1': {name: punctuation.definition.arguments.end.python}
-    patterns:
-    - include: '#keyword_arguments'
-    - include: $self
-  - begin: \G
-    end: (?=\()
-    patterns:
-    - include: '#dotted_name'
 
 - name: meta.function.python
   begin: \s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
@@ -322,6 +275,66 @@ patterns:
     beginCaptures:
       '1': {name: punctuation.definition.decorator.python}
     end: (?=\s|$\n?|#)
+    patterns:
+    - include: '#dotted_name'
+
+- name: meta.function-call.python
+  contentName: meta.function-call.arguments.python
+  begin: (?<=\)|\])\s*(\()
+  beginCaptures:
+    '1': {name: punctuation.definition.arguments.begin.python}
+  end: (\))
+  endCaptures:
+    '1': {name: punctuation.definition.arguments.end.python}
+  patterns:
+  - include: '#keyword_arguments'
+  - include: $self
+
+- include: '#builtin_types'
+
+- include: '#builtin_functions_name'
+
+- include: '#builtin_functions_call'
+
+- include: '#errors_warnings_exceptions'
+
+- include: '#docstrings'
+
+- include: '#magic_function_names'
+
+- include: '#magic_function_calls'
+
+- include: '#magic_variable_names'
+
+- include: '#language_variables'
+
+- include: '#generic_object_names'
+
+- name: meta.function-call.python
+  begin: (?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=(\())
+  beginCaptures:
+    '1': {name: meta.function-call.generic.python}
+    '2': {name: punctuation.definition.arguments.begin.python}
+  end: (\))
+  endCaptures:
+    '1': {name: punctuation.definition.arguments.end.python}
+  patterns:
+  - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+    end: (?=\s*\()
+    patterns:
+    - include: '#dotted_name'
+  - contentName: meta.function-call.arguments.python
+    begin: (\()
+    beginCaptures:
+      '1': {name: punctuation.definition.arguments.begin.python}
+    end: (?=(\)))
+    endCaptures:
+      '1': {name: punctuation.definition.arguments.end.python}
+    patterns:
+    - include: '#keyword_arguments'
+    - include: $self
+  - begin: \G
+    end: (?=\()
     patterns:
     - include: '#dotted_name'
 
@@ -739,8 +752,9 @@ repository:
     - include: $self
 
   language_variables:
-    name: variable.language.python
-    match: (?<!\.)\b(self|cls)\b
+    match: (?<!\.)\b(self|cls)(?:\.|\()?
+    captures:
+      "1": {name: variable.language.python}
 
   line_continuation:
     match: (\\)(.*)$\n?
