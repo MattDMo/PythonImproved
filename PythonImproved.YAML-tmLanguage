@@ -306,6 +306,26 @@ patterns:
 
 - include: '#magic_variable_names'
 
+- name: meta.function-call.python
+  begin: (self|cls)\s*(?=(\())
+  beginCaptures:
+    '1': {name: variable.language.python}
+    '2': {name: punctuation.definition.arguments.begin.python}
+  end: (\))
+  endCaptures:
+    '1': {name: punctuation.definition.arguments.end.python}
+  patterns:
+  - contentName: meta.function-call.arguments.python
+    begin: (\()
+    beginCaptures:
+      '1': {name: punctuation.definition.arguments.begin.python}
+    end: (?=(\)))
+    endCaptures:
+      '1': {name: punctuation.definition.arguments.end.python}
+    patterns:
+    - include: '#keyword_arguments'
+    - include: $self
+
 # this needs to be here, or else cls() is a reg. function and self.foo is not highlighted
 - include: '#language_variables'
 

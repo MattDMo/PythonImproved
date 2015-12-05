@@ -229,42 +229,6 @@
 			<string>keyword.operator.assignment.python</string>
 		</dict>
 		<dict>
-			<key>include</key>
-			<string>#builtin_types</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#builtin_functions_name</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#builtin_functions_call</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#errors_warnings_exceptions</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#docstrings</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#magic_function_calls</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#magic_function_names</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#magic_variable_names</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#generic_object_names</string>
-		</dict>
-		<dict>
 			<key>begin</key>
 			<string>\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\:)</string>
 			<key>beginCaptures</key>
@@ -393,7 +357,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_])</string>
+			<string>\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -423,114 +387,16 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
 							<string>#entity_name_function</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(?:\.)?((self|cls)|([\p{Alpha}_][\p{Alnum}_]*))\s*(?=(\())</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter.function.language.python</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>meta.function-call.generic.python</string>
-				</dict>
-				<key>4</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.arguments.begin.python</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(\))</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.arguments.end.python</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.function-call.python</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
-					<key>end</key>
-					<string>(?=\s*\()</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#dotted_name</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(\()</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.arguments.begin.python</string>
-						</dict>
-					</dict>
-					<key>contentName</key>
-					<string>meta.function-call.arguments.python</string>
-					<key>end</key>
-					<string>(?=(\)))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.arguments.end.python</string>
-						</dict>
-					</dict>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#keyword_arguments</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\G</string>
-					<key>end</key>
-					<string>(?=\()</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -567,7 +433,7 @@
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -911,6 +777,243 @@
 			</array>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>(?&lt;=\)|\])\s*(\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.begin.python</string>
+				</dict>
+			</dict>
+			<key>contentName</key>
+			<string>meta.function-call.arguments.python</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.end.python</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.function-call.python</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#keyword_arguments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#builtin_types</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#builtin_functions_name</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#builtin_functions_call</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#errors_warnings_exceptions</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#docstrings</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#magic_function_names</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#magic_function_calls</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#magic_variable_names</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(self|cls)\s*(?=(\())</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.language.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.begin.python</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.end.python</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.function-call.python</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.python</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>meta.function-call.arguments.python</string>
+					<key>end</key>
+					<string>(?=(\)))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.end.python</string>
+						</dict>
+					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#keyword_arguments</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#language_variables</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#generic_object_names</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=(\())</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.generic.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.begin.python</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.end.python</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.function-call.python</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+					<key>end</key>
+					<string>(?=\s*\()</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dotted_name</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.python</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>meta.function-call.arguments.python</string>
+					<key>end</key>
+					<string>(?=(\)))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.end.python</string>
+						</dict>
+					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#keyword_arguments</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\G</string>
+					<key>end</key>
+					<string>(?=\()</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dotted_name</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>comment</key>
 			<string>Py2 print statement that should only be matched after function calls</string>
 			<key>match</key>
@@ -1009,10 +1112,6 @@
 		<dict>
 			<key>include</key>
 			<string>#line_continuation</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#language_variables</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -1993,10 +2092,16 @@
 		</dict>
 		<key>language_variables</key>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.language.python</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>(?&lt;!\.)\b(self|cls)\b</string>
-			<key>name</key>
-			<string>variable.language.python</string>
+			<string>(?&lt;!\.)\b(self|cls)(?:\.|\()?</string>
 		</dict>
 		<key>line_continuation</key>
 		<dict>
