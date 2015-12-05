@@ -142,7 +142,7 @@ patterns:
       - include: $self
 
 - name: meta.class.python
-  begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_])
+  begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -151,8 +151,8 @@ patterns:
     '2': {name: invalid.illegal.missing-inheritance.python}
   patterns:
   - contentName: entity.name.type.class.python
-    begin: (?=[A-Za-z_][A-Za-z0-9_]*)
-    end: (?![A-Za-z0-9_])
+    begin: (?=[\p{Alpha}_][\p{Alnum}_]*)
+    end: (?![\p{Alnum}_])
     patterns:
     - include: '#entity_name_function'
 
@@ -166,7 +166,7 @@ patterns:
   patterns:
   - contentName: entity.name.function.python
     begin: (?=[\p{Alpha}_][\p{Alnum}_]*)
-    end: (?![A-Za-z0-9_])
+    end: (?![\p{Alnum}_])
     patterns:
     - include: '#entity_name_function'
   - contentName: meta.function.parameters.python
@@ -306,6 +306,7 @@ patterns:
 
 - include: '#magic_variable_names'
 
+# this needs to be here, or else cls() is a reg. function and self.foo is not highlighted
 - include: '#language_variables'
 
 - include: '#generic_object_names'
@@ -372,7 +373,8 @@ patterns:
 
 - include: '#line_continuation'
 
-- include: '#language_variables'
+# not needed?
+# - include: '#language_variables'
 
 - include: '#string_quoted_single'
 
