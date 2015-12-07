@@ -307,7 +307,7 @@ patterns:
 - include: '#magic_variable_names'
 
 - name: meta.function-call.python
-  begin: (self|cls)\s*(?=(\())
+  begin: \b(self|cls)\b\s*(?=(\())
   beginCaptures:
     '1': {name: variable.language.python}
     '2': {name: punctuation.definition.arguments.begin.python}
@@ -774,7 +774,7 @@ repository:
     - include: $self
 
   language_variables:
-    match: (?<!\.)\b(self|cls)(?:\.|\()?
+    match: (?<!\.)\b(self|cls)\b(?:\.|\()?
     captures:
       "1": {name: variable.language.python}
 

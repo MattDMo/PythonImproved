@@ -847,7 +847,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(self|cls)\s*(?=(\())</string>
+			<string>\b(self|cls)\b\s*(?=(\())</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -2101,7 +2101,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?&lt;!\.)\b(self|cls)(?:\.|\()?</string>
+			<string>(?&lt;!\.)\b(self|cls)\b(?:\.|\()?</string>
 		</dict>
 		<key>line_continuation</key>
 		<dict>
