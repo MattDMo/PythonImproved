@@ -576,7 +576,7 @@ repository:
           bool | buffer | bytearray | bytes | complex | dict | float |
           frozenset | int | list | long | memoryview | object | property |
           range | set | slice | str | tuple | type | unicode | xrange)
-        \b\s*(?!(\())
+        \b(?!(\s*\())
 
   character-class:
     patterns:
