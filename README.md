@@ -23,7 +23,7 @@ If you prefer to modify your own color scheme, here is a list of new/modified sc
 - `support.ipython.in` and `support.ipython.out`: [IPython](http://ipython.org) `In [1]:`/`Out [1]:` fields &mdash; designed for use with [SublimeREPL](https://packagecontrol.io/packages/SublimeREPL). The cell number can be themed with a different color using `support.ipython.cell-number`.
 - `constant.numeric.integer.(long).binary.python`: binary literals `0b00101010`, `0b00101010L`
 - `keyword.control.import.python` now contains `import`, `from`, _and_ `as`
-- `support.type.exception.python` now matches any identifier that ends with `Exception` or `Error`, not just the built-in ones like `IndentationError` or `RuntimeException`, allowing for the highlighting of custom exceptions such as those included in third-party modules
+- `support.type.exception.python` now matches any identifier that ends with `Exception` or `Error`, not just the built-in ones like `IndentationError` or `RuntimeException`, allowing for the highlighting of custom exceptions such as those included in third-party modules.
 - [Function annotation](http://www.python.org/dev/peps/pep-3107/) support for Python 3, thanks to [@facelessuser](https://github.com/facelessuser).  New scopes added: `punctuation.separator.annotation.python`, `punctuation.separator.annotation.result.python`, `punctuation.definition.parameters-group.begin.python`, and `punctuation.definition.parameters-group.end.python`.
 - You can now have comments in multi-line function definitions:
 
@@ -55,12 +55,13 @@ def myfunc(self,            # gotta have self
 
 ## Notes
 
-- To facilitate hacking, I'm also including my `.YAML-tmLanguage` file in the repo, which I use for my day-to-day work (I really hate debugging regexes embedded in XML). Install [`AAAPackageDev`](https://packagecontrol.io/packages/AAAPackageDev) for syntax highlighting, and tools for converting between YAML, JSON, and XML/Plist formats. [Neon](https://packagecontrol.io/packages/Neon%20Color%20Scheme) of course has great coloring for the `.YAML-tmLanguage` format, and especially the regexes :)
+- To facilitate hacking, I'm also including my `.YAML-tmLanguage` file in the repo, which I use for my day-to-day work (I really hate debugging regexes embedded in XML). Install [`PackageDev`](https://packagecontrol.io/packages/PackageDev) for syntax highlighting, and tools for converting between YAML, JSON, and XML/Plist formats. [Neon](https://packagecontrol.io/packages/Neon%20Color%20Scheme) of course has great coloring for the `.YAML-tmLanguage` format, and especially the regexes :)
 - Speaking of which, for raw/regex strings, regexes will be scoped according to the accompanying `Regular Expressions (Python Improved).tmLanguage` file, instead of the builtin Python regular expressions definition. If you're using **Neon** for syntax highlighting (or any color scheme that highlights regexes), use a lowercase `r` to denote your string as containing a regex (i.e., `r"\b(?i:(0[o]?[0-7]+))"`). However, if you're just using a raw string literal to, for example, define a Windows path and you *don't* want regex highlighing for all the back slashes and whatnot, use an uppercase `R` (`R"C:\Users\MattDMo"`). Python can't tell the difference, but it will look nicer in your editor.
 - All Django-related stuff has been removed. If you want it back, just dig through the repo's history and you can find it. It was just too distracting.
 - I removed the SQL-related stuff from the string definitions, because 1) somebody complained, and 2) like Django, it was distracting. It didn't cover all of SQL, only highlighted some keywords, and just wasn't worth it.
 - Unicode escapes should now appear correctly in all strings, as with Python 3 all strings are Unicode. I think I got it right, if you think otherwise just let me know.
 - I've begun working on correctly highlighting all the various elements of the new-style string formatting mini-language, but I haven't applied it to the most recent release while I work out the kinks. Feel free to [join the discussion](https://github.com/MattDMo/PythonImproved/issues/38).
+- Now that the [ST3 public beta](https://sublimetext.com/3) supports `.sublime-syntax` files, I'm going to begin transitioning PI over to that format. If you'd like to contribute, chime in on [this issue](https://github.com/MattDMo/PythonImproved/issues/54). One major advantage will be fixing [this bug](https://github.com/MattDMo/PythonImproved/issues/34) with raw string literals.
 
 ## Issues
 
