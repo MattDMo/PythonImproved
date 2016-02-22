@@ -82,7 +82,7 @@
 			<key>match</key>
 			<string>\b(?i:(0x\h+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.hexadecimal.python</string>
+			<string>constant.numeric.integer.hexadecimal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -94,7 +94,7 @@
 			<key>match</key>
 			<string>\b(?i:(0b[01]+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.binary.python</string>
+			<string>constant.numeric.integer.binary.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -106,7 +106,7 @@
 			<key>match</key>
 			<string>\b(?i:(0[o]?[0-7]+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.octal.python</string>
+			<string>constant.numeric.integer.octal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -150,7 +150,7 @@
 			<key>match</key>
 			<string>\b(?i:([1-9]+[0-9]*|0)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.decimal.python</string>
+			<string>constant.numeric.integer.decimal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
