@@ -31,7 +31,7 @@ patterns:
 - comment: Match identifiers in ALL_CAPS as constants, except when followed by . or
     (.
   name: constant.other.allcaps.python
-  match: \b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(])
+  match: \b([[:upper:]_][[:upper:][:digit:]_]*)\b(?![\.\(])
 
 - name: constant.numeric.integer.long.hexadecimal.python
   match: \b(?i:(0x\h*)L)
@@ -52,13 +52,13 @@ patterns:
   match: \b(?i:(0[o]?[0-7]+))
 
 - name: constant.numeric.complex.python
-  match: \b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?<=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)
+  match: \b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?<=[^[:alnum:]_])\.\d+)(e[\-\+]?\d+)?))J)
 
 - name: constant.numeric.float.python
-  match: \b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])
+  match: \b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^[:alpha:]_])
 
 - name: constant.numeric.float.python
-  match: (?<=[^\p{Alnum}_])(?i:(\.\d+(e[\-\+]?\d+)?))
+  match: (?<=[^[:alnum:]_])(?i:(\.\d+(e[\-\+]?\d+)?))
 
 - name: constant.numeric.float.python
   match: \b(?i:(\d+e[\-\+]?\d+))
@@ -107,7 +107,7 @@ patterns:
 
 - name: meta.class.old-style.python
   contentName: entity.name.type.class.python
-  begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\:)
+  begin: \s*(class)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\:)
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: \s*(:)
@@ -117,7 +117,7 @@ patterns:
   - include: '#entity_name_class'
 
 - name: meta.class.python
-  begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
+  begin: \s*(class)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: (\))\s*(?:(\:)|(.*$\n?))
@@ -127,8 +127,8 @@ patterns:
     '3': {name: invalid.illegal.missing-section-begin.python}
   patterns:
   - contentName: entity.name.type.class.python
-    begin: (?=[\p{Alpha}_][\p{Alnum}_]*)
-    end: (?![\p{Alnum}_])
+    begin: (?=[[:alpha:]_][[:alnum:]_]*)
+    end: (?![[:alnum:]_])
     patterns:
     - include: '#entity_name_class'
   - contentName: meta.class.inheritance.python
@@ -146,7 +146,7 @@ patterns:
       - include: $self
 
 - name: meta.class.python
-  begin: \s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_])
+  begin: \s*(class)\s+(?=[[:alpha:]_][[:alnum:]_])
   beginCaptures:
     '1': {name: storage.type.class.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -161,7 +161,7 @@ patterns:
     - include: '#entity_name_function'
 
 - name: meta.function.python
-  begin: \s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()
+  begin: \s*(def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\:)
@@ -169,7 +169,7 @@ patterns:
     '1': {name: punctuation.section.function.begin.python}
   patterns:
   - contentName: entity.name.function.python
-    begin: (?=[\p{Alpha}_][\p{Alnum}_]*)
+    begin: (?=[[:alpha:]_][[:alnum:]_]*)
     end: (?![A-Za-z0-9_])
     patterns:
     - include: '#entity_name_function'
@@ -182,7 +182,7 @@ patterns:
     - include: '#annotated_arguments'
     - include: '#keyword_arguments'
     - include: '#comments'
-    - match: \b(?:(self|cls)|([\p{Alpha}_][\p{Alnum}_]*))\s*(?:(,)|(?=[\n\)]))
+    - match: \b(?:(self|cls)|([[:alpha:]_][[:alnum:]_]*))\s*(?:(,)|(?=[\n\)]))
       captures:
         '1': {name: variable.parameter.function.language.python}
         '2': {name: variable.parameter.function.python}
@@ -196,7 +196,7 @@ patterns:
     - include: $self
 
 - name: meta.function.python
-  begin: \s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)
+  begin: \s*(def)\s+(?=[[:alpha:]_][[:alnum:]_]*)
   beginCaptures:
     '1': {name: storage.type.function.python}
   end: (\()|\s*($\n?|#.*$\n?)
@@ -205,8 +205,8 @@ patterns:
     '2': {name: invalid.illegal.missing-parameters.python}
   patterns:
   - contentName: entity.name.function.python
-    begin: (?=[\p{Alpha}_][\p{Alnum}_]*)
-    end: (?![\p{Alnum}_])
+    begin: (?=[[:alpha:]_][[:alnum:]_]*)
+    end: (?![[:alnum:]_])
     patterns:
     - include: '#entity_name_function'
 
@@ -225,20 +225,20 @@ patterns:
     end: (?=\:)
     patterns:
     - include: '#keyword_arguments'
-    - match: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(?:(,)|(?=[\n\)\:]))
+    - match: \b([[:alpha:]_][[:alnum:]_]*)\s*(?:(,)|(?=[\n\)\:]))
       captures:
         '1': {name: variable.parameter.function.python}
         '2': {name: punctuation.separator.parameters.python}
 
 - comment: a decorator may be a function call which returns a decorator.
   name: meta.function.decorator.python
-  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+  begin: ^\s*(?=@\s*[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*\s*\()
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
   - contentName: entity.name.function.decorator.python
-    begin: (?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+    begin: (?=(@)\s*[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*\s*\()
     beginCaptures:
       '1': {name: punctuation.definition.decorator.python}
     end: (?=\s*\()
@@ -255,10 +255,10 @@ patterns:
 
 - name: meta.function.decorator.python
   contentName: entity.name.function.decorator.python
-  begin: ^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*)
+  begin: ^\s*(?=@\s*[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*)
   end: (?=\s|$\n?|#)
   patterns:
-  - begin: (?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\.[\p{Alpha}_][\p{Alnum}_]*)*)
+  - begin: (?=(@)\s*[[:alpha:]_][[:alnum:]_]*(\.[[:alpha:]_][[:alnum:]_]*)*)
     beginCaptures:
       '1': {name: punctuation.definition.decorator.python}
     end: (?=\s|$\n?|#)
@@ -294,14 +294,14 @@ patterns:
 - include: '#generic_object_names'
 
 - name: meta.function-call.python
-  begin: (?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=\()
+  begin: (?:\.)?([[:alpha:]_][[:alnum:]_]*)\s*(?=\()
   beginCaptures:
     '1': {name: meta.function-call.generic.python}
   end: (\))
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+  - begin: (?=[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*\s*\()
     end: (?=\s*\()
     patterns:
     - include: '#dotted_name'
@@ -315,12 +315,12 @@ patterns:
     - include: $self
 
 - name: meta.item-access.python
-  begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)
+  begin: (?=[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*\s*\[)
   end: (\])
   endCaptures:
     '1': {name: punctuation.definition.arguments.end.python}
   patterns:
-  - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)
+  - begin: (?=[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*\s*\[)
     end: (?=\s*\[)
     patterns:
     - include: '#dotted_name'
@@ -427,7 +427,7 @@ patterns:
 
 repository:
   annotated_arguments:
-    begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)|(?=\()
+    begin: \b([[:alpha:]_][[:alnum:]_]*)\s*(:)|(?=\()
     beginCaptures:
       '1': {name: variable.parameter.function.python}
       '2': {name: punctuation.separator.annotation.python}
@@ -448,7 +448,7 @@ repository:
     endCaptures:
       '1': {name: punctuation.definition.parameters-group.end.python}
     patterns:
-    - begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)
+    - begin: \b([[:alpha:]_][[:alnum:]_]*)\s*(:)
       beginCaptures:
         '1': {name: variable.parameter.function.python}
         '2': {name: punctuation.separator.annotation.python}
@@ -457,7 +457,7 @@ repository:
         '1': {name: punctuation.separator.parameters.python}
       patterns:
       - include: $self
-    - begin: \b([\p{Alpha}_][\p{Alnum}_]*)
+    - begin: \b([[:alpha:]_][[:alnum:]_]*)
       beginCaptures:
         '1': {name: variable.parameter.function.python}
       end: \s*(?:(,)|(?=$\n?|\)))
@@ -467,7 +467,7 @@ repository:
 
   builtin_exceptions:
     name: support.type.exception.python
-    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([\p{Alnum}_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([\p{Alnum}_]+)?Exception)\b
+    match: \b((Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision|([[:alnum:]_]+))Error|((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit|([[:alnum:]_]+)?Exception)\b
 
   builtin_functions:
     patterns:
@@ -479,7 +479,7 @@ repository:
       endCaptures:
         '1': {name: punctuation.definition.arguments.end.python}
       patterns:
-      - begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()
+      - begin: (?=[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*\s*\()
         end: (?=\s*\()
         patterns:
         - include: '#dotted_name'
@@ -548,18 +548,18 @@ repository:
       - include: '#string_quoted_single'
 
   dotted_name:
-    begin: (?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*)
-    end: (?![\p{Alnum}_\.])
+    begin: (?=[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*)
+    end: (?![[:alnum:]_\.])
     patterns:
-    - begin: (\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
-      end: (?![\p{Alnum}_])
+    - begin: (\.)(?=[[:alpha:]_][[:alnum:]_]*)
+      end: (?![[:alnum:]_])
       patterns:
       - include: '#magic_function_names'
       - include: '#magic_variable_names'
       - include: '#illegal_names'
       - include: '#generic_names'
-    - begin: (?<!\.)(?=[\p{Alpha}_][\p{Alnum}_]*)
-      end: (?![\p{Alnum}_])
+    - begin: (?<!\.)(?=[[:alpha:]_][[:alnum:]_]*)
+      end: (?![[:alnum:]_])
       patterns:
       - include: '#builtin_functions'
       - include: '#builtin_types'
@@ -615,17 +615,17 @@ repository:
     - include: '#generic_names'
 
   generic_names:
-    match: '[\p{Alpha}_][\p{Alnum}_]*'
+    match: '[[:alpha:]_][[:alnum:]_]*'
 
   generic_object_names:
-    match: (\.\b([\p{Alpha}_][\p{Alnum}_]*)\b(?!\(|\[)|\b([\p{Alpha}_][\p{Alnum}_]*)\b\.)
+    match: (\.\b([[:alpha:]_][[:alnum:]_]*)\b(?!\(|\[)|\b([[:alpha:]_][[:alnum:]_]*)\b\.)
 
   illegal_names:
     name: invalid.illegal.name.python
     match: \b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b
 
   keyword_arguments:
-    begin: \b([\p{Alpha}_][\p{Alnum}_]*)\s*(=)(?!=)
+    begin: \b([[:alpha:]_][[:alnum:]_]*)\s*(=)(?!=)
     beginCaptures:
       '1': {name: variable.parameter.function.keyword.python}
       '2': {name: keyword.operator.assignment.python}
@@ -1029,6 +1029,6 @@ repository:
 author: Matt Morrison @MattDMo mattdmo@pigimal.com
 bundleUUID: 0F24FCF1-6543-4CC6-8B33-2EAED401FE3A
 firstLineMatch: ^#!/.*\bpython[0-9.-]*\b
-foldingStartMarker: ^\s*(def|class)\s+([.\p{Alnum}_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
+foldingStartMarker: ^\s*(def|class)\s+([.[:alnum:]_ <]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")
 foldingStopMarker: ^\s*$|^\s*\}|^\s*\]|^\s*\)|^\s*"""\s*$
 keyEquivalent: ^~P
