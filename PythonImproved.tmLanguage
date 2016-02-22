@@ -23,7 +23,7 @@
 	<key>firstLineMatch</key>
 	<string>^#!/.*\bpython[0-9.-]*\b</string>
 	<key>foldingStartMarker</key>
-	<string>^\s*(((?:async\s+)?def)|class)\s+([.\p{Alnum}_ &lt;]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")</string>
+	<string>^\s*(((?:async\s+)?def)|class)\s+([.[:alnum:]_ &lt;]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")</string>
 	<key>foldingStopMarker</key>
 	<string>^\s*$|^\s*\}|^\s*\]|^\s*\)|^\s*"""\s*$</string>
 	<key>keyEquivalent</key>
@@ -74,7 +74,7 @@
 			<key>comment</key>
 			<string>Match identifiers in ALL_CAPS as constants, except when followed by `.`, `(`, `'`, or `"`.</string>
 			<key>match</key>
-			<string>\b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(\'\"])</string>
+			<string>\b([[:upper:]_][[:upper:][:digit:]_]*)\b(?![\.\(\'\"])</string>
 			<key>name</key>
 			<string>constant.other.allcaps.python</string>
 		</dict>
@@ -82,7 +82,7 @@
 			<key>match</key>
 			<string>\b(?i:(0x\h+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.hexadecimal.python</string>
+			<string>constant.numeric.integer.hexadecimal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -94,7 +94,7 @@
 			<key>match</key>
 			<string>\b(?i:(0b[01]+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.binary.python</string>
+			<string>constant.numeric.integer.binary.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -106,7 +106,7 @@
 			<key>match</key>
 			<string>\b(?i:(0[o]?[0-7]+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.octal.python</string>
+			<string>constant.numeric.integer.octal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -118,7 +118,7 @@
 			<key>comment</key>
 			<string>Not quite perfect...</string>
 			<key>match</key>
-			<string>\b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?&lt;=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)</string>
+			<string>\b(?i:(((\d+(\.(?=[^[:alpha:]_])\d*)?|(?&lt;=[^[:alnum:]_])\.\d+)(e[\-\+]?\d+)?))J)</string>
 			<key>name</key>
 			<string>constant.numeric.complex.python</string>
 		</dict>
@@ -126,7 +126,7 @@
 			<key>comment</key>
 			<string>Ummm... why do we have three of these? This is one...</string>
 			<key>match</key>
-			<string>\b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])</string>
+			<string>\b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^[:alpha:]_])</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
@@ -134,7 +134,7 @@
 			<key>comment</key>
 			<string>This is two...</string>
 			<key>match</key>
-			<string>(?&lt;=[^\p{Alnum}_])(?i:(\.\d+(e[\-\+]?\d+)?))</string>
+			<string>(?&lt;=[^[:alnum:]_])(?i:(\.\d+(e[\-\+]?\d+)?))</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
@@ -150,7 +150,7 @@
 			<key>match</key>
 			<string>\b(?i:([1-9]+[0-9]*|0)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.decimal.python</string>
+			<string>constant.numeric.integer.decimal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -230,7 +230,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\:)</string>
+			<string>\s*(class)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\:)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -263,7 +263,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
+			<string>\s*(class)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -298,11 +298,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -357,7 +357,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+			<string>\s*(class)\s+(?=[[:alpha:]_][[:alnum:]_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -387,11 +387,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -404,10 +404,15 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
+			<string>\s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
 				<dict>
 					<key>name</key>
 					<string>storage.type.function.python</string>
@@ -429,11 +434,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -491,7 +496,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b(?:(self|cls)|([\p{Alpha}_][\p{Alnum}_]*))\s*(?:(,)|(?=[\n\)]))</string>
+							<string>\b(?:(self|cls)|([[:alpha:]_][[:alnum:]_]*))\s*(?:(,)|(?=[\n\)]))</string>
 						</dict>
 					</array>
 				</dict>
@@ -525,10 +530,15 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+			<string>\s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
 				<dict>
 					<key>name</key>
 					<string>storage.type.function.python</string>
@@ -555,11 +565,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -576,11 +586,21 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.python</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
 					<string>storage.type.function.python</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(((?:async\s+)?def)|lambda)\b</string>
+			<string>\b(?:(?:(async)\s+)?(def)|(lambda))\b</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -657,7 +677,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(?:(,)|(?=[\n\)\:]))</string>
+							<string>\b([[:alpha:]_][[:alnum:]_]*)\s*(?:(,)|(?=[\n\)\:]))</string>
 						</dict>
 					</array>
 				</dict>
@@ -665,7 +685,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+			<string>^\s*(?=@\s*[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
 			<key>end</key>
@@ -684,7 +704,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+					<string>(?=(@)\s*[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -744,7 +764,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)</string>
+			<string>^\s*(?=@\s*[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*)</string>
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
@@ -755,7 +775,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)</string>
+					<string>(?=(@)\s*[[:alpha:]_][[:alnum:]_]*(\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -922,7 +942,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=(\())</string>
+			<string>(?:\.)?([[:alpha:]_][[:alnum:]_]*)\s*(?=(\())</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -952,7 +972,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\.[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 					<key>end</key>
 					<string>(?=\s*\()</string>
 					<key>patterns</key>
@@ -1023,7 +1043,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
+			<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\[)</string>
 			<key>end</key>
 			<string>(\])</string>
 			<key>endCaptures</key>
@@ -1040,7 +1060,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\[)</string>
 					<key>end</key>
 					<string>(?=\s*\[)</string>
 					<key>patterns</key>
@@ -1337,7 +1357,7 @@
 		<key>annotated_arguments</key>
 		<dict>
 			<key>begin</key>
-			<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)|(?=\()</string>
+			<string>\b([[:alpha:]_][[:alnum:]_]*)\s*(:)|(?=\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1405,7 +1425,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)</string>
+					<string>\b([[:alpha:]_][[:alnum:]_]*)\s*(:)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1439,7 +1459,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>\b([\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>\b([[:alpha:]_][[:alnum:]_]*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1514,7 +1534,7 @@
 					<array>
 						<dict>
 							<key>begin</key>
-							<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+							<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 							<key>end</key>
 							<string>(?=\s*\()</string>
 							<key>patterns</key>
@@ -1715,7 +1735,7 @@
 		<key>constant_placeholder</key>
 		<dict>
 			<key>match</key>
-			<string>(?i:%(\([\p{Lower}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[\p{Lower}%])</string>
+			<string>(?i:%(\([[:lower:]Lower}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[[:lower:]Lower}%])</string>
 			<key>name</key>
 			<string>constant.other.placeholder.python</string>
 		</dict>
@@ -1760,16 +1780,16 @@
 			<key>begin</key>
 			<string>(?x)(?=
   (?:\.(?!\s+import)\s*)?
-  [\p{Alpha}_][\p{Alnum}_]*
-  (?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*
+  [[:alpha:]_][[:alnum:]_]*
+  (?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*
 )</string>
 			<key>end</key>
-			<string>(?![\p{Alnum}_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
+			<string>(?![[:alnum:]_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(\.)(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(\.)(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1779,7 +1799,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1806,9 +1826,9 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(?&lt;!\.)(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?&lt;!\.)(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1901,18 +1921,18 @@
       Memory | Name | NotImplemented | OS | Overflow | Reference | Runtime |
       Recursion | Standard | Syntax | System | Tab | Type | UnboundLocal |
       Unicode(Encode | Decode | Translate)? | Value | VMS | Windows |
-      ZeroDivision | ([\p{Alpha}_][\p{Alnum}_]*))
+      ZeroDivision | ([[:alpha:]_][[:alnum:]_]*))
     ?Error
     |
     (
       (Pending)?Deprecation | Bytes | Future | Import | Resource |
-      Runtime | Syntax | Unicode | User | [\p{Alpha}_][\p{Alnum}_]*)
+      Runtime | Syntax | Unicode | User | [[:alpha:]_][[:alnum:]_]*)
     ?Warning
     |
     SystemExit | Stop(Async)?Iteration | NotImplemented |
     KeyboardInterrupt | GeneratorExit
     |
-    ([\p{Alpha}_][\p{Alnum}_]*)
+    ([[:alpha:]_][[:alnum:]_]*)
     ?Exception
   )
 \b</string>
@@ -2005,6 +2025,20 @@
   (\\t) |
   (\\v)</string>
 		</dict>
+		<key>escaped_char_raw_double</key>
+		<dict>
+			<key>match</key>
+			<string>\\"</string>
+			<key>name</key>
+			<string>constant.character.escape.quote.python</string>
+		</dict>
+		<key>escaped_char_raw_single</key>
+		<dict>
+			<key>match</key>
+			<string>\\'</string>
+			<key>name</key>
+			<string>constant.character.escape.quote.python</string>
+		</dict>
 		<key>escaped_unicode_char</key>
 		<dict>
 			<key>captures</key>
@@ -2031,14 +2065,14 @@
 		<key>generic_names</key>
 		<dict>
 			<key>match</key>
-			<string>[\p{Alpha}_][\p{Alnum}_]*</string>
+			<string>[[:alpha:]_][[:alnum:]_]*</string>
 			<key>name</key>
 			<string>meta.identifier.python</string>
 		</dict>
 		<key>generic_object_names</key>
 		<dict>
 			<key>match</key>
-			<string>(\.\b([\p{Alpha}_][\p{Alnum}_]*)\b(?!\(|\[)|\b([\p{Alpha}_][\p{Alnum}_]*)\b\.)</string>
+			<string>(\.\b([[:alpha:]_][[:alnum:]_]*)\b(?!\(|\[)|\b([[:alpha:]_][[:alnum:]_]*)\b\.)</string>
 		</dict>
 		<key>illegal_names</key>
 		<dict>
@@ -2058,7 +2092,7 @@
 		<key>keyword_arguments</key>
 		<dict>
 			<key>begin</key>
-			<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(=)(?!=)</string>
+			<string>\b([[:alpha:]_][[:alnum:]_]*)\s*(=)(?!=)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -2173,7 +2207,7 @@
 					<array>
 						<dict>
 							<key>begin</key>
-							<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+							<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 							<key>end</key>
 							<string>(?=\s*\()</string>
 							<key>patterns</key>
@@ -2342,7 +2376,7 @@
   (
     (?&lt;argname&gt;
       (
-        (?&lt;identifier&gt;([\p{Alpha}_][\p{Alnum}_]*)) |
+        (?&lt;identifier&gt;([[:alpha:]_][[:alnum:]_]*)) |
         (?&lt;integer&gt;
           ([1-9]\d* | 0) |
           (
@@ -2448,6 +2482,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
@@ -2491,6 +2529,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -2531,6 +2573,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2577,6 +2623,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -2617,6 +2667,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2662,6 +2716,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -2813,6 +2871,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
@@ -2861,6 +2923,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -2906,6 +2972,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2957,6 +3027,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -3002,6 +3076,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3052,6 +3130,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+							<dict>
+								<key>include</key>
+								<string>#escaped_char_raw_double</string>
+							</dict>
 						</dict>
 					</array>
 				</dict>
@@ -3335,6 +3417,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
@@ -3377,6 +3463,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+							<dict>
+								<key>include</key>
+								<string>#escaped_char_raw_single</string>
+							</dict>
 						</dict>
 					</array>
 				</dict>
@@ -3418,6 +3508,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3463,6 +3557,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+							<dict>
+								<key>include</key>
+								<string>#escaped_char_raw_single</string>
+							</dict>
 						</dict>
 					</array>
 				</dict>
@@ -3504,6 +3602,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3549,6 +3651,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+							<dict>
+								<key>include</key>
+								<string>#escaped_char_raw_single</string>
+							</dict>
 						</dict>
 					</array>
 				</dict>
@@ -3693,6 +3799,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
@@ -3736,6 +3846,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -3776,6 +3890,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3822,6 +3940,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -3862,6 +3984,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3907,6 +4033,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>
