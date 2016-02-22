@@ -404,10 +404,15 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*((?:async\s+)?def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()</string>
+			<string>\s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
 				<dict>
 					<key>name</key>
 					<string>storage.type.function.python</string>
@@ -525,10 +530,15 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*((?:async\s+)?def)\s+(?=[[:alpha:]_][[:alnum:]_]*)</string>
+			<string>\s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
 				<dict>
 					<key>name</key>
 					<string>storage.type.function.python</string>
@@ -576,11 +586,21 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.python</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
 					<string>storage.type.function.python</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(((?:async\s+)?def)|lambda)\b</string>
+			<string>\b(?:(?:(async)\s+)?(def)|(lambda))\b</string>
 		</dict>
 		<dict>
 			<key>comment</key>

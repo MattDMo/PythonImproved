@@ -157,9 +157,10 @@ patterns:
     - include: '#entity_name_function'
 
 - name: meta.function.python
-  begin: \s*((?:async\s+)?def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()
+  begin: \s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()
   beginCaptures:
-    '1': {name: storage.type.function.python}
+    '1': {name: storage.modifier.async.python}
+    '2': {name: storage.type.function.python}
   end: (\:)
   endCaptures:
     '1': {name: punctuation.section.function.begin.python}
@@ -192,9 +193,10 @@ patterns:
     - include: $self
 
 - name: meta.function.python
-  begin: \s*((?:async\s+)?def)\s+(?=[[:alpha:]_][[:alnum:]_]*)
+  begin: \s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*)
   beginCaptures:
-    '1': {name: storage.type.function.python}
+    '1': {name: storage.modifier.async.python}
+    '2': {name: storage.type.function.python}
   end: (\()|\s*($\n?|#.*$\n?)
   endCaptures:
     '1': {name: punctuation.definition.parameters.begin.python}
@@ -206,9 +208,11 @@ patterns:
     patterns:
     - include: '#entity_name_function'
 
-- match: \b(((?:async\s+)?def)|lambda)\b
+- match: \b(?:(?:(async)\s+)?(def)|(lambda))\b
   captures:
-    '1': {name: storage.type.function.python}
+    '1': {name: storage.modifier.async.python}
+    '2': {name: storage.type.function.python}
+    '3': {name: storage.type.function.python}
 
 - comment: 'Keywords that delimit flow blocks or alter flow from within a
     block. This block should be matched *after* meta.function.python to
