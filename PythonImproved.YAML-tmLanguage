@@ -8,7 +8,7 @@ uuid: 11B0273F-0284-4483-B17B-4B8D0A9294CC
 
 patterns:
 - name: support.type.ellipsis.python
-  match: (?<!^from\s|^import\s)(\.{3})
+  match: (?<!^from\s|^import\s)(\b\.{3}\b)
 
 - name: support.ipython.in.python
   match: (^In \[(\d+)\]\:)
