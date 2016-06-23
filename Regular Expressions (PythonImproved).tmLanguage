@@ -52,19 +52,19 @@
 			<key>comment</key>
 			<string>We are restrictive in what we allow to go after the comment character to avoid false positives, since the availability of comments depend on regexp flags.</string>
 			<key>match</key>
-			<string>(?&lt;=^|\s)#\s[[\p{Alnum},. \t?!-:][^\x{00}-\x{7F}]]*$</string>
+			<string>(?&lt;=^|\s)#\s[[[:alnum:],. \t?!-:][^\x{00}-\x{7F}]]*$</string>
 			<key>name</key>
 			<string>comment.line.number-sign.regexp</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\(\?[iLmsux]+\)</string>
+			<string>\(\?[giLmsux]+\)</string>
 			<key>name</key>
 			<string>keyword.other.option-toggle.regexp</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(\()(\?P=([\p{Alpha}_][\p{Alnum}_]*\w*))(\))</string>
+			<string>(\()(\?P=([[:alpha:]_][[:alnum:]_]*\w*))(\))</string>
 			<key>name</key>
 			<string>keyword.other.back-reference.named.regexp</string>
 		</dict>
@@ -126,7 +126,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(\()(\?\(([1-9][0-9]?|[\p{Alpha}_][\p{Alnum}_]*)\))</string>
+			<string>(\()(\?\(([1-9][0-9]?|[[:alpha:]_][[:alnum:]_]*)\))</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -161,7 +161,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(\()((\?P&lt;)([\p{Alpha}]\w*)(&gt;)|(\?:))?</string>
+			<string>(\()((\?P&lt;)([[:alpha:]_][[:alnum:]_]*)(&gt;)|(\?:))?</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
