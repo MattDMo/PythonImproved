@@ -157,9 +157,10 @@ patterns:
     - include: '#entity_name_function'
 
 - name: meta.function.python
-  begin: \s*((?:async\s+)?def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()
+  begin: \s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()
   beginCaptures:
-    '1': {name: storage.type.function.python}
+    '1': {name: storage.modifier.async.python}
+    '2': {name: storage.type.function.python}
   end: (\:)
   endCaptures:
     '1': {name: punctuation.section.function.begin.python}
