@@ -34,7 +34,7 @@
 	<array>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!^from\s|^import\s)(\.{3})</string>
+			<string>(?&lt;!^from\s|^import\s)(\b\.{3}\b)</string>
 			<key>name</key>
 			<string>support.type.ellipsis.python</string>
 		</dict>
@@ -82,7 +82,7 @@
 			<key>match</key>
 			<string>\b(?i:(0x\h+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.hexadecimal.python</string>
+			<string>constant.numeric.integer.hexadecimal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -94,7 +94,7 @@
 			<key>match</key>
 			<string>\b(?i:(0b[01]+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.binary.python</string>
+			<string>constant.numeric.integer.binary.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -106,7 +106,7 @@
 			<key>match</key>
 			<string>\b(?i:(0[o]?[0-7]+)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.octal.python</string>
+			<string>constant.numeric.integer.octal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -150,7 +150,7 @@
 			<key>match</key>
 			<string>\b(?i:([1-9]+[0-9]*|0)L)</string>
 			<key>name</key>
-			<string>constant.numeric.integer.long.decimal.python</string>
+			<string>constant.numeric.integer.decimal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -525,10 +525,15 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*((?:async\s+)?def)\s+(?=[[:alpha:]_][[:alnum:]_]*)</string>
+			<string>\s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
 				<dict>
 					<key>name</key>
 					<string>storage.type.function.python</string>
@@ -576,11 +581,21 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
 					<string>storage.type.function.python</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.inline.python</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(((?:async\s+)?def)|lambda)\b</string>
+			<string>\b(?:(?:(async)\s+)?(def)|(lambda))\b</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -1706,7 +1721,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(#+).*$\n?</string>
+					<string>(#+).*$</string>
 					<key>name</key>
 					<string>comment.line.number-sign.python</string>
 				</dict>
@@ -1995,7 +2010,7 @@
   (\\[0-7]{3}) |
   (\\\n) |
   (\\\\) |
-  (\\\") |
+  (\\") |
   (\\') |
   (\\a) |
   (\\b) |
@@ -2004,6 +2019,20 @@
   (\\r) |
   (\\t) |
   (\\v)</string>
+		</dict>
+		<key>escaped_char_raw_double</key>
+		<dict>
+			<key>match</key>
+			<string>\\"</string>
+			<key>name</key>
+			<string>constant.character.escape.quote.python</string>
+		</dict>
+		<key>escaped_char_raw_single</key>
+		<dict>
+			<key>match</key>
+			<string>\\'</string>
+			<key>name</key>
+			<string>constant.character.escape.quote.python</string>
 		</dict>
 		<key>escaped_unicode_char</key>
 		<dict>
@@ -2448,6 +2477,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
@@ -2491,6 +2524,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -2531,6 +2568,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2577,6 +2618,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -2617,6 +2662,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2662,6 +2711,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -2813,6 +2866,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
@@ -2861,6 +2918,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -2906,6 +2967,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2957,6 +3022,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -3002,6 +3071,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3052,6 +3125,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -3335,6 +3412,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
@@ -3378,6 +3459,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -3418,6 +3503,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3464,6 +3553,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -3504,6 +3597,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3549,6 +3646,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>
@@ -3693,6 +3794,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#regular_expressions</string>
 						</dict>
 					</array>
@@ -3736,6 +3841,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -3776,6 +3885,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3822,6 +3935,10 @@
 							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -3862,6 +3979,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3907,6 +4028,10 @@
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>
