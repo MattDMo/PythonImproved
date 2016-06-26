@@ -404,10 +404,15 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*((?:async\s+)?def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()</string>
+			<string>\s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
 				<dict>
 					<key>name</key>
 					<string>storage.type.function.python</string>
