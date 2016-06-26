@@ -16,7 +16,9 @@ before the negative lookahead. Fixed line ending regex for comments and decorato
 to not highlight to very right side of view if a background color is used. Added
 Comments.tmPreferences so that Ctrl-/ or Cmd-/ adds a regular `# ` comment, and
 Ctrl-Shift-/ or Cmd-Shift-/ adds a triple-quoted """docstring""". Made a few tweaks
-to the regular expressions syntax.
+to the regular expressions syntax. Changed async to storage.modifier.async and
+fixed highlighting. Added some changes from the new TextMate grammar (see #60).
+Various other tweaks and fixes.
 
 To take full advantage of the extra scopes included in Python Improved, check out
 the Neon Color Scheme at https://packagecontrol.io/packages/Neon%20Color%20Scheme
