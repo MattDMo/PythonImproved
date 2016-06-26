@@ -1,0 +1,30 @@
+Python Improved v2.2.0
+======================
+
+Another tmLanguage-only release. I'm working on a sublime-syntax version, but it's
+just not ready for prime time yet. The regex engine is changing under my feet, and
+there have been a ton of changes to the regular Python.sublime-syntax that ships
+with Sublime (not all of them good, IMHO), so you may want to check it out. Come
+back, though! :)
+
+Changes/improvements in this release:
+To keep things consistent, the Ruby character properties (`\p{Alnum}`, `\p{Digit}`
+for example) have been replaced with Unicode character classes (`[:alnum:]`,
+`[:digit:]`) for better compatibility with Sublime's new regex engine (not sure
+if it applies to tmLanguages, though.) Fixed builtin_types to allow for space(s)
+before the negative lookahead. Fixed line ending regex for comments and decorators
+to not highlight to very right side of view if a background color is used. Added
+Comments.tmPreferences so that Ctrl-/ or Cmd-/ adds a regular `# ` comment, and
+Ctrl-Shift-/ or Cmd-Shift-/ adds a triple-quoted """docstring""". Made a few tweaks
+to the regular expressions syntax.
+
+To take full advantage of the extra scopes included in Python Improved, check out
+the Neon Color Scheme at https://packagecontrol.io/packages/Neon%20Color%20Scheme
+If you'd rather modify your own color scheme, a list of scopes is included in
+the README.md on GitHub at https://github.com/MattDMo/PythonImproved#readme
+
+If you have any questions, comments, concerns, bugs, or patches, please open an
+issue or pull request on GitHub and I'll do what I can to help out. You can also
+email me directly at <mattdmo@pigimal.com> or find me on Twitter at @MattDMo.
+This is definitely a work in progress, so if you'd like to contribute I'd love
+to hear from you!
