@@ -208,7 +208,7 @@ patterns:
     - include: '#entity_name_function'
 
 - match: \b(?:(?:(async)\s+)?(def)|(lambda))\b
-   captures:
+  captures:
     '1': {name: storage.modifier.async.python}
     '2': {name: storage.type.function.python}
     '3': {name: storage.type.function.inline.python}
