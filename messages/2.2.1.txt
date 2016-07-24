@@ -1,0 +1,19 @@
+Python Improved v2.2.1
+======================
+
+Just a quick point release: I've changed the extension of `Regular Expressions
+(Python Improved).tmLanguage` to .hidden-tmLanguage, so it doesn't show up in the
+Syntax menus. This way, you'll be able to directly select "Tools → Syntax →
+Python Improved" instead of having to go into the "Python Improved" submenu to
+select "Python Improved". Just a little added convenience :)
+
+To take full advantage of the extra scopes included in Python Improved, check out
+the Neon Color Scheme at https://packagecontrol.io/packages/Neon%20Color%20Scheme
+If you'd rather modify your own color scheme, a list of scopes is included in
+the README.md on GitHub at https://github.com/MattDMo/PythonImproved#readme
+
+If you have any questions, comments, concerns, bugs, or patches, please open an
+issue or pull request on GitHub and I'll do what I can to help out. You can also
+email me directly at <mattdmo@pigimal.com> or find me on Twitter at @MattDMo.
+This is definitely a work in progress, so if you'd like to contribute I'd love
+to hear from you!
