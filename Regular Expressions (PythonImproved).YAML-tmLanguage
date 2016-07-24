@@ -1,4 +1,4 @@
-# [PackageDev] target_format: plist, ext: tmLanguage
+# [PackageDev] target_format: plist, ext: hidden-tmLanguage
 comment: Matches Python's regular expression syntax.
 name: Regular Expressions (PythonImproved)
 scopeName: source.regexp.python.improved
