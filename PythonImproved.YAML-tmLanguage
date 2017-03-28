@@ -642,7 +642,7 @@ repository:
       )
     end: (?![[:alnum:]_\.\s])|(?=(?<!\.)\s+[^.])|$
     patterns:
-    - begin: (\.)(?=[[:alpha:]_][[:alnum:]_]*)
+    - begin: (?=[[:alpha:]_][[:alnum:]_]*)
       beginCaptures:
         '1': {name: meta.dot.python}
       end: (?![[:alnum:]_])
