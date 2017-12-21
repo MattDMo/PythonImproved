@@ -2066,8 +2066,10 @@
 		<dict>
 			<key>match</key>
 			<string>[[:alpha:]_][[:alnum:]_]*</string>
+<!-- Not sure why this is here, but it's not working -- see #70
 			<key>name</key>
 			<string>meta.identifier.python</string>
+-->
 		</dict>
 		<key>generic_object_names</key>
 		<dict>
