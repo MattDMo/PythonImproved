@@ -65,7 +65,7 @@ def myfunc(self,            # gotta have self
 
 ## Issues
 
-If you have questions, concerns, or suggested improvements, I'd love to hear from you! Feel free to [open an issue](https://github.com/MattDMo/PythonImproved/issues/new) or send a [pull request](https://github.com/MattDMo/PythonImproved/compare/) and I'll get back to you as soon as I can. You can also email me at <mattdmo@pigimal.com> or find me on Twitter [@MattDMo](https://twitter.com/MattDMo).
+If you have questions, concerns, or suggested improvements, I'd love to hear from you! Feel free to [open an issue](https://github.com/MattDMo/PythonImproved/issues/new) or send a [pull request](https://github.com/MattDMo/PythonImproved/compare/) and I'll get back to you as soon as I can. You can also email me at <mattdmo@mattdmo.com> or find me on Twitter [@MattDMo](https://twitter.com/MattDMo).
 
 
 ## License
