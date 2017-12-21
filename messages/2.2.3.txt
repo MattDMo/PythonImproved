@@ -1,4 +1,4 @@
-Python Improved v2.2.2
+Python Improved v2.2.3
 ======================
 
 The `meta.identifier.python` scope was messing up some stuff (see #70), and I
