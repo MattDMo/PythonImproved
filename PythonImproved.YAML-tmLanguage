@@ -755,7 +755,7 @@ repository:
       '3': {name: constant.character.escape.unicode.name.python}
 
   generic_names:
-    name: meta.identifier.python
+    #name: meta.identifier.python
     match: '[[:alpha:]_][[:alnum:]_]*'
 
   generic_object_names:
