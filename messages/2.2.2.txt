@@ -1,0 +1,7 @@
+Python Improved v2.2.2
+======================
+
+The `meta.identifier.python` scope was messing up some stuff (see #70), and I
+can't really remember what its original function was supposed to be, so I
+commented it out. If I ever remember or if someone could remind me, maybe I'll
+try to fix it and put it back in. Maybe.
