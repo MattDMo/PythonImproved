@@ -5,6 +5,8 @@ All the best,
 
 Matt
 
+PS: Sorry, I went a little emoji-crazy there. I promise it won't happen again :pensive:
+
 ---
 
 # Python Improved
@@ -83,6 +85,10 @@ If you have questions, concerns, or suggested improvements, I'd love to hear fro
 
 This is free software. It is licensed under the [MIT License](http://opensource.org/licenses/MIT). Feel free to use this in your own work. However, if you modify and/or redistribute it, please attribute me in some way, and distribute your work under this or a similar license. A shout-out or a beer would be appreciated.
 
+
+## Support
+
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=R97MGGYES6GAJ&lc=US&item_name=Matthew%20D%2e%20Morrison&item_number=PythonImproved&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="Donate" alt="PayPal - The safer, easier way to pay online!"></a>
 <p>
+
 You can also give on [Gratipay](https://www.gratipay.com/on/github/MattDMo/).
