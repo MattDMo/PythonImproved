@@ -6,13 +6,27 @@ comment: To make PythonImproved your default Python syntax, open a .py file and 
 file_extensions:
   - py
   - py3
-  - rpy
   - pyw
+  - pyi
+  - pyx
+  - pyx.in
+  - pxd
+  - pxd.in
+  - pxi
+  - pxi.in
+  - rpy
   - cpy
   - SConstruct
   - Sconstruct
   - sconstruct
   - SConscript
+  - gyp
+  - gypi
+  - Snakefile
+  - vpy
+  - wscript
+  - bazel
+  - bzl
 first_line_match: '^#!/.*\bpython[0-9.-]*\b'
 scope: source.python
 contexts:
