@@ -1,14 +1,3 @@
-# ***NOTE:***
-Because of reasons, I haven't been able to devote ~~much of~~ any time to supporting and maintaining my open source projects since late 2016. I'm not dead :skull:, dying :mask:, in prison :oncoming_police_car:, in exile :no_entry:, in space :alien:, hiding under a rock :mountain:, boycotting the interwebs :no_entry_sign: :computer:, or anything like that; life has just... been very busy :weary:. Hopefully I'll have more time for nerding in the not-too-distant future, but until then my development work will just have to remain more or less on hold, as unfortunately it doesn't pay any bills, provide any food, take care of my kids, or keep my car on the road. Of course, if anyone would like to donate to the cause, the link is below :moneybag:
-
-All the best,
-
-Matt
-
-PS: Sorry, I went a little emoji-crazy there. I promise it won't happen again :pensive:
-
----
-
 # Python Improved
 
 A better Python `.tmLanguage` syntax highlighting definition for [Sublime Text](http://www.sublimetext.com) and [TextMate](http://www.macromates.com). It includes support for both Python 2 and Python 3, and unlike any other Python syntax definition now fully supports Unicode identifiers anywhere in your code! It also provides its own improved regex syntax definition for inline highlighting of raw string literals.
