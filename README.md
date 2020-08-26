@@ -1,3 +1,5 @@
+<a href="https://packagecontrol.io/packages/Python%20Improved"><img src="https://packagecontrol.herokuapp.com/downloads/Python%20Improved.svg"></a>
+
 # Python Improved
 
 A better Python `.tmLanguage` syntax highlighting definition for [Sublime Text](http://www.sublimetext.com) and [TextMate](http://www.macromates.com). It includes support for both Python 2 and Python 3, and unlike any other Python syntax definition now fully supports Unicode identifiers anywhere in your code! It also provides its own improved regex syntax definition for inline highlighting of raw string literals.
@@ -35,13 +37,13 @@ def myfunc(self,            # gotta have self
            **kwargs):       # you never know
 ```
 
-![Multi-line comments and function annotations](http://pigimal.com/img/github/python_annotations.png)
+![Multi-line comments and function annotations](https://pigimal.com/img/github/python_annotations.png)
 
 - New scopes for bytes, unicode, and raw/regex strings, thanks to [@simonzack](https://github.com/simonzack): `string.quoted.(single|double).(block|single-line).(bytes|bytes-raw|bytes-raw-regex).python`
 - Also from @simonzack, highlighting of `self|cls` in parameter strings: `variable.parameter.function.(keyword|language)`
 - `comment.line.note.python` is a comment line that contains `(BUG|FIXME|TODO|XXX)` at the beginning. `comment.line.note.notation.python` matches the actual word itself, so you can differentially highlight the word and the whole line:
 
-![BUG FIXME TODO XXX line highlighting](http://pigimal.com/img/comment.line.note.png)
+![BUG FIXME TODO XXX line highlighting](https://pigimal.com/img/comment.line.note.png)
 
 - `constant.other.allcaps.python` captures variable names that are in all caps (`OPENING_PORT`, for example), assuming the convention that these are generally treated as constants in the code. Matches `CONSTANT`, `class.CONSTANT` and the `CONSTANT` part of `CLASS.CONSTANT`, but not `CLASS.function()`, `class.FUNCTION()`, or `FUNCTION()`.
 - Fixed the octal integers so the Python 3-style `0o123` is matched as well as the old-style `0123`
@@ -70,7 +72,7 @@ If you have questions, concerns, or suggested improvements, I'd love to hear fro
 
 ## License
 
-&copy; 2013-2018 Matt Morrison <mattdmo@mattdmo.com>.
+&copy; 2013-2020 Matt Morrison <mattdmo@mattdmo.com>.
 
 This is free software. It is licensed under the [MIT License](http://opensource.org/licenses/MIT). Feel free to use this in your own work. However, if you modify and/or redistribute it, please attribute me in some way, and distribute your work under this or a similar license. A shout-out or a beer would be appreciated.
 
@@ -78,6 +80,3 @@ This is free software. It is licensed under the [MIT License](http://opensource.
 ## Support
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=R97MGGYES6GAJ&lc=US&item_name=Matthew%20D%2e%20Morrison&item_number=PythonImproved&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="Donate" alt="PayPal - The safer, easier way to pay online!"></a>
-<p>
-
-You can also give on [Gratipay](https://www.gratipay.com/on/github/MattDMo/).
