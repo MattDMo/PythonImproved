@@ -1,4 +1,6 @@
-<a href="https://packagecontrol.io/packages/Python%20Improved"><img src="https://packagecontrol.herokuapp.com/downloads/Python%20Improved.svg"></a>
+[![Package Control](https://packagecontrol.herokuapp.com/downloads/Python%20Improved.svg)](https://packagecontrol.io/packages/Python&20Improved)
+[![GitHub release](https://img.shields.io/github/release/mattdmo/pythonimproved.svg)](https://github.com/MattDMo/PythonImproved/releases/latest)
+[![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-3fabd1?logo=paypal)](https://paypal.me/MattMorrison966)
 
 # Python Improved
 
