@@ -76,7 +76,7 @@ If you have questions, concerns, or suggested improvements, I'd love to hear fro
 
 &copy; 2013-2022 Matt Morrison <mattdmo@mattdmo.com>.
 
-This is free software. It is licensed under the [MIT License](http://opensource.org/licenses/MIT). Feel free to use this in your own work. However, if you modify and/or redistribute it, please attribute me in some way, and distribute your work under this or a similar license. A shout-out or a beer would be appreciated.
+This is free software. It is licensed under the [MIT License](http://opensource.org/licenses/MIT). Feel free to use this in your own work. However, if you modify and/or redistribute it, please attribute me in some way, and it would be great if you distribute your work under this or a similar license, but it's not required.. A shout-out or a beer would be appreciated.
 
 
 ## Support
